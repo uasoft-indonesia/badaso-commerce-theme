@@ -6,8 +6,6 @@ import VueTailwind from 'vue-tailwind'
 import App from './apps/App.vue';
 import VTooltip from './directives/v-tooltip'
 
-import './assets/css/index.css';
-import 'vue-resize/dist/vue-resize.css'
 import voca from 'voca'
 
 Vue.config.productionTip = false;
