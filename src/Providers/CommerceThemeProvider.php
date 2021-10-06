@@ -28,6 +28,7 @@ class CommerceThemeProvider extends ServiceProvider
         });
 
         $this->loadViewsFrom(__DIR__.'/../resources/views', 'commerce-theme');
+        $this->loadRoutesFrom(__DIR__.'/../Routes/api.php');
 
         $this->publishes([
             __DIR__.'/../Seeder' => database_path('seeders/Badaso/Commerce/Theme'),

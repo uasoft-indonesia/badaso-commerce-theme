@@ -5,10 +5,11 @@ namespace Uasoft\Badaso\Theme\CommerceTheme\Commands;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Artisan;
 use Symfony\Component\VarExporter\VarExporter;
-use Uasoft\Badaso\Module\Commerce\Facades\BadasoCommerceModule;
+use Illuminate\Support\Str;
 
 class BadasoCommerceThemeSetup extends Command
 {
+    protected $file;
     /**
      * The console command name.
      *
@@ -30,6 +31,7 @@ class BadasoCommerceThemeSetup extends Command
      */
     public function __construct()
     {
+        $this->file = app('files');
         parent::__construct();
     }
 
@@ -52,6 +54,7 @@ class BadasoCommerceThemeSetup extends Command
         $decoded_json = json_decode($package_json, true);
 
         $decoded_json['dependencies']['vue-resize'] = '^1.0.1';
+        $decoded_json['dependencies']['vuelidate'] = '^0.7.6';
 
         $encoded_json = json_encode($decoded_json, JSON_PRETTY_PRINT);
         file_put_contents(base_path('package.json'), $encoded_json);
@@ -88,5 +91,10 @@ class BadasoCommerceThemeSetup extends Command
         }
 
         $this->info('webpack.mix.js updated');
+    }
+
+    protected function checkExist($file, $search)
+    {
+        return $this->file->exists($file) && ! Str::contains($this->file->get($file), $search);
     }
 }

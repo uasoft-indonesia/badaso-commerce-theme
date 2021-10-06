@@ -2,7 +2,9 @@
 
 namespace Database\Seeders\Badaso\Commerce\Theme;
 
+use Exception;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 use Uasoft\Badaso\Models\Menu;
 
 class CommerceThemeMenusSeeder extends Seeder
@@ -16,7 +18,7 @@ class CommerceThemeMenusSeeder extends Seeder
      */
     public function run()
     {
-        \DB::beginTransaction();
+        DB::beginTransaction();
 
         try {
             $menus = [
@@ -39,9 +41,9 @@ class CommerceThemeMenusSeeder extends Seeder
             }
         } catch (Exception $e) {
             throw new Exception('Exception occur '.$e);
-            \DB::rollBack();
+            DB::rollBack();
         }
 
-        \DB::commit();
+        DB::commit();
     }
 }

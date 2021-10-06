@@ -2,7 +2,9 @@
 
 namespace Database\Seeders\Badaso\Commerce\Theme;
 
+use Exception;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 use Uasoft\Badaso\Models\Menu;
 use Uasoft\Badaso\Models\MenuItem;
 
@@ -17,10 +19,10 @@ class CommerceThemeFixedMenuItemSeeder extends Seeder
      */
     public function run()
     {
-        \DB::beginTransaction();
+        DB::beginTransaction();
 
         try {
-            $menu_id = Menu::where('key', 'commerce-module')->first()->id;
+            $menu_id = Menu::where('key', 'commerce-theme')->first()->id;
 
             $menu_items = [
                 0 => [
@@ -32,7 +34,7 @@ class CommerceThemeFixedMenuItemSeeder extends Seeder
                     'color' => '',
                     'parent_id' => null,
                     'order' => 1,
-                    'permissions' => 'browse_configurations',
+                    'permissions' => 'browse_theme_commerce_configurations',
                 ]
             ];
 
@@ -50,9 +52,9 @@ class CommerceThemeFixedMenuItemSeeder extends Seeder
             }
         } catch (Exception $e) {
             throw new Exception('Exception occur '.$e);
-            \DB::rollBack();
+            DB::rollBack();
         }
 
-        \DB::commit();
+        DB::commit();
     }
 }

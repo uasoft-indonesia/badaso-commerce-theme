@@ -13,8 +13,12 @@ class BadasoCommerceThemeSeeder extends Seeder
      */
     public function run()
     {
-        $this->call(CommerceThemeMenusSeeder::class);
-        $this->call(CommerceThemeFixedMenuItemSeeder::class);
-        $this->call(CommerceThemeSiteManagementSeeder::class);
+        $this->call([
+            CommerceThemeMenusSeeder::class,
+            CommerceThemeFixedMenuItemSeeder::class,
+            CommerceThemePermissionsSeeder::class,
+            CommerceThemeProductCategories::class,
+            CommerceThemeSiteManagementSeeder::class
+        ]);
     }
 }
