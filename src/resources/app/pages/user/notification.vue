@@ -38,10 +38,10 @@
     </div>
     <div class="bg-white shadow-sm rounded-xl">
       <div class="flex flex-col py-2 px-6 justify-center items-end border-b">
-        <div class="text-sm text-gray-400 cursor-pointer">Tandai sebagai sudah dibaca</div>
+        <div class="text-sm text-gray-400 cursor-pointer" @click="readAll">Tandai sebagai sudah dibaca</div>
       </div>
       <div class="flex flex-wrap">
-        <router-link :to="{ name: 'OrderDetail', params: { id: getOrderId(notification.content) } }" class="w-full flex p-6 space-x-4 items-start last:rounded-b-xl hover:bg-gray-50" v-for="notification, index in notifications.data" :key="index">
+        <div class="w-full flex p-6 space-x-4 items-start last:rounded-b-xl hover:bg-gray-50 cursor-pointer" :class="[notification.isRead == 0 ? 'bg-primary bg-opacity-10' : 'bg-white']" @click="notificationDetail(notification)" v-for="notification, index in notifications.data" :key="index">
           <div class="w-1/12">
             <img :src="logoTheme" class="w-full h-auto" alt="">
           </div>
@@ -56,7 +56,7 @@
               v-if="notification.type === 'orderNotification'"
             >Tampilkan Rincian Pesanan</button>
           </div>
-        </router-link>
+        </div>
       </div>
     </div>
   </div>
@@ -108,6 +108,31 @@ export default {
     getOrderId(message) {
       if (message.split("#").length < 2) return null
       return message.split("#")[1].split(" ")[0]
+    },
+    notificationDetail(notification) {
+      this.$api.badasoNotification
+        .read({
+          id: notification.id
+        })
+        .then(res => {
+          this.$router.push({ 
+            name: 'OrderDetail', 
+            params: { id: this.getOrderId(notification.content) }
+          })
+        })
+        .catch(err => {
+          this.$helper.displayErrors(err)
+        })
+    },
+    readAll() {
+      this.$api.badasoNotification
+        .readAll()
+        .then(res => {
+          this.fetchNotifications()
+        })
+        .catch(err => {
+          this.$helper.displayErrors(err)
+        })
     }
   }
 }
