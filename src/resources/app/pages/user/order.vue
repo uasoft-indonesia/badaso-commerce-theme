@@ -119,9 +119,9 @@
                   <component
                     :is="`${order.orderPayment.paymentType}-pay`"
                     :order="order"
+                    @click="pay"
                   >Bayar</component>
                 </button>
-                {{ searchOrder }}
               </div>
             </div>
           </div>
@@ -228,6 +228,9 @@ export default {
           id
         }
       })
+    },
+    pay() {
+      this.$helper.alert('Transaksi sedang diproses, mohon tetap dihalaman ini.')
     }
   }
 }

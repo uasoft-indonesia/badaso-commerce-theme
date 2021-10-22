@@ -209,13 +209,6 @@ export default {
     return {
       order: {
         orderDetails: [],
-        recipientName: null,
-        addressLine1: null,
-        addressLine2: null,
-        city: null,
-        postalCode: null,
-        country: null,
-        phoneNumber: null,
         discounted: null,
         total: null,
         shippingCost: null,
@@ -228,7 +221,16 @@ export default {
         createdAt: null,
         orderPayment: {
           token: null
-        }
+        },
+        orderAddress: {
+          recipientName: null,
+          addressLine1: null,
+          addressLine2: null,
+          city: null,
+          postalCode: null,
+          country: null,
+          phoneNumber: null,
+        },
       },
       paymentOption: {
         name: null

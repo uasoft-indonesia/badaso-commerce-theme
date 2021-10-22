@@ -287,6 +287,8 @@ export default {
         })
         .then(res => {
           this.$store.dispatch('FETCH_CARTS')
+
+          this.$helper.alert('Transaksi sedang diproses, mohon tetap dihalaman ini.')
           
           if (typeof this.checkoutData === 'function') {
             this.checkoutData(res)
