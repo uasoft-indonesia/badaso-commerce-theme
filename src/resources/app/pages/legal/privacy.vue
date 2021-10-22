@@ -19,7 +19,7 @@ export default {
   },
   computed: mapState({
     tos (state) {
-      return _.find(state.themeConfigurations, { key: "tos" }).value
+      return _.find(state.themeConfigurations, { key: "privacy" }).value
     },
   }),
   methods: {

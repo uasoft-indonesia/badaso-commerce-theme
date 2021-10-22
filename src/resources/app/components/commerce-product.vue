@@ -17,13 +17,17 @@
         <!-- This is for voucher, not yet implemented. -->
         <!-- <div class="bg-primary text-white text-xs inline-block border-r border-l border-dotted py-0.5 px-1 my-1">Diskon Rp5RB</div> -->
 
-        <div class="flex items-center mt-1">
+        <div class="flex items-start justify-between mt-1">
           <div class="text-primary font-medium">
             {{ getProductPrice }}
           </div>
-          <div class="flex-grow" />
-          <div class="text-xs text-gray-400">
-            30 Terjual
+          <div class="text-xs text-gray-400 mt-1 whitespace-nowrap">
+            {{ getProductSold }} Terjual
+          </div>
+        </div>
+        <div class="flex items-start justify-between mt-1">
+          <div class="text-primary font-medium">
+            <rating stroke v-model.number="product.reviewAvgRating" :star-width="10" :star-height="10" star-active-color="rgba(6, 187, 211, 1)" star-empty-color="transparent" />
           </div>
         </div>
       </div>
@@ -37,7 +41,11 @@
 </template>
 
 <script>
+import Rating from './../components/rating/rating.vue'
 export default {
+  components: {
+    Rating
+  },
   props: {
     product: {
       required: true
@@ -50,7 +58,9 @@ export default {
   },
   computed: {
     hasActiveDiscount() {
-      return this.product.productDetails[0].discount.active
+      return this.$_.has(this.product.productDetails[0], 'discount')
+        ? this.product.productDetails[0].discount.active
+        : false
     },
     getDiscountType() {
       return this.product.productDetails[0].discount.discountType
@@ -69,9 +79,16 @@ export default {
         : `${this.$currency(min.price)} - ${this.$currency(max.price)}`
       }
 
-      return this.$currency(this.$_.minBy(this.product.productDetails, 'price').price)
+      return this.$_.has(this.$_.minBy(this.product.productDetails, 'price'), 'price')
+        ? this.$currency(this.$_.minBy(this.product.productDetails, 'price').price)
+        : this.$currency(0)
+    },
+    getProductSold() {
+      return this.product.productDetails.reduce((prev, curr) => {
+        return prev + parseInt(curr.sold || 0)
+      }, 0) || 0;
     }
-  }
+  },
 }
 </script>
 

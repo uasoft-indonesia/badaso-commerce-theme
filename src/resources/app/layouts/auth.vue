@@ -4,7 +4,7 @@
       <div class="container flex items-center gap-16">
         <div class="flex flex-shrink-0 items-center">
           <router-link :to="{ name: 'Home' }">
-            <commerce-logo color="primary" />
+            <commerce-logo dark />
           </router-link>
           <div class="text-2xl">{{ $route.name }}</div>
         </div>

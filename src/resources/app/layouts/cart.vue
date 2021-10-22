@@ -5,7 +5,7 @@
       <div class="container flex items-center gap-16 justify-between">
         <div class="flex flex-shrink-0 items-center">
           <router-link :to="{ name: 'Home' }" class="flex flex-nowrap items-center divide-x">
-            <commerce-logo color="primary" />
+            <commerce-logo dark />
             <div class="text-xl mt-3 pl-4 text-primary">{{ $route.meta.title }}</div>
           </router-link>
         </div>

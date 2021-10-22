@@ -48,7 +48,11 @@ export default new Vuex.Store({
     ],
     themeConfigurations: [
       {
-        key: "logoTextTheme",
+        key: "logoTextLightTheme",
+        value: null
+      },
+      {
+        key: "logoTextDarkTheme",
         value: null
       },
       {
@@ -77,6 +81,22 @@ export default new Vuex.Store({
       },
       {
         key: "tos",
+        value: null
+      },
+      {
+        key: "privacy",
+        value: null
+      },
+      {
+        key: "facebookUrl",
+        value: null
+      },
+      {
+        key: "instagramUrl",
+        value: null
+      },
+      {
+        key: "twitterUrl",
         value: null
       },
     ],
@@ -132,6 +152,9 @@ export default new Vuex.Store({
     SET_USER(state, user) {
       state.user = { ...user }
     },
+    SET_NOTIFICATIONS(state, notifications) {
+      state.notifications = notifications
+    },
     PUSH_TOAST(state, toast) {
       state.toast.push({
         ...toast,
@@ -168,6 +191,7 @@ export default new Vuex.Store({
           .catch(err => {
             if (err.status === 401) {
               localStorage.removeItem('token')
+              state.isAuthenticated = false
               state.user = {
                 name: null,
                 email: null,
@@ -196,7 +220,21 @@ export default new Vuex.Store({
           state.notifications = res.data.notifications
         })
         .catch(err => {
-          helper.displayErrors(err)
+          if (err.status === 401) {
+            localStorage.removeItem('token')
+            state.isAuthenticated = false
+            state.user = {
+              name: null,
+              email: null,
+              additionalInfo: null,
+              avatar: null,
+              emailVerifiedAt: null,
+              password: null,
+              rememberToken: null,
+              createdAt: null,
+              updatedAt: null
+            }
+          }
         })
     }
   },
@@ -209,6 +247,9 @@ export default new Vuex.Store({
     },
     SET_IS_AUTHENTICATED({ commit }, payload) {
       commit('SET_IS_AUTHENTICATED', payload)
+    },
+    SET_NOTIFICATIONS({ commit }, payload) {
+      commit('SET_NOTIFICATIONS', payload)
     },
     SET_USER({ commit }, user) {
       commit('SET_USER', user)
@@ -237,7 +278,7 @@ export default new Vuex.Store({
     SHOW_LOADING({ commit }) {
       commit('SHOW_LOADING')
     },
-    FETCH_NOTIFICATIONS({ commit }){
+    FETCH_NOTIFICATIONS({ commit }) {
       commit('FETCH_NOTIFICATIONS')
     }
   },

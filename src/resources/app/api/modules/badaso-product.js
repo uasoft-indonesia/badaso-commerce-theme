@@ -27,8 +27,22 @@ export default {
     return resource.get(url);
   },
 
+  browseBestSellingProduct(data = {}) {
+    let ep = apiPrefix + "/v1/product/public/best-selling";
+    let qs = QueryString(data);
+    let url = ep + qs;
+    return resource.get(url);
+  },
+
   read(data = {}) {
     let ep = apiPrefix + "/v1/product/public/read";
+    let qs = QueryString(data);
+    let url = ep + qs;
+    return resource.get(url);
+  },
+
+  search(data = {}) {
+    let ep = apiPrefix + "/v1/product/public/search";
     let qs = QueryString(data);
     let url = ep + qs;
     return resource.get(url);

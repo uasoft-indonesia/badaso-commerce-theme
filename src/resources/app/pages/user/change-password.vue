@@ -135,7 +135,7 @@ export default {
   mounted() {
     if (!this.isAuthenticated) {
       this.$router.push({
-        name: "Home"
+        name: "Log In"
       }).catch(() => {})
     }
 

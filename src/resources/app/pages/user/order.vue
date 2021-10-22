@@ -112,10 +112,16 @@
                 <div class="text-2xl text-primary">{{ $currency(parseInt(order.payed)) }}</div>
               </div>
               <div class="flex items-center space-x-2">
-                <button class="text-sm bg-primary text-white py-2 rounded-md w-40 font-medium hover:brightness-90 bg-blend-darken filter" v-if="order.status === 'done'">Nilai</button>
+                <button @click="review(order.id)" class="text-sm bg-primary text-white py-2 rounded-md w-40 font-medium hover:brightness-90 bg-blend-darken filter" v-if="order.status === 'done' && !isReviewIsNull(order.orderDetails)">Nilai</button>
                 <!-- <button class="text-sm bg-primary bg-opacity-0 hover:bg-opacity-5 text-gray-700 py-2 rounded-md w-40 border">Hubungi Penjual</button> -->
-                <button class="text-sm bg-primary bg-opacity-0 hover:bg-opacity-5 text-gray-700 py-2 rounded-md w-40 border">Beli Lagi</button>
-                <button class="text-sm bg-primary hover:bg-opacity-90 text-white py-2 rounded-md w-40 border" @click="$router.push({ name: 'PaymentInfo', params: { id: order.id } })" v-if="order.status === 'waitingBuyerPayment'">Bayar</button>
+                <button class="text-sm bg-primary bg-opacity-0 hover:bg-opacity-5 text-gray-700 py-2 rounded-md w-40 border" @click="$router.push({ name: 'DetailProduct', params: { slug: order.orderDetails[0].productDetail.product.slug }})">Beli Lagi</button>
+                <button class="text-sm bg-primary hover:bg-opacity-90 text-white py-2 rounded-md w-40 border" v-if="order.status === 'waitingBuyerPayment'">
+                  <component
+                    :is="`${order.orderPayment.paymentType}-pay`"
+                    :order="order"
+                  >Bayar</component>
+                </button>
+                {{ searchOrder }}
               </div>
             </div>
           </div>
@@ -146,6 +152,7 @@ export default {
         'Dibatalkan'
       ],
       orders: [],
+      search: 'ab',
     }
   },
   computed: {
@@ -176,13 +183,16 @@ export default {
   mounted() {
     if (!this.isAuthenticated) {
       this.$router.push({
-        name: "Home"
+        name: "Log In"
       }).catch(() => {})
     }
 
     this.fetchOrders()
   },
   methods: {
+    isReviewIsNull(orderDetails) {
+      return this.$_.every(orderDetails, 'review')
+    },
     formatStatus(status, expiredAt) {
       switch (status) {
         case 'cancel':
@@ -210,6 +220,14 @@ export default {
         .catch(err => {
           this.$helper.displayErrors(err)
         })
+    },
+    review(id) {
+      this.$router.push({
+        name: 'Review',
+        params: {
+          id
+        }
+      })
     }
   }
 }

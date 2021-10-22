@@ -58,49 +58,78 @@
           </div>
           <div class="text-sm text-gray-700 w-32 text-center mt-6 mb-1">Pesanan Dibuat</div>
         </div>
-        <div class="flex-auto h-16 flex items-center -mx-8"><div class="bg-primary h-1 w-full" /></div>
-        <div class="flex flex-col items-center justify-center">
-          <div class="flex flex-col rounded-full w-16 items-center justify-center h-16" :class="[order.status === 'waitingSellerConfirmation' ? 'bg-primary text-white' : 'ring-4 ring-primary ring-inset' ]">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" />
-            </svg>
+        <template v-if="order.status !== 'cancel'">
+          <div class="flex-auto h-16 flex items-center -mx-8"><div class="bg-primary h-1 w-full" /></div>
+          <div class="flex flex-col items-center justify-center">
+            <div class="flex flex-col rounded-full w-16 items-center justify-center h-16" :class="[order.status === 'waitingSellerConfirmation' ? 'bg-primary text-white' : 'ring-4 ring-primary ring-inset' ]">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" />
+              </svg>
+            </div>
+            <div class="text-sm text-gray-700 w-32 text-center mt-6 mb-1">Pesanan Dikonfirmasi</div>
           </div>
-          <div class="text-sm text-gray-700 w-32 text-center mt-6 mb-1">Pesanan Belum Bayar ({{ $currency(order.payed) }})</div>
-        </div>
-        <div class="flex-auto h-16 flex items-center -mx-8"><div class="bg-primary h-1 w-full" /></div>
-        <div class="flex flex-col items-center justify-center">
-          <div class="flex flex-col rounded-full w-16 items-center justify-center h-16" :class="[order.status === 'process' ? 'bg-primary text-white' : 'ring-4 ring-primary ring-inset' ]">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-            </svg>
+        </template>
+        <template v-if="order.status !== 'cancel'">
+          <div class="flex-auto h-16 flex items-center -mx-8"><div class="bg-primary h-1 w-full" /></div>
+          <div class="flex flex-col items-center justify-center">
+            <div class="flex flex-col rounded-full w-16 items-center justify-center h-16" :class="[order.status === 'process' ? 'bg-primary text-white' : 'ring-4 ring-primary ring-inset' ]">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+              </svg>
+            </div>
+            <div class="text-sm text-gray-700 w-32 text-center mt-6 mb-1">Pesanan Diproses</div>
           </div>
-          <div class="text-sm text-gray-700 w-32 text-center mt-6 mb-1">Pesanan Diproses</div>
-        </div>
-        <div class="flex-auto h-16 flex items-center -mx-8"><div class="bg-primary h-1 w-full" /></div>
-        <div class="flex flex-col items-center justify-center">
-          <div class="flex flex-col rounded-full w-16 items-center justify-center h-16" :class="[order.status === 'delivering' ? 'bg-primary text-white' : 'ring-4 ring-primary ring-inset' ]">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0z" />
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0" />
-            </svg>
+        </template>
+        <template v-if="order.status !== 'cancel'">
+          <div class="flex-auto h-16 flex items-center -mx-8"><div class="bg-primary h-1 w-full" /></div>
+          <div class="flex flex-col items-center justify-center">
+            <div class="flex flex-col rounded-full w-16 items-center justify-center h-16" :class="[order.status === 'delivering' ? 'bg-primary text-white' : 'ring-4 ring-primary ring-inset' ]">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0" />
+              </svg>
+            </div>
+            <div class="text-sm text-gray-700 w-32 text-center mt-6 mb-1">Pesanan Dikirim</div>
           </div>
-          <div class="text-sm text-gray-700 w-32 text-center mt-6 mb-1">Pesanan Dikirim</div>
-        </div>
-        <div class="flex-auto h-16 flex items-center -mx-8"><div class="bg-primary h-1 w-full" /></div>
-        <div class="flex flex-col items-center justify-center">
-          <div class="flex flex-col rounded-full w-16 items-center justify-center h-16" :class="[order.status === 'done' ? 'bg-primary text-white' : 'ring-4 ring-primary ring-inset' ]">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
-            </svg>
+        </template>
+        <template v-if="order.status !== 'cancel'">
+          <div class="flex-auto h-16 flex items-center -mx-8"><div class="bg-primary h-1 w-full" /></div>
+          <div class="flex flex-col items-center justify-center">
+            <div class="flex flex-col rounded-full w-16 items-center justify-center h-16" :class="[order.status === 'done' ? 'bg-primary text-white' : 'ring-4 ring-primary ring-inset' ]">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
+              </svg>
+            </div>
+            <div class="text-sm text-gray-700 w-32 text-center mt-6 mb-1">Pesanan Selesai</div>
           </div>
-          <div class="text-sm text-gray-700 w-32 text-center mt-6 mb-1">Pesanan Selesai</div>
-        </div>
+        </template>
+        <template v-if="order.status === 'cancel'">
+          <div class="flex-auto h-16 flex items-center -mx-8"><div class="bg-primary h-1 w-full" /></div>
+          <div class="flex flex-col items-center justify-center">
+            <div class="flex flex-col rounded-full w-16 items-center justify-center h-16" :class="[order.status === 'cancel' ? 'bg-red-600 text-white' : 'ring-4 ring-primary ring-inset' ]">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </div>
+            <div class="text-sm text-gray-700 w-32 text-center mt-6 mb-1">Pesanan Dibatalkan</div>
+          </div>
+        </template>
       </div>
       <div class="bg-white rounded-xl border-t border-dotted">
-        <div class="flex justify-between items-center text-sm bg-primary bg-opacity-5 rounded-xl text-gray-700 px-6 py-4">
-          <div class="text-center text-xs text-gray-400 flex items-center">Terima kasih sudah berbelanja di Shopee!</div>
-          <button class="text-sm bg-primary text-white py-2 rounded-md w-40 font-medium hover:brightness-90 bg-blend-darken filter">Beli Lagi</button>
+        <div class="flex justify-end cursor-pointer select-none border-b items-center text-sm bg-primary bg-opacity-5 rounded-t-xl text-gray-700 px-6 py-4" v-if="order.status === 'waitingBuyerPayment'">
+          <component :is="`${order.orderPayment.paymentType}-pay`" :order="order" class="text-sm text-center bg-primary text-white py-2 rounded-md w-40 font-medium hover:brightness-90 bg-blend-darken filter">
+            Bayar
+          </component>
+        </div>
+        <div class="flex justify-between items-center text-sm bg-primary bg-opacity-5 rounded-b-xl text-gray-700 px-6 py-4">
+          <div class="text-center text-xs text-gray-400 flex flex-col items-start text-left w-1/3">
+            <template v-if="order.status === 'cancel'">
+              Kelihatannya pesanan kamu dibatalkan karena {{ order.cancelMessage }}
+            </template>
+            <span>Terima kasih sudah berbelanja di {{ title }}!</span>
+          </div>
+          <button @click="$router.push({ name: 'DetailProduct', params: { slug: order.orderDetails[0].productDetail.product.slug }})" class="text-sm bg-primary text-white py-2 rounded-md w-40 font-medium hover:brightness-90 bg-blend-darken filter">Beli Lagi</button>
         </div>
       </div>
       <!-- <div class="bg-white rounded-t-xl border-t border-dotted">
@@ -115,9 +144,9 @@
         </div>
         <div class="w-full flex divide-x">
           <div class="flex w-1/3 flex-col space-y-1 pr-6">
-            <div class="text-gray-700 text-lg mb-1">{{ order.recipientName }}</div>
-            <div class="text-gray-400 text-md">{{ order.phoneNumber }}</div>
-            <div class="text-gray-400 text-md">{{ order.addressLine1 }}, {{ order.addressLine2 ? order.addressLine2 + ', ' : '' }}{{ order.country }} {{ order.postalCode }}, {{ getCountryFullText(order.country) }}</div>
+            <div class="text-gray-700 text-lg mb-1">{{ order.orderAddress.recipientName }}</div>
+            <div class="text-gray-400 text-md">{{ order.orderAddress.phoneNumber }}</div>
+            <div class="text-gray-400 text-md">{{ order.orderAddress.addressLine1 }}, {{ order.orderAddress.addressLine2 ? order.orderAddress.addressLine2 + ', ' : '' }}{{ order.orderAddress.country }} {{ order.orderAddress.postalCode }}, {{ getCountryFullText(order.orderAddress.country) }}</div>
           </div>
         </div>
       </div>
@@ -148,7 +177,7 @@
       <div class="bg-gray-50 border-t divide-y flex flex-wrap divide-dotted shadow-sm">
         <div class="flex w-full divide-x divide-dotted items-center">
           <div class="flex w-2/3 justify-end p-3 text-xs text-gray-500">Subtotal Produk</div>
-          <div class="flex w-1/3 justify-end p-3 pr-6 text-sm text-gray-700">{{ $currency(order.total) }}</div>
+          <div class="flex w-1/3 justify-end p-3 pr-6 text-sm text-gray-700">{{ $currency(order.total - order.discounted) }}</div>
         </div>
         <div class="flex w-full divide-x divide-dotted items-center">
           <div class="flex w-2/3 justify-end p-3 text-xs text-gray-500">Pengiriman</div>
@@ -160,7 +189,7 @@
         </div>
         <div class="flex w-full divide-x divide-dotted items-center">
           <div class="flex w-2/3 justify-end p-3 text-xs text-gray-500">Metode Pembayaran</div>
-          <div class="flex w-1/3 justify-end p-3 pr-6 text-sm text-gray-700">Bank Transfer (Dicek Manual)</div>
+          <div class="flex w-1/3 justify-end p-3 pr-6 text-sm text-gray-700">{{ paymentOption.name }}</div>
         </div>
       </div>
     </div>
@@ -197,6 +226,12 @@ export default {
         cancelMessage: null,
         expiredAt: null,
         createdAt: null,
+        orderPayment: {
+          token: null
+        }
+      },
+      paymentOption: {
+        name: null
       }
     }
   },
@@ -207,6 +242,9 @@ export default {
       },
       user(state) {
         return state.user
+      },
+      title(state) {
+        return this.$_.find(state.themeConfigurations, { key: "themeTitle" }).value;
       },
       countries(state) {
         return (JSON.parse(this.$_.find(state.moduleConfigurations, { key: "allowedCountries" }).value)).map((val) => {
@@ -221,7 +259,7 @@ export default {
   mounted() {
     if (!this.isAuthenticated) {
       this.$router.push({
-        name: "Home"
+        name: "Log In"
       }).catch(() => {})
     }
 
@@ -233,6 +271,7 @@ export default {
         .read({ id: this.$route.params.id })
         .then(res => {
           this.order = res.data.order
+          this.paymentOption = res.data.paymentOption
         })
         .catch(err => {
           this.$helper.displayErrors(err)

@@ -5,7 +5,7 @@
         <span class="select-none">
           {{ $route.meta.title }}
         </span>
-        <a @click="() => $route.push({ name: 'Order' })" class="absolute left-4 cursor-pointer">
+        <a @click="() => $router.go(-1)" class="absolute left-4 cursor-pointer">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
           </svg>
@@ -139,7 +139,7 @@ export default {
         })
         .then(res => {
           this.order = res.data.order
-          if (res.data.order.status != 'waitingBuyerPayment') {
+          if (res.data.order.status != 'waitingBuyerPayment' || res.data.order.orderPayment.paymentType != 'manual-transfer') {
             this.$router.push({
               name: "Order"
             })

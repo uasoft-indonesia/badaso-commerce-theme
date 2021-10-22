@@ -50,7 +50,8 @@ export default {
       totalPage: 0,
       currentActiveIndex: 1,
       currentPosition: 0,
-      interval: undefined
+      interval: undefined,
+      observer: undefined
     }
   },
   computed: {
@@ -58,16 +59,33 @@ export default {
       return this.totalPage
     }
   },
+  watch: {
+    '$slots.default': {
+      handler(val) {
+        this.totalPage = val.length
+      }
+    }
+  },
   mounted() {
-    this.totalPage = this.$refs.carouselSingle.children.length
+    const observer = new MutationObserver(this.setTotalPage);
+    observer.observe(this.$el, {
+      childList: true,
+      subtree: true 
+    });
+    this.observer = observer;
+
     this.interval = setInterval(() => {
       this.next()
     }, this.autoplayDuration);
   },
   beforeDestroy() {
     clearInterval(this.interval)
+    this.observer.disconnect()
   },
   methods: {
+    setTotalPage() {
+      this.totalPage = this.$slots.default.length
+    },
     next() {
       if (this.currentActiveIndex + 1 === this.totalPage) {
         this.currentActiveIndex = this.totalPage

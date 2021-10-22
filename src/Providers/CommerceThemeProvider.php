@@ -18,7 +18,7 @@ class CommerceThemeProvider extends ServiceProvider
      */
     public function boot()
     {
-        $kernel = $this->app->make(Kernel::class);
+        $this->app->make(Kernel::class);
 
         $loader = AliasLoader::getInstance();
         $loader->alias('BadasoCommerceTheme', FacadesBadasoCommerceTheme::class);
@@ -29,10 +29,11 @@ class CommerceThemeProvider extends ServiceProvider
 
         $this->loadViewsFrom(__DIR__.'/../resources/views', 'commerce-theme');
         $this->loadRoutesFrom(__DIR__.'/../Routes/api.php');
+        $this->loadRoutesFrom(__DIR__.'/../Routes/web.php');
 
         $this->publishes([
             __DIR__.'/../Seeder' => database_path('seeders/Badaso/Commerce/Theme'),
-            // __DIR__.'/../Config/badaso-commerce.php' => config_path('badaso-commerce.php'),
+            __DIR__.'/../Config/badaso-commerce-theme.php' => config_path('badaso-commerce-theme.php'),
         ], 'BadasoCommerceTheme');
     }
 

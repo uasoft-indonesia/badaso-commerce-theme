@@ -73,6 +73,15 @@ class BadasoCommerceThemeSetup extends Command
     {
         Artisan::call('storage:link');
     }
+    
+    protected function envListUpload()
+    {
+        return [
+            'MIX_COMMERCE_WEB_ROUTE_PREFIX' => '',
+            'NOTIFICATION_EMAIL' => '',
+            'CRON_EXPIRED_ORDER' => '*/5 * * * *',
+        ];
+    }
 
     protected function updateWebpackMix()
     {

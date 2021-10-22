@@ -5,7 +5,7 @@
           <span class="select-none">
             {{ $route.meta.title }}
           </span>
-          <a @click="() => $route.push({ name: 'Order' })" class="absolute left-4 cursor-pointer">
+          <a @click="() => $router.go(-1)" class="absolute left-4 cursor-pointer">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
             </svg>
@@ -48,7 +48,7 @@
             </div>
           </div>
           <div class="w-full flex flex-nowrap gap-2 p-2">
-            <div class="text-xs text-gray-500">Pastikan Anda telah melengkapi seluruh informasi sebelum upload bukti transfer. Shopee akan memeriksa bukti Anda dalam 24 jam.</div>
+            <div class="text-xs text-gray-500">Pastikan Anda telah melengkapi seluruh informasi sebelum upload bukti transfer. {{ title }} akan memeriksa bukti Anda dalam 24 jam.</div>
           </div>
           <div class="w-full flex text-sm flex-col bg-white p-3 border-t border-b border-gray-300 justify-between">
             <p>Info Rek Bank:</p>
@@ -302,6 +302,9 @@ export default {
       availableBanks(state) {
         return JSON.parse(this.$_.find(state.moduleConfigurations, { key: "availableBanks" }).value)
       },
+      title(state) {
+        return this.$_.find(state.themeConfigurations, { key: "themeTitle" }).value;
+      },
     })
   },
   mounted() {
@@ -350,7 +353,6 @@ export default {
             this.$closeLoading()
           })
       } else {
-        console.log(this.$v);
         this.$helper.displayErrors("Please check the input that you provide again.")
       }
     },
@@ -363,7 +365,7 @@ export default {
         .then(res => {
           this.order = res.data.order
           this.total = parseInt(res.data.order.payed)
-          if (res.data.order.status != 'waitingBuyerPayment') {
+          if (res.data.order.status != 'waitingBuyerPayment' || res.data.order.orderPayment.paymentType != 'manual-transfer') {
             this.$router.push({
               name: "Order"
             })

@@ -4,6 +4,7 @@ import currency from 'currency.js';
 import * as _ from 'lodash'
 import voca from 'voca'
 import moment from 'moment';
+import VueGtag from 'vue-gtag';
 
 import App from './apps/App.vue';
 import VTooltip from './directives/v-tooltip'
@@ -14,14 +15,34 @@ import helper from './utils/helper.js';
 
 import CommerceLoading from './components/commerce-loading.vue'
 import Alert from './components/alert/alert.vue'
+import Radio from './components/form/radio.vue'
 
 Vue.config.productionTip = false;
 Vue.config.devtools = true;
 
 Vue.use(Vuelidate)
+if (process.env.MIX_ANALYTICS_TRACKING_ID) {
+  Vue.use(VueGtag, {
+    config: {
+      id: process.env.MIX_ANALYTICS_TRACKING_ID
+    }
+  }, router)
+}
 Vue.directive('tooltip', VTooltip)
 Vue.component('commerce-loading', CommerceLoading)
 Vue.component('alert', Alert)
+Vue.component('radio', Radio)
+
+const plugins = process.env.MIX_PAYMENT_MODULE.split(",");
+
+try {
+  plugins.forEach((plugin) => {
+    const files = require(`@/${plugin}/src/resources/payment/components`).default
+    _.forEach(files, (file, index) => {
+      Vue.component(index, file)
+    })
+  })
+} catch (error) {}
 
 Vue.prototype.$voca = voca
 Vue.prototype.$api = api

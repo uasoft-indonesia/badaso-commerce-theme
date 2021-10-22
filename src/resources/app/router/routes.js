@@ -13,6 +13,7 @@ import EditAddress from '../pages/user/address-edit.vue';
 import ChangePassword from '../pages/user/change-password.vue';
 import Order from '../pages/user/order.vue';
 import OrderDetail from '../pages/user/order-detail.vue';
+import Review from '../pages/user/review.vue';
 import Notification from '../pages/user/notification.vue';
 
 import Login from '../pages/auth/login.vue';
@@ -29,39 +30,43 @@ import PaymentConfirm from '../pages/payment/confirm.vue'
 
 import Page404 from '../pages/404.vue';
 
+let prefix = process.env.MIX_COMMERCE_WEB_ROUTE_PREFIX
+  ? "/" + process.env.MIX_COMMERCE_WEB_ROUTE_PREFIX
+  : "/commerce";
+
 export default [
   {
-    path: '/login',
+    path: prefix + '/login',
     name: 'Log In',
     component: Login,
     layout: 'authLayout'
   },
   {
-    path: '/register',
+    path: prefix + '/register',
     name: 'Daftar',
     component: Register,
     layout: 'authLayout'
   },
   {
-    path: '/forgot-password',
+    path: prefix + '/forgot-password',
     name: 'Forgot Password',
     component: ForgotPassword,
     layout: 'authLayout'
   },
   {
-    path: '/reset-password',
+    path: prefix + '/reset-password',
     name: 'Reset Password',
     component: ResetPassword,
     layout: 'authLayout'
   },
   {
-    path: '/verify',
+    path: prefix + '/verify',
     name: 'Verification',
     component: Verification,
     layout: 'authLayout'
   },
   {
-    path: '/',
+    path: prefix + '/',
     name: 'Home',
     component: Home,
     layout: 'defaultLayout',
@@ -70,19 +75,19 @@ export default [
     },
   },
   {
-    path: '/category/:slug',
+    path: prefix + '/category/:slug',
     name: 'Category',
     component: Category,
     layout: 'defaultLayout',
   },
   {
-    path: '/search',
+    path: prefix + '/search',
     name: 'Search',
     component: Search,
     layout: 'defaultLayout'
   },
   {
-    path: '/cart',
+    path: prefix + '/cart',
     name: 'Cart',
     component: Cart,
     layout: 'cartLayout',
@@ -91,7 +96,7 @@ export default [
     }
   },
   {
-    path: '/checkout',
+    path: prefix + '/checkout',
     name: 'Checkout',
     component: Checkout,
     layout: 'cartLayout',
@@ -100,7 +105,7 @@ export default [
     }
   },
   {
-    path: '/user/profile',
+    path: prefix + '/user/profile',
     name: 'Profile',
     component: Profile,
     layout: 'defaultLayout',
@@ -109,7 +114,7 @@ export default [
     },
   },
   {
-    path: '/user/address',
+    path: prefix + '/user/address',
     name: 'Address',
     component: Address,
     layout: 'defaultLayout',
@@ -118,7 +123,7 @@ export default [
     },
   },
   {
-    path: '/user/address/add',
+    path: prefix + '/user/address/add',
     name: 'AddAddress',
     component: AddAddress,
     layout: 'defaultLayout',
@@ -127,7 +132,7 @@ export default [
     },
   },
   {
-    path: '/user/address/edit/:id',
+    path: prefix + '/user/address/edit/:id',
     name: 'EditAddress',
     component: EditAddress,
     layout: 'defaultLayout',
@@ -136,7 +141,7 @@ export default [
     },
   },
   {
-    path: '/user/password',
+    path: prefix + '/user/password',
     name: 'ChangePassword',
     component: ChangePassword,
     layout: 'defaultLayout',
@@ -145,7 +150,7 @@ export default [
     },
   },
   {
-    path: '/user/notification',
+    path: prefix + '/user/notification',
     name: 'Notification',
     component: Notification,
     layout: 'defaultLayout',
@@ -154,7 +159,7 @@ export default [
     },
   },
   {
-    path: '/user/order',
+    path: prefix + '/user/order',
     name: 'Order',
     component: Order,
     layout: 'defaultLayout',
@@ -163,7 +168,7 @@ export default [
     },
   },
   {
-    path: '/user/order/:id',
+    path: prefix + '/user/order/:id',
     name: 'OrderDetail',
     component: OrderDetail,
     layout: 'defaultLayout',
@@ -172,7 +177,16 @@ export default [
     },
   },
   {
-    path: '/discover',
+    path: prefix + '/user/order/:id/review',
+    name: 'Review',
+    component: Review,
+    layout: 'defaultLayout',
+    meta: {
+      title: 'Pesanan Saya - Badaso Commerce Theme',
+    },
+  },
+  {
+    path: prefix + '/discover',
     name: 'ProductList',
     component: ProductList,
     layout: 'defaultLayout',
@@ -181,7 +195,7 @@ export default [
     },
   },
   {
-    path: '/terms-of-service',
+    path: prefix + '/terms-of-service',
     name: 'Terms of Service',
     component: TOS,
     layout: 'legalLayout',
@@ -190,7 +204,7 @@ export default [
     },
   },
   {
-    path: '/privacy',
+    path: prefix + '/privacy',
     name: 'Privacy',
     component: Privacy,
     layout: 'legalLayout',
@@ -199,7 +213,7 @@ export default [
     },
   },
   {
-    path: '/payment/:id/info',
+    path: prefix + '/payment/:id/info',
     name: 'PaymentInfo',
     component: PaymentInfo,
     layout: 'paymentLayout',
@@ -208,7 +222,7 @@ export default [
     },
   },
   {
-    path: '/payment/:id/confirm',
+    path: prefix + '/payment/:id/confirm',
     name: 'PaymentConfirm',
     component: PaymentConfirm,
     layout: 'paymentLayout',
@@ -217,19 +231,19 @@ export default [
     },
   },
   {
-    path: '/:slug',
+    path: prefix + '/:slug',
     name: 'DetailProduct',
     component: DetailProduct,
     layout: 'defaultLayout'
   },
   {
-    path: '*',
+    path: prefix + '*',
     redirect: {
       name: 'Page404'
     }
   },
   {
-    path: '/404',
+    path: prefix + '/404',
     name: 'Page404',
     component: Page404,
     layout: 'blankLayout'

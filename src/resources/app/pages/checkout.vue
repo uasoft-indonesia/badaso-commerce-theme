@@ -93,9 +93,9 @@
       <div class="grid grid-cols-8">
         <div class="pl-6 pt-6 text-lg leading-tight font-medium text-gray-700">Metode Pembayaran</div>
         <div class="ml-4 pt-6 col-span-7 flex gap-4 flex-wrap">
-          <button tabindex="-1" class="border border-primary px-4 py-2 text-sm font-medium rounded-md text-primary relative">
-            Transfer Bank
-            <span class="absolute bottom-0 right-0 text-white">
+          <button v-for="p, index in payments" :key="index" tabindex="-1" class="border border-primary px-4 py-2 text-sm font-medium rounded-md text-primary relative" @click="setPaymentTab(p)">
+            {{ p.name }}
+            <span v-if="p.slug === payment" class="absolute bottom-0 right-0 text-white">
               <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 absolute bottom-0 right-0" viewBox="0 0 20 20" fill="currentColor">
                 <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
               </svg>
@@ -107,28 +107,9 @@
         </div>
         <div class="col-span-full my-8 h-px w-full bg-gray-300" />
         <div class="pl-6 text-lg leading-tight font-medium text-gray-700">Pilih Bank</div>
-        <div class="ml-4 col-span-7 flex gap-6 flex-wrap">
-          <div class="flex items-center gap-4 cursor-pointer w-full" @click="radioData = 'manual'">
-            <radio v-model="radioData" name="bank" data="manual" />
-            <div class="border p-2 ml-2 rounded">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" />
-              </svg>
-            </div>
-            <div class="flex flex-wrap">
-              <div class="w-full text-sm">Transfer Manual (Dicek Manual)</div>
-              <div class="w-full text-sm text-gray-400">Perlu upload bukti transfer</div>
-            </div>
-          </div>
-          <!-- <div class="flex items-center gap-4 cursor-pointer w-full" @click="radioData = 'mandiri'">
-            <radio v-model="radioData" name="bank" data="mandiri" />
-            <img src="https://mall.shopee.co.id/static/images/img_bankid_mandiri.png" class="border p-2 ml-2">
-            <div class="flex flex-wrap">
-              <div class="w-full text-sm">Bank Mandiri (Dicek Manual)</div>
-              <div class="w-full text-sm text-gray-400">Perlu upload bukti transfer</div>
-            </div>
-          </div> -->
-        </div>
+        
+        <commerce-payment v-model="option" :active="payment" :payments="payments" @checkout="checkoutData = $event" />
+
         <div class="col-span-full p-6 mt-8 flex flex-wrap flex-col items-end gap-4 bg-primary bg-opacity-5 border-t border-gray-300">
           <div class="w-1/3 flex justify-between items-center flex-1">
             <div class="text-sm text-gray-500 text-left">Subtotal untuk Produk:</div>
@@ -164,17 +145,17 @@
 
 <script>
 import { mapState } from 'vuex';
-import Radio from './../components/form/radio.vue'
+import CommercePayment from './../components/commerce-payment.vue'
 export default {
   components: {
-    Radio
+    CommercePayment
   },
   data() {
     return {
-      radioData: 'manual',
+      payment: 'transfer-bank',
+      option: '',
       isAddState: false,
       userAddress: [],
-      paymentType: 'manual_bank_transfer',
       addressSelected: {
         id: null,
         recipientName: null,
@@ -186,7 +167,9 @@ export default {
         phoneNumber: null,
         isMain: null,
       },
-      message: null
+      message: null,
+      payments: [],
+      checkoutData: null
     }
   },
   computed: {
@@ -222,8 +205,48 @@ export default {
       return
     }
     this.fetchMainAddress()
+    this.fetchCarts()
+    this.fetchSupportedPayments()
   },
   methods: {
+    fetchCarts() {
+      this.$openLoading()
+      let ids = []
+      for (const item of this.items) {
+        ids.push(item.id)
+      }
+      this.$api.badasoCart
+        .validateIds({
+          ids: this.$_.join(ids, ',')
+        })
+        .then(res => {
+          if (!res.data.cart) {
+            this.$router.push({
+              name: 'Cart'
+            })
+          }
+        })
+        .catch(err => {
+          this.$helper.displayErrors(err)
+        })
+        .finally(() => {
+          this.$closeLoading()
+        })
+    },
+    fetchSupportedPayments() {
+      this.$openLoading()
+      this.$api.badasoPayment
+        .supportedPayments()
+        .then(res => {
+          this.payments = res.data.payments
+        })
+        .catch(err => {
+          this.$helper.displayErrors(err)
+        })
+        .finally(() => {
+          this.$closeLoading()
+        })
+    },
     fetchMainAddress() {
       this.$openLoading()
       this.$api.badasoUserAddress
@@ -260,17 +283,14 @@ export default {
           }),
           userAddressId: this.addressSelected.id,
           message: this.message,
-          paymentType: this.paymentType
+          paymentType: this.option
         })
         .then(res => {
           this.$store.dispatch('FETCH_CARTS')
-          this.$store.dispatch('SET_CHECKOUT', [])
-          this.$router.push({
-            name: 'PaymentInfo',
-            params: {
-              id: res.data.order
-            }
-          })
+          
+          if (typeof this.checkoutData === 'function') {
+            this.checkoutData(res)
+          }
         })
         .catch(err => {
           this.$helper.displayErrors(err)
@@ -278,7 +298,14 @@ export default {
         .finally(() => {
           this.$closeLoading()
         })
+    },
+    setPaymentTab(p) {
+      this.option = ''
+      this.payment = p.slug; 
     }
+  },
+  beforeDestroy() {
+    this.$store.dispatch('SET_CHECKOUT', [])
   }
 }
 </script>

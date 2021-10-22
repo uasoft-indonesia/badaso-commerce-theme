@@ -22,7 +22,11 @@
     "source": "https://github.com/uasoft-indonesia/badaso-commerce-theme"
   },
   "type": "library",
-  "require": {},
+  "require": {
+    "badaso/core": "^2.0",
+    "badaso/content-module": "^2.0",
+    "badaso/commerce-module": "^2.0"
+  },
   "authors": [
     {
       "name": "UASOFT",

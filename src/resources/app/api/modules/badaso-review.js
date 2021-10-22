@@ -7,38 +7,21 @@ let apiPrefix = process.env.MIX_API_ROUTE_PREFIX
 
 export default {
   browse(data = {}) {
-    let ep = apiPrefix + "/v1/cart/public";
+    let ep = apiPrefix + "/v1/review/public";
     let qs = QueryString(data);
     let url = ep + qs;
     return resource.get(url);
   },
 
-  read(data) {
-    let ep = apiPrefix + "/v1/cart/public/read";
+  read(data = {}) {
+    let ep = apiPrefix + "/v1/review/public/read";
     let qs = QueryString(data);
     let url = ep + qs;
     return resource.get(url);
   },
 
-  add(data) {
-    let ep = apiPrefix + "/v1/cart/public/add";
-    return resource.post(ep, data);
-  },
-
-  edit(data) {
-    let ep = apiPrefix + "/v1/cart/public/edit";
-    return resource.put(ep, data);
-  },
-
-  delete(data) {
-    let paramData = {
-      data: data,
-    };
-    return resource.delete(apiPrefix + "/v1/cart/public/delete", paramData);
-  },
-
-  validateIds(data) {
-    let ep = apiPrefix + "/v1/cart/public/validate";
+  submit(data) {
+    let ep = apiPrefix + "/v1/review/public/submit";
     return resource.post(ep, data);
   },
 };

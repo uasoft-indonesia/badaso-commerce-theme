@@ -26,20 +26,18 @@
       </div>
       <div class="w-full col-start-3 col-end-6">
         <div class="uppercase text-lg font-semibold text-gray-700">{{ product.name }}</div>
-        <div class="flex items-center mt-4 flex-nowrap gap-4 text-sm">
+        <div class="flex items-center mt-4 flex-nowrap gap-2 text-sm divide-x">
 
           <!-- Rating need to be implemented -->
           <div class="text-primary flex items-center gap-2">
-            <span class="underline">{{ rating }}</span>
-            <rating stroke v-model="rating" :star-width="16" :star-height="16" star-active-color="rgba(6, 187, 211, 1)" star-empty-color="transparent" />
+            <span class="underline">{{ parseFloat(product.reviewAvgRating).toFixed(2) }}</span>
+            <rating stroke v-model="product.reviewAvgRating" :star-width="16" :star-height="16" star-active-color="rgba(6, 187, 211, 1)" star-empty-color="transparent" />
           </div>
-          <div class="h-6 w-px bg-gray-300" />
-          <div>
-            <span class="underline">525</span> <span class="text-gray-500">Penilaian</span>
+          <div class="pl-2">
+            <span class="underline">{{ product.reviewCount }}</span> <span class="text-gray-500">Penilaian</span>
           </div>
-          <div class="h-6 w-px bg-gray-300" />
-          <div>
-            10RB+ <span class="text-gray-500">Terjual</span>
+          <div class="pl-2">
+            {{ getProductSold }} <span class="text-gray-500">Terjual</span>
           </div>
         </div>
         <div class="mt-4 flex items-center bg-gray-100 gap-2 rounded-xl" v-if="hasActiveDiscount">
@@ -119,35 +117,39 @@
           <div class="text-lg text-gray-700 font-medium w-full">Penilaian Produk</div>
           <div class="grid grid-cols-6 bg-gray-100 border border-gray-200 w-full p-6 gap-8 mt-4 rounded-xl">
             <div class="col-span-1 text-primary flex justify-center flex-wrap gap-2">
-              <div class="font-medium flex-1 text-center"><span class="text-2xl">{{ rating }}</span> dari 5</div>
-              <rating class="flex-1 justify-center" stroke v-model="rating" :star-width="20" :star-height="20" star-active-color="rgba(6, 187, 211, 1)" star-empty-color="transparent" />
+              <div class="font-medium flex-1 text-center"><span class="text-2xl">{{ parseFloat(product.reviewAvgRating || 0).toFixed(2) }}</span> dari 5</div>
+              <rating class="flex-1 justify-center" stroke v-model="product.reviewAvgRating" :star-width="20" :star-height="20" star-active-color="rgba(6, 187, 211, 1)" star-empty-color="transparent" />
             </div>
             <div class="col-span-5 flex items-center flex-wrap gap-2">
-              <button class="py-1 px-6 text-sm text-primary bg-white border border-primary rounded-md">Semua</button>
-              <button class="py-1 px-4 text-sm text-black bg-white border border-gray-300 rounded-md">5 Bintang (2)</button>
-              <button class="py-1 px-4 text-sm text-black bg-white border border-gray-300 rounded-md">4 Bintang (0)</button>
-              <button class="py-1 px-4 text-sm text-black bg-white border border-gray-300 rounded-md">3 Bintang (0)</button>
-              <button class="py-1 px-4 text-sm text-black bg-white border border-gray-300 rounded-md">2 Bintang (0)</button>
-              <button class="py-1 px-4 text-sm text-black bg-white border border-gray-300 rounded-md">1 Bintang (0)</button>
+              <button @click="reviewActive = 0" :class="getReviewButtonClasses(0)" class="py-1 px-4 text-sm border rounded-md">Semua</button>
+              <button @click="reviewActive = 5" :class="getReviewButtonClasses(5)" class="py-1 px-4 text-sm border rounded-md">5 Bintang ({{ rating[5] }})</button>
+              <button @click="reviewActive = 4" :class="getReviewButtonClasses(4)" class="py-1 px-4 text-sm border rounded-md">4 Bintang ({{ rating[4] }})</button>
+              <button @click="reviewActive = 3" :class="getReviewButtonClasses(3)" class="py-1 px-4 text-sm border rounded-md">3 Bintang ({{ rating[3] }})</button>
+              <button @click="reviewActive = 2" :class="getReviewButtonClasses(2)" class="py-1 px-4 text-sm border rounded-md">2 Bintang ({{ rating[2] }})</button>
+              <button @click="reviewActive = 1" :class="getReviewButtonClasses(1)" class="py-1 px-4 text-sm border rounded-md">1 Bintang ({{ rating[1] }})</button>
             </div>
           </div>
-          <!-- <div class="flex items-start pl-4 gap-4 flex-wrap mt-4" v-for="index in 3" :key="index">
-            <img src="https://picsum.photos/400/320" class="object-center object-cover w-12 h-12 rounded-full">
-            <div class="flex-1 flex flex-wrap gap-1 text-sm">
-              <div class="text-xs w-full">j*******e</div>
-              <rating stroke v-model="rating" :star-width="12" :star-height="12" star-active-color="rgba(6, 187, 211, 1)" star-empty-color="transparent" />
-              <div class="w-full text-gray-400">Variasi: Gold</div>
-              <div class="text-gray-700 my-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia minima recusandae facere eos assumenda incidunt repudiandae quas omnis veritatis itaque in nulla dicta numquam unde, illo quaerat officiis dolorum sunt nostrum, eum hic maxime accusamus nisi. Ut itaque aperiam asperiores nemo ratione illo repellat soluta impedit facilis accusamus culpa labore atque quidem tempore explicabo suscipit numquam fugiat, reiciendis necessitatibus autem eaque vero similique placeat commodi. Sed dignissimos quibusdam, dolore itaque quis repellendus, obcaecati distinctio temporibus veniam non sunt incidunt perferendis consectetur unde atque aperiam dolorem nulla quidem odit consequuntur excepturi error molestiae. Voluptas dolorem minus cumque, vel nesciunt suscipit ex.</div>
-              <div class="text-gray-400 text-xs">2021-07-25 12:54</div>
-              <div class="w-full flex gap-2 items-center text-gray-400 mt-2">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 cursor-pointer" viewBox="0 0 20 20" fill="currentColor">
-                  <path d="M2 10.5a1.5 1.5 0 113 0v6a1.5 1.5 0 01-3 0v-6zM6 10.333v5.43a2 2 0 001.106 1.79l.05.025A4 4 0 008.943 18h5.416a2 2 0 001.962-1.608l1.2-6A2 2 0 0015.56 8H12V4a2 2 0 00-2-2 1 1 0 00-1 1v.667a4 4 0 01-.8 2.4L6.8 7.933a4 4 0 00-.8 2.4z" />
-                </svg> {{ index }}
+          <div class="flex w-full flex-wrap">
+            <div class="flex items-start w-full pl-4 border-b border-gray-300 pb-4 last:border-b-0 gap-4 flex-wrap mt-4" v-for="review, index in getFilteredReviews" :key="index">
+              <img :src="review.user.avatar" class="object-center object-cover w-12 h-12 rounded-full">
+              <div class="flex-1 flex flex-wrap gap-1 text-sm">
+                <div class="text-xs w-full">{{ review.user.name }}</div>
+                <rating stroke v-model="review.rating" :star-width="12" :star-height="12" star-active-color="rgba(6, 187, 211, 1)" star-empty-color="transparent" />
+                <div class="w-full text-gray-400 capitalize">Variasi: {{ review.orderDetail.productDetail.name }}</div>
+                <div class="text-gray-700 my-2 w-full" v-if="review.review">{{ review.review }}</div>
+                <div class="w-full flex flex-wrap gap-2">
+                  <template v-for="media, index in review.media">
+                    <img v-if="isImage(media)" :src="media" class="w-20 h-20 object-cover" :key="`image-${index}`">
+                    <video v-if="isVideo(media)" :key="`video-${index}`" class="w-20 h-20">
+                      <source :src="media">
+                    </video>
+                  </template>
+                </div>
+                <div class="text-gray-400 text-xs">{{ $moment(review.createdAt).format('DD-MM-YYYY HH:mm:ss') }}</div>
               </div>
             </div>
-            <div class="w-full h-px bg-gray-300 my-2" />
           </div>
-          <pagination :total="30" :per-page="1" v-model="currentPage" /> -->
+          <pagination v-if="review.data.length > 0" :total="review.total" :per-page="10" v-model="currentPage" />
         </div>
       </div>
       <div class="flex flex-wrap col-start-5 col-end-auto row-span-2 mb-auto bg-white shadow-sm pt-4 rounded-xl">
@@ -185,7 +187,7 @@ export default {
   },
   data() {
     return {
-      rating: 0,
+      reviewActive: 0,
       quantity: 1,
       activeImageCarousel: 0,
       active: 0,
@@ -202,9 +204,18 @@ export default {
       selectedProduct: {
         id: null
       },
+      rating: {
+        1: 0,
+        2: 0,
+        3: 0,
+        4: 0,
+        5: 0,
+      },
       product: {
         desc: null,
         name: "",
+        reviewAvgRating: 0,
+        reviewCount: 0,
         productCategory: {
           name: null, 
           slug: null, 
@@ -218,16 +229,26 @@ export default {
               discountFixed: 0,
               discountPercent: 0,
               discountType: 'fixed'
-            }
+            },
+            sold: 0
           }
         ],
         productImage: null,
         slug: null,
       },
+      review: {
+        data: [],
+        total: 0
+      },
       similarProducts: []
     }
   },
   computed: {
+    getFilteredReviews() {
+      return this.reviewActive === 0
+        ? this.review.data
+        : this.$_.filter(this.review.data, { rating: this.reviewActive })
+    },
     hasActiveDiscount() {
       return this.product.productDetails[this.activeImageCarousel].discount.active
     },
@@ -239,6 +260,11 @@ export default {
     getDiscountType() {
       return this.product.productDetails[0].discount.discountType
     },
+    getProductSold() {
+      return this.product.productDetails.reduce((prev, curr) => {
+        return prev + parseInt(curr.sold || 0)
+      }, 0) || 0;
+    }
   },
   watch: {
     $route: {
@@ -251,12 +277,64 @@ export default {
       handler(val) {
         document.title = `${val} - Badaso Commerce Theme`
       }
+    },
+    currentPage: {
+      handler() {
+        this.getReviews()
+      }
     }
   },
   mounted() {
     this.getProduct()
   },
   methods: {
+    isImage(image) {
+      var _validFileExtensions = [".jpg", ".jpeg", ".png"];
+      var extIsValid = false;
+      for (var j = 0; j < _validFileExtensions.length; j++) {
+        var currentExtension = _validFileExtensions[j];
+        if (image.endsWith(currentExtension)) {
+          extIsValid = true;
+          break;
+        }
+      }
+
+      if (!extIsValid) return false;
+      return true;
+    },
+    isVideo(video) {
+      var _validFileExtensions = [".mp4", ".mkv"];
+      var extIsValid = false;
+      for (var j = 0; j < _validFileExtensions.length; j++) {
+        var currentExtension = _validFileExtensions[j];
+        if (video.endsWith(currentExtension)) {
+          extIsValid = true;
+          break;
+        }
+      }
+
+      if (!extIsValid) return false;
+      return true;
+    },
+    getReviewButtonClasses(index) {
+      return this.reviewActive === index 
+        ? 'text-primary bg-white border-primary'
+        : 'text-black bg-white border-gray-300'
+    },
+    getReviews() {
+      this.$api.badasoReview
+        .browse({
+          slug: this.$route.params.slug,
+          page: this.currentPage
+        })
+        .then(res => {
+          this.review = res.data.reviews
+          this.rating = {...this.rating, ...this.$_.countBy(res.data.reviews.data, 'rating')}
+        })
+        .catch(err => {
+          this.$helper.displayErrors(err)
+        })
+    },
     getProduct() {
       this.$api.badasoProduct
         .read({
@@ -264,11 +342,14 @@ export default {
         })
         .then(res => {
           this.product = res.data.product
+          this.product.reviewAvgRating = parseFloat(res.data.product.reviewAvgRating) || 0
           this.activeImageSource = res.data.product.productDetails[0].productImage
           this.activePrice = res.data.product.productDetails[0].price
           this.activeStock = res.data.product.productDetails[0].quantity
           this.selectedProduct.id = res.data.product.productDetails[0].id
+          this.activeDiscount = res.data.product.productDetails[0].discount
           this.getSimilarProduct()
+          this.getReviews()
         })
         .catch(err => {
           this.$helper.displayErrors(err)

@@ -80,7 +80,7 @@
           <input rows="3" v-model="address.postalCode" placeholder="Kode Pos" type="text" class="w-full border p-2 text-sm focus:outline-none hover:shadow-inner transition-shadow form-input border-gray-200 rounded-md focus:ring-0 focus:border-primary">
         </div>
         <div class="flex w-full flex-nowrap gap-4">
-          <label class="w-1/6 py-2 text-sm text-right text-gray-500">Nomor Handphone</label>
+          <label class="w-1/6 py-2 text-sm text-right text-gray-500">Nomor Handphone*</label>
           <input rows="3" v-model="address.phoneNumber" placeholder="Nomor Handphone" type="text" class="w-full border p-2 text-sm focus:outline-none hover:shadow-inner transition-shadow form-input border-gray-200 rounded-md focus:ring-0 focus:border-primary">
         </div>
         <div class="flex w-full flex-nowrap mt-2">
@@ -133,7 +133,7 @@ export default {
   mounted() {
     if (!this.isAuthenticated) {
       this.$router.push({
-        name: "Home"
+        name: "Log In"
       }).catch(() => {})
     }
     this.fetchAddress()

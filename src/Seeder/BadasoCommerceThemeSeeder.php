@@ -18,7 +18,8 @@ class BadasoCommerceThemeSeeder extends Seeder
             CommerceThemeFixedMenuItemSeeder::class,
             CommerceThemePermissionsSeeder::class,
             CommerceThemeProductCategories::class,
-            CommerceThemeSiteManagementSeeder::class
+            CommerceThemeSiteManagementSeeder::class,
+            CommerceThemeContentSeeder::class
         ]);
     }
 }

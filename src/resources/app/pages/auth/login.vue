@@ -18,17 +18,7 @@
           <div class="text-xl w-full">Log In</div>
           <input
             type="email"
-            class="
-              w-full
-              text-sm
-              border border-gray-300
-              p-2
-              focus:outline-none
-              focus:shadow-md
-              focus:border-gray-700
-              rounded-md
-              mt-4
-            "
+            class="w-full border border-gray-300 py-2 pl-2 pr-8 focus:outline-none mt-4 focus:border-primary text-sm rounded-md"
             placeholder="Email"
             v-model="email"
             @keypress.enter="login"
@@ -146,6 +136,7 @@ export default {
             this.$store.dispatch("SET_IS_AUTHENTICATED", true);
             this.$store.dispatch("SET_USER", response.data.user);
             this.$store.dispatch('FETCH_CARTS')
+            this.$store.dispatch('FETCH_NOTIFICATIONS')
           } else {
             this.$router.push({
               name: "Verification",

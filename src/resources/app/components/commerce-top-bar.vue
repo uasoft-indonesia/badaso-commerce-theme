@@ -27,14 +27,22 @@
               <div v-if="dropdownOpen" @mouseover="dropdownOpen = true" class="!absolute right-0 top-5 pt-2 z-20 w-96 overflow-hidden transition-all ease-in-out transform duration-300 origin-top-right">
                 <div class="border shadow-xl border-gray-300 bg-white rounded-sm navigation-arrow-top">
                   <div class="p-2">
-                    <div class="text-gray-300 text-sm mb-2">Notifikasi Baru Diterima</div>
-                    <router-link :to="{ name: 'Notification' }" class="flex items-start px-2 py-2 hover:bg-gray-100 -mx-2" v-for="notification, index in notifications" :key="index">
-                      <img class="h-10 w-10 object-cover" :src="logoTheme">
-                      <div>
-                        <p class="text-gray-700 text-sm mx-2 line-clamp-2">{{ notification.title }}</p>
-                        <div class="line-clamp-4 text-xs mx-2 text-gray-400">{{ notification.content }}</div>
+                    <template v-if="isAuthenticated">
+                      <div class="text-gray-300 text-sm mb-2">Notifikasi Baru Diterima</div>
+                      <router-link :to="{ name: 'Notification' }" class="flex items-start px-2 py-2 hover:bg-gray-100 -mx-2" v-for="notification, index in notifications" :key="index">
+                        <img class="h-10 w-10 object-cover" :src="logoTheme">
+                        <div>
+                          <p class="text-gray-700 text-sm mx-2 line-clamp-2">{{ notification.title }}</p>
+                          <div class="line-clamp-4 text-xs mx-2 text-gray-400">{{ notification.content }}</div>
+                        </div>
+                      </router-link>
+                    </template>
+                    <template v-else>
+                      <div class="h-16 flex justify-center items-center flex-col">
+                        <div class="text-sm text-gray-400">Login terlebih dahulu.</div>
+                        <router-link :to="{ name: 'Log In' }" class="block text-primary rounded-md text-sm font-medium">Log In</router-link>
                       </div>
-                    </router-link>
+                    </template>
                   </div>
                   <router-link v-if="notifications.length > 5" :to="{ name: 'Notification' }" class="block bg-white text-gray-700 text-center text-sm py-2 -mt-2 hover:bg-gray-100">Tampilkan Semua</router-link>
                 </div>
@@ -107,16 +115,34 @@ export default {
   },
   methods: {
     logout() {
-      this.$store.dispatch("SET_IS_AUTHENTICATED", false);
       this.$api.badasoAuth
         .logout()
         .then(res => {
-          this.$router.push({
-            name: "Home"
-          }).catch(() => {})
         })
         .catch(err => {
-          console.error(err);
+        })
+        .finally(() => {
+          this.$store.dispatch("SET_IS_AUTHENTICATED", false);
+          this.$store.dispatch("SET_NOTIFICATIONS", {
+            data: [],
+            total: null,
+            currentPage: 1,
+            perPage: 10
+          });
+          this.$store.dispatch("SET_USER", {
+            name: null,
+            email: null,
+            additionalInfo: null,
+            avatar: null,
+            emailVerifiedAt: null,
+            password: null,
+            rememberToken: null,
+            createdAt: null,
+            updatedAt: null,
+          });
+          this.$router.push({
+            name: "Log In"
+          }).catch(() => {})
         })
     }
   }

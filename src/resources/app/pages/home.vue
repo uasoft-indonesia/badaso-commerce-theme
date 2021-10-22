@@ -28,17 +28,9 @@
       </card-body>
     </card>
     <div class="commerce-h-spacer" />
-    <card>
+    <!-- <card>
       <card-header>
         Pencarian Populer
-        <card-action>
-          <a href="#" class="capitalize font-normal tracking-normal text-sm inline-flex items-center">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-            </svg>
-            Ubah
-          </a>
-        </card-action>
       </card-header>
       <card-body color="transparent" no-gutter>
         <carousel show="5" class="container" hide-navigation>
@@ -56,7 +48,7 @@
         </carousel>
       </card-body>
     </card>
-    <div class="commerce-h-spacer" />
+    <div class="commerce-h-spacer" /> -->
     <card>
       <card-header text-color="primary">
         Produk Terlaris
@@ -71,22 +63,22 @@
       </card-header>
       <card-body color="transparent" no-gutter>
         <carousel show="6" class="container">
-          <carousel-item v-for="index in 24" :key="index">
-            <a href="#" class="bg-white rounded-xl flex w-full flex-wrap">
+          <carousel-item v-for="product, index in bestSelling" :key="index">
+            <router-link :to="{ name: 'DetailProduct', params: { slug: product.slug } }" class="bg-white rounded-xl flex w-full flex-wrap">
               <div class="w-full relative mb-2 flex items-center">
                 <div class="p-2 bg-primary absolute top-0 left-4">
                   <span class="text-sm text-white font-semibold">TOP</span>
                 </div>
                 <div class="absolute bottom-0 w-full text-center text-white p-1">
-                  <span class="z-10 relative">Penjualan / Bulan 55RB+</span>
+                  <span class="z-10 relative">Penjualan / Bulan {{ getProductSoldTotal(product) }}+</span>
                   <div class="bg-black opacity-40 w-full top-0 left-0 absolute h-full z-0"></div>
                 </div>
-                <div class="w-full bg-contain bg-no-repeat rounded-t-xl" style="background-image: url('https://picsum.photos/320/320'); padding-top: 100%" />
+                <div class="w-full bg-contain bg-no-repeat rounded-t-xl" :style="`background-image: url('${product.productImage}'); padding-top: 100%`" />
               </div>
               <div class="flex-1 px-4 pb-4">
-                <div class="text-left text-xl font-semibold">Masker Sensi</div>
+                <div class="text-left text-xl font-semibold line-clamp-1">{{ product.name }}</div>
               </div>
-            </a>
+            </router-link>
           </carousel-item>
         </carousel>
       </card-body>
@@ -141,14 +133,26 @@ export default {
       productCategories: [],
       products: {
         data: []
-      }
+      },
+      bestSelling: [],
     }
   },
   mounted() {
     this.getCategories()
     this.getProducts()
+    this.browseBestSellingProduct()
   },
   methods: {
+    browseBestSellingProduct() {
+      this.$api.badasoProduct
+        .browseBestSellingProduct()
+        .then(res => {
+          this.bestSelling = res.data.products
+        })
+        .catch(err => {
+          console.error(err);
+        })
+    },
     getProducts() {
       this.$api.badasoProduct
         .browse()
@@ -168,6 +172,11 @@ export default {
         .catch(err => {
           console.error(err);
         })
+    },
+    getProductSoldTotal(product) {
+      return product.productDetails.reduce((prev, curr) => {
+        return prev + parseInt(curr.sold || 0)
+      }, 0) || 0;
     }
   }
 }

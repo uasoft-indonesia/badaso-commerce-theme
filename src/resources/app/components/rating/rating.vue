@@ -1,11 +1,11 @@
 <template>
-  <div class="flex items-center" :aria-label="value + ' of 5'">
-    <div v-for="(star, index) in stars" :key="index" class="flex">
+  <div class="flex items-center" :aria-label="value + ' of 5'" ref="ratingContainer">
+    <div v-for="(star, index) in stars" :key="index" class="flex" @click="emit(index)">
       <svg
         :style="[
           { fill: `url(#gradient${star.raw})` },
-          { width: starWidth },
-          { height: starHeight },
+          { width: starWidth ? starWidth : length },
+          { height: starHeight ? starHeight : length },
         ]"
         aria-hidden="true"
         :stroke="stroke ? 'rgba(6, 187, 211, 1)' : ''"
@@ -50,16 +50,14 @@ export default {
   components: {},
   props: {
     value: {
-      type: Number,
-      default: 4.3,
+      type: Number|String,
+      default: 0,
     },
     starWidth: {
       type: Number,
-      default: 24
     },
     starHeight: {
       type: Number,
-      default: 24
     },
     starEmptyColor: {
       type: String,
@@ -72,6 +70,10 @@ export default {
     stroke: {
       type: Boolean,
       default: false
+    },
+    interactable: {
+      type: Boolean,
+      default: false
     }
   },
   data: function () {
@@ -80,15 +82,27 @@ export default {
       emptyStar: 0,
       fullStar: 1,
       totalStars: 5,
+      length: 24
     };
+  },
+  watch: {
+    'value': {
+      handler(val) {
+        this.stars = []
+        this.initStars();
+        this.setStars();
+      },
+      immediate: false
+    }
   },
   directives: {},
   computed: {
     getStarPoints () {
-      let centerX = this.starWidth / 2;
-      let centerY = this.starWidth / 2;
+      let width = this.starWidth ? this.starWidth : this.length
+      let centerX = width / 2;
+      let centerY = width / 2;
       let innerCircleArms = 5; // a 5 arms star
-      let innerRadius = this.starWidth / innerCircleArms;
+      let innerRadius = width / innerCircleArms;
       let innerOuterRadiusRatio = 2.5; // Unique value - determines fatness/sharpness of star
       let outerRadius = innerRadius * innerOuterRadiusRatio;
       return this.calcStarPoints(
@@ -153,10 +167,18 @@ export default {
       let starFullnessPercent = starData.raw * 100 + "%";
       return starFullnessPercent;
     },
+    emit(index) {
+      if (this.interactable) {
+        this.$emit('input', index + 1)
+      }
+    }
   },
   created() {
     this.initStars();
     this.setStars();
+  },
+  mounted() {
+    this.length = this.$refs.ratingContainer.offsetWidth / 5
   },
 };
 </script>
