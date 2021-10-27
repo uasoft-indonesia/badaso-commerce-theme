@@ -1,0 +1,66 @@
+<template>
+  <div>
+    <commerce-top-bar />
+    <nav class="relative bg-white flex items-stretch w-full h-20 shadow-md">
+      <div class="container flex items-center gap-16 justify-between">
+        <div class="flex flex-shrink-0 items-center">
+          <router-link :to="{ name: 'Home' }" class="flex flex-nowrap items-center divide-x">
+            <commerce-logo dark />
+            <div class="text-xl mt-3 pl-4 text-primary">{{ $route.meta.title }}</div>
+          </router-link>
+        </div>
+        <div class="flex">
+          <div class="flex items-stretch justify-end mx-auto w-96">
+            <div class="h-10 w-full relative flex items-center">
+              <input type="text" v-model="search" @keypress.enter="searchProduct" class="block w-full h-full focus:outline-none px-3 py-4 rounded-sm border-primary border-2" placeholder="Search anything here">
+              <button class="absolute top-0 right-0 bottom-0 bg-primary focus:outline-none px-6 rounded-sm" @click="searchProduct">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="white">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <router-view />
+    <commerce-footer />
+  </div>
+</template>
+
+<script>
+import CommerceTopBar from '../components/commerce-top-bar.vue'
+import CommerceFooter from '../components/commerce-footer.vue'
+import CommerceLogo from '../components/commerce-logo.vue'
+export default {
+  name: "auth-layout",
+  components: {
+    CommerceTopBar,
+    CommerceFooter,
+    CommerceLogo,
+  },
+  data() {
+    return {
+      search: ''
+    }
+  },
+  methods: {
+    searchProduct() {
+      return
+    }
+  },
+  mounted() {
+    document.title = `${this.$route.meta.title} - Badaso Commerce Theme`
+  },
+  watch: {
+    $route(to, from) {
+      document.title = `${to.meta.title} - Badaso Commerce Theme`
+    }
+  },
+  beforeRouteEnter(to, from, next) {
+    next(vm => {
+      document.title = `${to.meta.title} - Badaso Commerce Theme`
+    })
+  }
+};
+</script>

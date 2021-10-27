@@ -1,0 +1,49 @@
+{
+  "version": "1.0.0",
+  "name": "uasoft-indonesia/badaso-commerce-theme",
+  "description": "Zero development for commerce theme on badaso",
+  "keywords": [
+    "laravel",
+    "admin",
+    "panel",
+    "dashboard",
+    "pwa",
+    "vue",
+    "generator",
+    "blog",
+    "badaso",
+    "commerce"
+  ],
+  "license": "proprietry",
+  "homepage": "https://badaso.uatech.co.id/",
+  "support": {
+    "issues": "https://github.com/uasoft-indonesia/badaso-commerce-theme/issues",
+    "discussion": "https://github.com/uasoft-indonesia/badaso-commerce-theme/discussions",
+    "source": "https://github.com/uasoft-indonesia/badaso-commerce-theme"
+  },
+  "type": "library",
+  "require": {
+    "badaso/core": "^2.0",
+    "badaso/content-module": "^2.0",
+    "badaso/commerce-module": "^2.0"
+  },
+  "authors": [
+    {
+      "name": "UASOFT",
+      "email": "hello@uatech.co.id"
+    }
+  ],
+  "minimum-stability": "alpha",
+  "autoload": {
+    "psr-4": {
+      "Uasoft\\Badaso\\Theme\\CommerceTheme\\": "src/"
+    }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Uasoft\\Badaso\\Theme\\CommerceTheme\\Providers\\CommerceThemeProvider"
+      ]
+    }
+  }
+}
