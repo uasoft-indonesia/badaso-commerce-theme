@@ -52,6 +52,7 @@ class BadasoCommerceThemeSetup extends Command
     {
         $package_json = file_get_contents(base_path('package.json'));
         $decoded_json = json_decode($package_json, true);
+        $decoded_json['devDependencies']['postcss'] = '^8.1.14';
         $decoded_json['devDependencies']['tailwindcss-debug-screens'] = '^2.0.0';
         $decoded_json['devDependencies']['tailwindcss-important'] = '^1.0.0';
 
@@ -60,6 +61,7 @@ class BadasoCommerceThemeSetup extends Command
         $decoded_json['dependencies']['@tailwindcss/line-clamp'] = '^0.2.1';
         $decoded_json['dependencies']['@inertiajs/inertia'] = '^0.10.1';
         $decoded_json['dependencies']['@inertiajs/inertia-vue'] = '^0.7.2';
+        $decoded_json['dependencies']['currency.js'] = '^2.0.4';
         $decoded_json['dependencies']['tailwindcss'] = '^2.2.6';
         $decoded_json['dependencies']['tailwindcss-tooltip-arrow-after'] = '^1.0.0';
         $decoded_json['dependencies']['voca'] = '^1.4.0';
