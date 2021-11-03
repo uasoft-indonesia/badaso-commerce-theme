@@ -7,7 +7,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Uasoft\Badaso\Models\Configuration;
 
-class CommerceThemeSiteManagementSeeder extends Seeder
+class CommerceThemeConfigurationsSeeder extends Seeder
 {
     /**
      * Auto generated seed file.

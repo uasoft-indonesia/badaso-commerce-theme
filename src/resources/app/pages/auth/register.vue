@@ -33,6 +33,22 @@
             placeholder="Name"
           />
           <input
+            v-model="username"
+            type="text"
+            class="
+              w-full
+              text-sm
+              border border-gray-300
+              p-2
+              focus:outline-none
+              focus:shadow-md
+              focus:border-gray-700
+              rounded-md
+              mt-4
+            "
+            placeholder="Username"
+          />
+          <input
             v-model="email"
             type="email"
             class="
@@ -61,21 +77,19 @@
           <div class="flex w-full flex-wrap">
             <div class="text-xs text-center my-4">
               Dengan mendaftar, Anda setuju dengan
-              <router-link
-                :to="{ name: 'Terms of Service' }"
-                class="text-primary cursor-pointer"
-                >Syarat, Ketentuan dan Kebijakan dari {{ title }}</router-link
-              >
+              <Link :href="route('badaso.commerce-theme.tos')" class="text-primary cursor-pointer">
+                Syarat, Ketentuan dan Kebijakan dari {{ title }}
+              </Link>
               &
-              <router-link :to="{ name: 'Privacy' }" class="text-primary cursor-pointer">Kebijakan Privasi</router-link>
+              <Link :href="route('badaso.commerce-theme.privacy')" class="text-primary cursor-pointer">
+                Kebijakan Privasi
+              </Link>
             </div>
             <div class="text-sm text-gray-300 w-full text-center">
               Punya akun?
-              <router-link
-                :to="{ name: 'Log In' }"
-                class="text-primary font-medium cursor-pointer"
-                >Log In</router-link
-              >
+              <Link :href="route('badaso.commerce-theme.login')" class="text-primary font-medium cursor-pointer">
+                Log In
+              </Link>
             </div>
           </div>
         </div>
@@ -87,6 +101,9 @@
 <script>
 import { mapState } from "vuex";
 import Password from "./../../components/form/password.vue";
+import appLayout from '../../layouts/app.vue'
+import authLayout from '../../layouts/auth.vue'
+import { Link } from "@inertiajs/inertia-vue"
 import {
   required,
   minLength,
@@ -96,12 +113,15 @@ import {
 } from "vuelidate/lib/validators";
 
 export default {
+  layout: [appLayout, authLayout],
   components: {
     Password,
+    Link
   },
   data() {
     return {
       name: null,
+      username: null,
       email: null,
       password: null,
       passwordConfirmation: null,
@@ -110,6 +130,11 @@ export default {
   },
   validations: {
     name: {
+      required,
+      minLength: minLength(4),
+      maxLength: maxLength(255),
+    },
+    username: {
       required,
       minLength: minLength(4),
       maxLength: maxLength(255),
@@ -160,9 +185,7 @@ export default {
   },
   mounted() {
     if (this.isAuthenticated) {
-      this.$router.push({
-        name: "Home"
-      }).catch(() => {})
+      this.$inertia.visit(this.route('badaso.commerce-theme.home'))
     }
     document.title = `Daftar sekarang! - ${this.appName}`;
   },
@@ -172,17 +195,13 @@ export default {
       this.$api.badasoAuth
         .register({
           name: this.name,
+          username: this.username,
           email: this.email,
           password: this.password,
           passwordConfirmation: this.passwordConfirmation,
         })
         .then((response) => {
-          this.$router.push({
-            name: "Verification",
-            query: {
-              email: this.email,
-            },
-          });
+          this.$inertia.visit(this.route('badaso.commerce-theme.verification', this.email))
         })
         .catch((error) => {
           this.$helper.displayErrors(error)

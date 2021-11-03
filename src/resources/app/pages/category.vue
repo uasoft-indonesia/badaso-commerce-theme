@@ -23,57 +23,15 @@
         <div class="w-full h-px bg-gray-300" />
 
         <div class="flex flex-wrap gap-3">
-          <a href="#" class="text-primary w-full font-bold text-sm flex items-center px-2 relative">
+          <Link v-if="activeCategory" :href="route('badaso.commerce-theme.category', $page.props.slug)" class="text-primary w-full font-bold text-sm flex items-center px-2 relative">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 absolute -left-2" viewBox="0 0 20 20" fill="currentColor">
               <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
             </svg>
-            Elektronik
-          </a>
-          <a href="#" class="text-gray-500 w-full font-medium text-sm flex items-center px-2 relative">
-            Konsol Game
-          </a>
-          <a href="#" class="text-gray-500 w-full font-medium text-sm flex items-center px-2 relative">
-            Aksesoris Konsol
-          </a>
-          <a href="#" class="text-gray-500 w-full font-medium text-sm flex items-center px-2 relative">
-            Alat Casting
-          </a>
-          <a href="#" class="text-gray-500 w-full font-medium text-sm flex items-center px-2 relative">
-            Foot Bath & Spa
-          </a>
-          <a href="#" class="text-gray-500 w-full font-medium text-sm flex items-center px-2 relative">
-            Mesin Jahit & Aksesoris
-          </a>
-          <a href="#" class="text-gray-500 w-full font-medium text-sm flex items-center px-2 relative">
-            Konsol Game
-          </a>
-          <a href="#" class="text-gray-500 w-full font-medium text-sm flex items-center px-2 relative">
-            Aksesoris Konsol
-          </a>
-          <a href="#" class="text-gray-500 w-full font-medium text-sm flex items-center px-2 relative">
-            Alat Casting
-          </a>
-          <a href="#" class="text-gray-500 w-full font-medium text-sm flex items-center px-2 relative">
-            Foot Bath & Spa
-          </a>
-          <a href="#" class="text-gray-500 w-full font-medium text-sm flex items-center px-2 relative">
-            Mesin Jahit & Aksesoris
-          </a>
-          <a href="#" class="text-gray-500 w-full font-medium text-sm flex items-center px-2 relative">
-            Konsol Game
-          </a>
-          <a href="#" class="text-gray-500 w-full font-medium text-sm flex items-center px-2 relative">
-            Aksesoris Konsol
-          </a>
-          <a href="#" class="text-gray-500 w-full font-medium text-sm flex items-center px-2 relative">
-            Alat Casting
-          </a>
-          <a href="#" class="text-gray-500 w-full font-medium text-sm flex items-center px-2 relative">
-            Foot Bath & Spa
-          </a>
-          <a href="#" class="text-gray-500 w-full font-medium text-sm flex items-center px-2 relative">
-            Mesin Jahit & Aksesoris
-          </a>
+            {{ activeCategory.name }}
+          </Link>
+          <Link :href="route('badaso.commerce-theme.category', category.slug)" v-for="category, index in filteredCategories" :key="index" class="text-gray-500 w-full font-medium text-sm flex items-center px-2 relative">
+            {{ category.name }}
+          </Link>
         </div>
 
         <div class="flex w-full gap-2 items-center">
@@ -304,22 +262,37 @@ import CarouselItemSingle from './../components/carousel-single/carousel-item.vu
 import Pagination from './../components/pagination/pagination.vue'
 import CommerceProductAlt from '../components/commerce-product-alt.vue'
 import { mapState } from 'vuex'
+
+import { Link } from '@inertiajs/inertia-vue'
+import appLayout from '../layouts/app.vue'
+import defaultLayout from '../layouts/default.vue'
 export default {
+  layout: [appLayout, defaultLayout],
   components: {
     CarouselSingle,
     CarouselItemSingle,
     Pagination,
-    CommerceProductAlt
+    CommerceProductAlt,
+    Link
   },
   data() {
     return {
       currentPage: 1,
       products: {
         data: []
-      }
+      },
+      productCategories: []
     }
   },
   computed: {
+    activeCategory() {
+      return this.$_.find(this.productCategories, { slug: this.$page.props.slug })
+    },
+    filteredCategories() {
+      return this.$_.filter(this.productCategories, (o) => {
+        return o.slug !== this.$page.props.slug
+      })
+    },
     ...mapState({
       productLimit(state) {
         return parseInt(this.$_.find(state.moduleConfigurations, { key: "homeProductLimit" }).value);
@@ -335,17 +308,28 @@ export default {
   },
   beforeRouteEnter(to, from, next) {
     next(vm => {
-      document.title = `${vm.$voca.titleCase(vm.$route.params.slug, true)} Category - Badaso Commerce Theme`
+      document.title = `${vm.$voca.titleCase(vm.$page.props.slug, true)} Category - Badaso Commerce Theme`
     })
   },
   mounted() {
     this.getProducts()
+    this.getCategories()
   },
   methods: {
+    getCategories() {
+      this.$api.badasoProductCategory
+        .browse()
+        .then(res => {
+          this.productCategories = res.data.productCategories
+        })
+        .catch(err => {
+          console.error(err);
+        })
+    },
     getProducts() {
       this.$api.badasoProduct
         .browseByCategorySlug({
-          slug: this.$route.params.slug,
+          slug: this.$page.props.slug,
           page: this.currentPage
         })
         .then(res => {

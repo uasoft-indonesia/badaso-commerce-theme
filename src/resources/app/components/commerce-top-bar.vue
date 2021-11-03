@@ -13,12 +13,12 @@
         <div class="lg:flex lg:justify-end ml-auto items-center">
           <div class="flex-grow-0 flex-shrink-0 relative px-4">
             <div class="block w-full h-full pointer-events-auto relative z-20" @mouseover="dropdownOpen = true">
-              <router-link :to="{ name: 'Notification' }" class="flex leading-normal text-white no-underline items-center hover:text-gray-300 text-sm">
+              <Link :href="route('badaso.commerce-theme.notification')" class="flex leading-normal text-white no-underline items-center hover:text-gray-300 text-sm">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
                 </svg>
                 Notifikasi
-              </router-link>
+              </Link>
             </div>
 
             <div v-if="dropdownOpen" @mouseover="dropdownOpen = false" class="inset-0 fixed h-full w-full z-10" />
@@ -29,22 +29,22 @@
                   <div class="p-2">
                     <template v-if="isAuthenticated">
                       <div class="text-gray-300 text-sm mb-2">Notifikasi Baru Diterima</div>
-                      <router-link :to="{ name: 'Notification' }" class="flex items-start px-2 py-2 hover:bg-gray-100 -mx-2" v-for="notification, index in notifications" :key="index">
+                      <Link :href="route('badaso.commerce-theme.notification')" class="flex items-start px-2 py-2 hover:bg-gray-100 -mx-2" v-for="notification, index in notifications" :key="index">
                         <img class="h-10 w-10 object-cover" :src="logoTheme">
                         <div>
                           <p class="text-gray-700 text-sm mx-2 line-clamp-2">{{ notification.title }}</p>
                           <div class="line-clamp-4 text-xs mx-2 text-gray-400">{{ notification.content }}</div>
                         </div>
-                      </router-link>
+                      </Link>
                     </template>
                     <template v-else>
                       <div class="h-16 flex justify-center items-center flex-col">
                         <div class="text-sm text-gray-400">Login terlebih dahulu.</div>
-                        <router-link :to="{ name: 'Log In' }" class="block text-primary rounded-md text-sm font-medium">Log In</router-link>
+                        <Link :href="route('badaso.commerce-theme.login')" class="block text-primary rounded-md text-sm font-medium">Log In</Link>
                       </div>
                     </template>
                   </div>
-                  <router-link v-if="notifications.length > 5" :to="{ name: 'Notification' }" class="block bg-white text-gray-700 text-center text-sm py-2 -mt-2 hover:bg-gray-100">Tampilkan Semua</router-link>
+                  <Link v-if="notifications.length > 5" :href="route('badaso.commerce-theme.notification')" class="block bg-white text-gray-700 text-center text-sm py-2 -mt-2 hover:bg-gray-100">Tampilkan Semua</Link>
                 </div>
               </div>
             </transition>
@@ -57,20 +57,20 @@
           </a>
           <div class="flex items-center divide-x">
             <template v-if="!isAuthenticated">
-              <router-link :to="{ name: 'Daftar'}" class="flex-grow-0 flex-shrink-0 relative px-3 leading-normal text-white no-underline flex items-center hover:text-gray-300 text-sm font-medium">
+              <Link :href="route('badaso.commerce-theme.register')" class="flex-grow-0 flex-shrink-0 relative px-3 leading-normal text-white no-underline flex items-center hover:text-gray-300 text-sm font-medium">
                 Daftar
-              </router-link>
-              <router-link :to="{ name: 'Log In'}" class="flex-grow-0 flex-shrink-0 relative px-3 leading-normal text-white no-underline flex items-center hover:text-gray-300 text-sm font-medium">
+              </Link>
+              <Link :href="route('badaso.commerce-theme.login')" class="flex-grow-0 flex-shrink-0 relative px-3 leading-normal text-white no-underline flex items-center hover:text-gray-300 text-sm font-medium">
                 Login
-              </router-link>
+              </Link>
             </template>
             <template v-else>
-              <router-link :to="{ name: 'Profile'}" class="flex-grow-0 flex-shrink-0 relative px-4 leading-normal text-white no-underline flex items-center hover:text-gray-300 text-sm font-medium cursor-pointer">
+              <Link :href="route('badaso.commerce-theme.profile')" class="flex-grow-0 flex-shrink-0 relative px-4 leading-normal text-white no-underline flex items-center hover:text-gray-300 text-sm font-medium cursor-pointer">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
                 {{ userName }}
-              </router-link>
+              </Link>
               <div class="flex-grow-0 flex-shrink-0 relative px-3 leading-normal text-white no-underline flex items-center hover:text-gray-300 text-sm font-medium cursor-pointer" @click="() => logout()">
                 Logout
               </div>
@@ -84,7 +84,11 @@
 
 <script>
 import { mapActions, mapState } from 'vuex'
+import { Link } from '@inertiajs/inertia-vue'
 export default {
+  components: {
+    Link
+  },
   data() {
     return {
       dropdownOpen: false
@@ -140,9 +144,7 @@ export default {
             createdAt: null,
             updatedAt: null,
           });
-          this.$router.push({
-            name: "Log In"
-          }).catch(() => {})
+          this.$inertia.visit(this.route('badaso.commerce-theme.login'))
         })
     }
   }

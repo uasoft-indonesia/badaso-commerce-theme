@@ -29,11 +29,9 @@
             <span v-else>LOG IN</span>
           </button>
           <div class="flex w-full flex-wrap">
-            <router-link
-              :to="{ name: 'Forgot Password' }"
-              class="text-xs text-primary font-medium"
-              >Lupa Password</router-link
-            >
+            <Link :href="route('badaso.commerce-theme.forgot-password')" class="text-xs text-primary font-medium">
+              Lupa Password
+            </Link>
             <div class="w-full flex items-center gap-4 my-2">
               <div class="h-px w-full bg-gray-300" />
               <div class="uppercase text-gray-300 text-sm">atau</div>
@@ -41,11 +39,9 @@
             </div>
             <div class="text-sm text-gray-300 w-full text-center">
               Baru di {{ title }}?
-              <router-link
-                :to="{ name: 'Daftar' }"
-                class="text-primary font-medium cursor-pointer"
-                >Daftar</router-link
-              >
+              <Link :href="route('badaso.commerce-theme.register')" class="text-primary font-medium cursor-pointer">
+                Daftar
+              </Link>
             </div>
           </div>
         </div>
@@ -57,16 +53,21 @@
 <script>
 import Password from "./../../components/form/password.vue";
 import { mapState } from "vuex";
+import { Link } from "@inertiajs/inertia-vue"
 import {
   required,
   minLength,
   maxLength,
   email,
 } from "vuelidate/lib/validators";
+import appLayout from '../../layouts/app.vue'
+import authLayout from '../../layouts/auth.vue'
 
 export default {
+  layout: [appLayout, authLayout],
   components: {
     Password,
+    Link,
   },
   data() {
     return {
@@ -78,7 +79,7 @@ export default {
   validations: {
     password: {
       required,
-      minLength: minLength(8),
+      minLength: minLength(4),
       maxLength: maxLength(255),
     },
     email: {
@@ -113,9 +114,7 @@ export default {
   },
   mounted() {
     if (this.isAuthenticated) {
-      this.$router.push({
-        name: "Home"
-      }).catch(() => {})
+      this.$inertia.visit(this.route("badaso.commerce-theme.home"))
     }
 
     document.title =
@@ -132,18 +131,13 @@ export default {
         })
         .then((response) => {
           if (response.data.accessToken) {
-            this.$router.push({ name: "Home" });
+            this.$inertia.visit(this.route("badaso.commerce-theme.home"))
             this.$store.dispatch("SET_IS_AUTHENTICATED", true);
             this.$store.dispatch("SET_USER", response.data.user);
             this.$store.dispatch('FETCH_CARTS')
             this.$store.dispatch('FETCH_NOTIFICATIONS')
           } else {
-            this.$router.push({
-              name: "Verification",
-              query: {
-                email: this.email,
-              },
-            });
+            this.$inertia.visit(this.route("badaso.commerce-theme.verification", this.email))
           }
         })
         .catch((error) => {

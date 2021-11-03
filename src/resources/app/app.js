@@ -1,4 +1,5 @@
 import Vue from 'vue';
+import { createInertiaApp, plugin as InertiaPlugin } from '@inertiajs/inertia-vue'
 import Vuelidate from 'vuelidate';
 import currency from 'currency.js';
 import * as _ from 'lodash'
@@ -6,11 +7,9 @@ import voca from 'voca'
 import moment from 'moment';
 import VueGtag from 'vue-gtag';
 
-import App from './apps/App.vue';
 import VTooltip from './directives/v-tooltip'
 import api from './api/index'
 import store from './store/index.js';
-import router from './router/router';
 import helper from './utils/helper.js';
 
 import CommerceLoading from './components/commerce-loading.vue'
@@ -21,13 +20,6 @@ Vue.config.productionTip = false;
 Vue.config.devtools = true;
 
 Vue.use(Vuelidate)
-if (process.env.MIX_ANALYTICS_TRACKING_ID) {
-  Vue.use(VueGtag, {
-    config: {
-      id: process.env.MIX_ANALYTICS_TRACKING_ID
-    }
-  }, router)
-}
 Vue.directive('tooltip', VTooltip)
 Vue.component('commerce-loading', CommerceLoading)
 Vue.component('alert', Alert)
@@ -74,9 +66,18 @@ Vue.prototype.$openLoading = () => {
 Vue.prototype.$closeLoading = () => {
   store.dispatch("HIDE_LOADING")
 }
+Vue.use(InertiaPlugin);
+Vue.mixin({ methods: { route } })
 
-const app = new Vue({
-  router,
-  store,
-  render: (h) => h(App),
-}).$mount('#commerce-theme');
+const appName = window.document.getElementsByTagName('title')[0]?.innerText || 'Badaso Commerce Theme';
+
+createInertiaApp({
+  title: (title) => `${title} - ${appName}`,
+  resolve: name => require(`./pages/${name}.vue`),
+  setup({ el, App, props }) {
+    new Vue({
+      store,
+      render: h => h(App, props),
+    }).$mount(el)
+  },
+})

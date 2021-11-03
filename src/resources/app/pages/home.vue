@@ -10,18 +10,18 @@
         <carousel show="10" class="container">
           <carousel-item v-for="category, index in splitCategory" :key="index">
             <div class="flex items-start justify-start h-full flex-wrap gap-y-2">
-              <router-link v-if="category[0]" :to="{ name: 'Category', params: { slug: category[0].slug } }" class="bg-white h-1/2 rounded-xl block">
+              <Link v-if="category[0]" :href="route('badaso.commerce-theme.category', category[0].slug)" class="bg-white h-1/2 rounded-xl block">
                 <img :src="category[0].image" alt="" class="rounded-full p-4">
                 <div class="pb-4 text-center text-sm">
                   {{ category[0].name }}
                 </div>
-              </router-link>
-              <router-link v-if="category[1]" :to="{ name: 'Category', params: { slug: category[1].slug } }" class="bg-white h-1/2 rounded-xl block">
+              </Link>
+              <Link v-if="category[1]" :href="route('badaso.commerce-theme.category', category[1].slug)" class="bg-white h-1/2 rounded-xl block">
                 <img :src="category[1].image" alt="" class="rounded-full p-4">
                 <div class="pb-4 text-center text-sm">
                   {{ category[1].name }}
                 </div>
-              </router-link>
+              </Link>
             </div>
           </carousel-item>
         </carousel>
@@ -64,7 +64,7 @@
       <card-body color="transparent" no-gutter>
         <carousel show="6" class="container">
           <carousel-item v-for="product, index in bestSelling" :key="index">
-            <router-link :to="{ name: 'DetailProduct', params: { slug: product.slug } }" class="bg-white rounded-xl flex w-full flex-wrap">
+            <Link :href="route('badaso.commerce-theme.detail', product.slug)" class="bg-white rounded-xl flex w-full flex-wrap">
               <div class="w-full relative mb-2 flex items-center">
                 <div class="p-2 bg-primary absolute top-0 left-4">
                   <span class="text-sm text-white font-semibold">TOP</span>
@@ -78,7 +78,7 @@
               <div class="flex-1 px-4 pb-4">
                 <div class="text-left text-xl font-semibold line-clamp-1">{{ product.name }}</div>
               </div>
-            </router-link>
+            </Link>
           </carousel-item>
         </carousel>
       </card-body>
@@ -93,7 +93,7 @@
           <commerce-product :product="product" v-for="product, index in products.data" :key="index" />
           <div class="commerce-h-spacer col-start-1 col-end-7" />
           <div class="flex col-start-3 col-end-5">
-            <router-link :to="{ name: 'ProductList' }" class="bg-white flex justify-center items-center w-full text-sm py-2 border border-gray-300 hover:bg-gray-200 rounded-lg">Lihat Lainnya</router-link>
+            <Link :href="route('badaso.commerce-theme.product-list')" class="bg-white flex justify-center items-center w-full text-sm py-2 border border-gray-300 hover:bg-gray-200 rounded-lg">Lihat Lainnya</Link>
           </div>
         </div>
       </card-body>
@@ -110,6 +110,10 @@ import CardBody from '../components/card/card-body.vue'
 import CommerceProduct from '../components/commerce-product.vue'
 import Carousel from '../components/carousel/carousel.vue'
 import CarouselItem from '../components/carousel/carousel-item.vue'
+
+import appLayout from '../layouts/app.vue'
+import defaultLayout from '../layouts/default.vue'
+import { Link } from "@inertiajs/inertia-vue"
 export default {
   components: {
     CommerceMainBanner,
@@ -119,8 +123,10 @@ export default {
     CardBody,
     Carousel,
     CarouselItem,
-    CommerceProduct
+    CommerceProduct,
+    Link
   },
+  layout: [appLayout, defaultLayout],
   computed: {
     splitCategory() {
       return this.$_.chunk(this.productCategories, 2)

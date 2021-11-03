@@ -10,7 +10,7 @@
             Alamat Pengiriman
           </span>
           <template v-if="isAddState">
-            <router-link :to="{ name: 'Address' }" class="text-sm text-gray-500 px-2 py-1 border rounded">Kelola Alamat</router-link>
+            <Link :href="route('badaso.commerce-theme.address')" class="text-sm text-gray-500 px-2 py-1 border rounded">Kelola Alamat</Link>
           </template>
         </div>
         <template v-if="userAddress.length > 0">
@@ -45,7 +45,7 @@
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
             <span class="text-gray-700 text-center text-sm mt-2">No user addresses was found.</span>
-            <router-link :to="{ name: 'Address' }" class="bg-primary text-white px-3 text-sm py-1 rounded">Kelola Alamat</router-link>
+            <Link :href="route('badaso.commerce-theme.address')" class="bg-primary text-white px-3 text-sm py-1 rounded">Kelola Alamat</Link>
           </div>
         </template>
       </div>
@@ -146,7 +146,11 @@
 <script>
 import { mapState } from 'vuex';
 import CommercePayment from './../components/commerce-payment.vue'
+
+import appLayout from '../layouts/app.vue'
+import cartLayout from '../layouts/cart.vue'
 export default {
+  layout: [appLayout, cartLayout],
   components: {
     CommercePayment
   },
@@ -199,9 +203,7 @@ export default {
   },
   mounted() {
     if (this.items.length <= 0) {
-      this.$router.push({
-        name: 'Cart'
-      })
+      this.$inertia.visit(this.route('badaso.commerce-theme.cart'))
       return
     }
     this.fetchMainAddress()
@@ -221,9 +223,7 @@ export default {
         })
         .then(res => {
           if (!res.data.cart) {
-            this.$router.push({
-              name: 'Cart'
-            })
+            this.$inertia.visit(this.route('badaso.commerce-theme.cart'))
           }
         })
         .catch(err => {

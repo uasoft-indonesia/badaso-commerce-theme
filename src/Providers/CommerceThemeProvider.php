@@ -34,6 +34,7 @@ class CommerceThemeProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/../Seeder' => database_path('seeders/Badaso/Commerce/Theme'),
             __DIR__.'/../Config/badaso-commerce-theme.php' => config_path('badaso-commerce-theme.php'),
+            __DIR__.'/../Tailwind/' => base_path(),
         ], 'BadasoCommerceTheme');
     }
 

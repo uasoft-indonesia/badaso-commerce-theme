@@ -7,33 +7,33 @@
         </div>
         <div class="inline-block flex-wrap pl-2">
           <div class="text-sm font-medium w-full line-clamp-1 text-gray-700">{{ user.name }}</div>
-          <router-link :to="{ name: 'Profile' }" class="text-sm text-gray-500 w-full flex items-center gap-1 cursor-pointer">
+          <Link :href="route('badaso.commerce-theme.profile')" class="text-sm text-gray-500 w-full flex items-center gap-1 cursor-pointer">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
               <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
             </svg>
             Ubah Profil
-          </router-link>
+          </Link>
         </div>
       </div>
       <div class="mt-4 flex items-center space-y-3 flex-wrap">
-        <router-link :to="{ name: 'Profile' }" class="w-full inline-flex items-center group">
+        <Link :href="route('badaso.commerce-theme.profile')" class="w-full inline-flex items-center group">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
           </svg>
           <span class="text-gray-700 font-semibold group-hover:text-primary transition-colors text-sm pl-2">Akun Saya</span>
-        </router-link>
-        <router-link :to="{ name: 'Order' }" class="w-full inline-flex items-center group text-primary">
+        </Link>
+        <Link :href="route('badaso.commerce-theme.order')" class="w-full inline-flex items-center group text-primary">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
           </svg>
           <span class="font-semibold cursor-pointer transition-colors text-sm pl-2">Pesanan Saya</span>
-        </router-link>
-        <router-link :to="{ name: 'Notification' }" class="w-full inline-flex items-center group">
+        </Link>
+        <Link :href="route('badaso.commerce-theme.notification')" class="w-full inline-flex items-center group">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
           </svg>
           <span class="text-gray-700 font-semibold cursor-pointer group-hover:text-primary transition-colors text-sm pl-2">Notifikasi</span>
-        </router-link>
+        </Link>
       </div>
     </div>
     <div class="px-6">
@@ -59,11 +59,11 @@
                   <path d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0z" />
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0" />
                 </svg>
-                <router-link :to="{ name: 'OrderDetail', params: { id: '80746114475257' } }" class="text-sm text-gray-500">
+                <Link :href="route('badaso.commerce-theme.order-detail', order.id)" class="text-sm text-gray-500">
                   <template v-if="order.status == 'process'">Paket sedang diproses</template>
                   <template v-if="order.status == 'delivering'">Paket sedang dalam perjalanan</template>
                   <template v-if="order.status == 'done'">Paket telah diterima</template>
-                </router-link>
+                </Link>
               </div>
               <div class="text-sm text-gray-500 border-r pr-2 cursor-default select-none" v-else-if="order.status == 'cancel' && order.cancelMessage">{{ order.cancelMessage }}</div>
               <div class="flex ml-3 items-center divide-x">
@@ -84,7 +84,7 @@
                 <span :class="['process', 'delivering', 'done'].includes(order.status) ? 'pl-2' : ''" class="text-sm text-primary tracking-wide uppercase">{{ formatStatus(order.status, order.expiredAt) }}</span>
               </div>
             </div>
-            <router-link :to="{ name: 'OrderDetail', params: { id: order.id } }" class="flex w-full flex-col">
+            <Link :href="route('badaso.commerce-theme.order-detail', order.id)" class="flex w-full flex-col">
               <div class="flex space-x-4 w-full py-4 first:border-t border-b last:border-b-0 last:pb-0 items-start" v-for="orderDetail, index in order.orderDetails" :key="index">
                 <img :src="orderDetail.productDetail.productImage" class="border" width="80">
                 <div class="flex flex-col">
@@ -100,7 +100,7 @@
                   {{ $currency(parseInt(orderDetail.price - orderDetail.discounted)) }}
                 </div>
               </div>
-            </router-link>
+            </Link>
           </div>
           <div class="bg-white border-t border-dotted p-6 rounded-xl shadow-sm flex flex-nowrap justify-between">
             <div class="flex self-end">
@@ -114,7 +114,7 @@
               <div class="flex items-center space-x-2">
                 <button @click="review(order.id)" class="text-sm bg-primary text-white py-2 rounded-md w-40 font-medium hover:brightness-90 bg-blend-darken filter" v-if="order.status === 'done' && !isReviewIsNull(order.orderDetails)">Nilai</button>
                 <!-- <button class="text-sm bg-primary bg-opacity-0 hover:bg-opacity-5 text-gray-700 py-2 rounded-md w-40 border">Hubungi Penjual</button> -->
-                <button class="text-sm bg-primary bg-opacity-0 hover:bg-opacity-5 text-gray-700 py-2 rounded-md w-40 border" @click="$router.push({ name: 'DetailProduct', params: { slug: order.orderDetails[0].productDetail.product.slug }})">Beli Lagi</button>
+                <Link class="text-sm block text-center bg-primary bg-opacity-0 hover:bg-opacity-5 text-gray-700 py-2 rounded-md w-40 border" :href="route('badaso.commerce-theme.detail', order.orderDetails[0].productDetail.product.slug)">Beli Lagi</Link>
                 <button class="text-sm bg-primary hover:bg-opacity-90 text-white py-2 rounded-md w-40 border" v-if="order.status === 'waitingBuyerPayment'">
                   <component
                     :is="`${order.orderPayment.paymentType}-pay`"
@@ -135,10 +135,16 @@
 import { mapState } from 'vuex'
 import Tooltip from '../../components/tooltip/tooltip.vue'
 import Radio from './../../components/form/radio.vue'
+import appLayout from '../../layouts/app.vue'
+import defaultLayout from '../../layouts/default.vue'
+import { Link } from '@inertiajs/inertia-vue'
+
 export default {
+  layout: [appLayout, defaultLayout],
   components: {
     Radio,
-    Tooltip
+    Tooltip,
+    Link
   },
   data() {
     return {
@@ -182,9 +188,7 @@ export default {
   },
   mounted() {
     if (!this.isAuthenticated) {
-      this.$router.push({
-        name: "Log In"
-      }).catch(() => {})
+      this.$inertia.visit(this.route('badaso.commerce-theme.login'))
     }
 
     this.fetchOrders()
@@ -222,12 +226,7 @@ export default {
         })
     },
     review(id) {
-      this.$router.push({
-        name: 'Review',
-        params: {
-          id
-        }
-      })
+      this.$inertia.visit(this.route('badaso.commerce-theme.review', id))
     },
     pay() {
       this.$helper.alert('Transaksi sedang diproses, mohon tetap dihalaman ini.')

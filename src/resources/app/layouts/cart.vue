@@ -4,10 +4,10 @@
     <nav class="relative bg-white flex items-stretch w-full h-20 shadow-md">
       <div class="container flex items-center gap-16 justify-between">
         <div class="flex flex-shrink-0 items-center">
-          <router-link :to="{ name: 'Home' }" class="flex flex-nowrap items-center divide-x">
+          <Link :href="route('badaso.commerce-theme.home')" class="flex flex-nowrap items-center divide-x">
             <commerce-logo dark />
-            <div class="text-xl mt-3 pl-4 text-primary">{{ $route.meta.title }}</div>
-          </router-link>
+            <div class="text-xl mt-3 pl-4 text-primary">{{ $page.props.name }}</div>
+          </Link>
         </div>
         <div class="flex">
           <div class="flex items-stretch justify-end mx-auto w-96">
@@ -23,7 +23,7 @@
         </div>
       </div>
     </nav>
-    <router-view />
+    <slot />
     <commerce-footer />
   </div>
 </template>
@@ -32,12 +32,15 @@
 import CommerceTopBar from '../components/commerce-top-bar.vue'
 import CommerceFooter from '../components/commerce-footer.vue'
 import CommerceLogo from '../components/commerce-logo.vue'
+import { Link } from '@inertiajs/inertia-vue'
+
 export default {
   name: "auth-layout",
   components: {
     CommerceTopBar,
     CommerceFooter,
     CommerceLogo,
+    Link,
   },
   data() {
     return {
@@ -49,18 +52,5 @@ export default {
       return
     }
   },
-  mounted() {
-    document.title = `${this.$route.meta.title} - Badaso Commerce Theme`
-  },
-  watch: {
-    $route(to, from) {
-      document.title = `${to.meta.title} - Badaso Commerce Theme`
-    }
-  },
-  beforeRouteEnter(to, from, next) {
-    next(vm => {
-      document.title = `${to.meta.title} - Badaso Commerce Theme`
-    })
-  }
 };
 </script>

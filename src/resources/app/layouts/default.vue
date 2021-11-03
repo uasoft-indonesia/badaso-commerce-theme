@@ -2,7 +2,7 @@
   <div>
     <commerce-top-bar />
     <commerce-navbar />
-    <router-view />
+    <slot />
     <commerce-footer />
   </div>
 </template>

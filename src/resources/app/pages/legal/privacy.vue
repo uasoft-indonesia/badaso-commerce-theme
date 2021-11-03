@@ -13,9 +13,15 @@
 <script>
 import Fab from './../../components/fab/fab'
 import { mapState } from 'vuex'
+import appLayout from '../../layouts/app.vue'
+import legalLayout from '../../layouts/legal.vue'
+import { Link } from '@inertiajs/inertia-vue'
+
 export default {
+  layout: [appLayout, legalLayout],
   components: {
-    Fab
+    Fab,
+    Link
   },
   computed: mapState({
     tos (state) {

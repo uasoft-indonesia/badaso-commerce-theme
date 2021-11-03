@@ -52,7 +52,19 @@ class BadasoCommerceThemeSetup extends Command
     {
         $package_json = file_get_contents(base_path('package.json'));
         $decoded_json = json_decode($package_json, true);
+        $decoded_json['devDependencies']['postcss'] = '^8.1.14';
+        $decoded_json['devDependencies']['tailwindcss-debug-screens'] = '^2.0.0';
+        $decoded_json['devDependencies']['tailwindcss-important'] = '^1.0.0';
 
+        $decoded_json['dependencies']['@tailwindcss/aspect-ratio'] = '^0.2.1';
+        $decoded_json['dependencies']['@tailwindcss/forms'] = '^0.3.3';
+        $decoded_json['dependencies']['@tailwindcss/line-clamp'] = '^0.2.1';
+        $decoded_json['dependencies']['@inertiajs/inertia'] = '^0.10.1';
+        $decoded_json['dependencies']['@inertiajs/inertia-vue'] = '^0.7.2';
+        $decoded_json['dependencies']['currency.js'] = '^2.0.4';
+        $decoded_json['dependencies']['tailwindcss'] = '^2.2.6';
+        $decoded_json['dependencies']['tailwindcss-tooltip-arrow-after'] = '^1.0.0';
+        $decoded_json['dependencies']['voca'] = '^1.4.0';
         $decoded_json['dependencies']['vue-resize'] = '^1.0.1';
         $decoded_json['dependencies']['vuelidate'] = '^0.7.6';
 
@@ -93,7 +105,13 @@ class BadasoCommerceThemeSetup extends Command
                 <<<'EOT'
 
         // BadasoCommerce
-        mix.js("vendor/badaso/commerce-theme/src/resources/js/app.js","public/js/commerce.js").vue()
+        const path = require('path');
+        mix.js("vendor/badaso/commerce-theme/src/resources/app/app.js", "public/js/commerce-theme.js")
+            .sass('vendor/badaso/commerce-theme/src/resources/app/assets/scss/index.scss', 'public/css/commerce-theme.css')    
+            .alias({
+                '@': path.join(__dirname, 'vendor/badaso')
+            })
+            .vue()
         EOT;
 
             $this->file->append($mix_file, $data);
