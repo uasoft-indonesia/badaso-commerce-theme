@@ -43,11 +43,9 @@
             <span v-else>VERIFIY</span>
           </button>
           <div class="flex w-full flex-wrap">
-            <router-link
-              :to="{ name: 'Reset Password' }"
-              class="text-xs text-primary font-medium"
-              >Lupa Password</router-link
-            >
+            <Link :href="route('badaso.commerce-theme.forgot-password', $page.props.email)" class="text-xs text-primary font-medium">
+              Lupa Password
+            </Link>
             <div class="w-full flex items-center gap-4 my-2">
               <div class="h-px w-full bg-gray-300" />
               <div class="uppercase text-gray-300 text-sm">atau</div>
@@ -55,11 +53,9 @@
             </div>
             <div class="text-sm text-gray-300 w-full text-center">
               Baru di {{ title }}?
-              <router-link
-                :to="{ name: 'Daftar' }"
-                class="text-primary font-medium cursor-pointer"
-                >Daftar</router-link
-              >
+              <Link :href="route('badaso.commerce-theme.register')" class="text-primary font-medium cursor-pointer">
+                Daftar
+              </Link>
             </div>
           </div>
         </div>
@@ -72,6 +68,8 @@
 import Password from "./../../components/form/password.vue";
 import Pin from "./../../components/form/pin.vue";
 import { mapState } from "vuex";
+import appLayout from '../../layouts/app.vue'
+import authLayout from '../../layouts/auth.vue'
 import {
   required,
   minLength,
@@ -80,6 +78,7 @@ import {
 } from "vuelidate/lib/validators";
 
 export default {
+  layout: [appLayout, authLayout],
   components: {
     Password,
     Pin,
@@ -132,13 +131,11 @@ export default {
   },
   mounted() {
     if (this.isAuthenticated) {
-      this.$router.push({
-        name: "Home"
-      }).catch(() => {})
+      this.$inertia.visit(this.route('badaso.commerce-theme.home'))
     }
 
     document.title = `Verifikasi Akun - ${this.appName}`;
-    this.email = this.$route.query.email;
+    this.email = this.$page.props.email;
   },
   methods: {
     verify() {
@@ -149,7 +146,7 @@ export default {
           token: this.token,
         })
         .then((response) => {
-          this.$router.push({ name: "Log In" });
+          this.$inertia.visit(this.route("badaso.commerce-theme.login"));
         })
         .catch((error) => {
           if (error.message && error.message === "EXPIRED") {

@@ -155,7 +155,7 @@
       <div class="flex flex-wrap col-start-5 col-end-auto row-span-2 mb-auto bg-white shadow-sm pt-4 rounded-xl">
         <div class="text-gray-400 text-sm pl-4">Produk Lainnya</div>
         <div class="flex flex-col w-full">
-          <router-link :to="{ name: 'DetailProduct', params: { slug: similarProduct.slug } }" v-for="similarProduct, index in similarProducts" :key="index">
+          <Link :href="route('badaso.commerce-theme.detail', similarProduct.slug)" v-for="similarProduct, index in similarProducts" :key="index">
             <div class="flex flex-col p-4">
               <div class="aspect-w-15 aspect-h-16">
                 <img :src="similarProduct.productImage" :alt="similarProduct.name" class="w-full h-full object-center object-cover">
@@ -164,7 +164,7 @@
               <div class="text-primary ml-2 font-semibold">{{ $currency(similarProduct.productDetails[0].price) }}</div>
             </div>
             <div class="w-full h-px bg-gray-300" v-if="index !== 6" />
-          </router-link>
+          </Link>
         </div>
       </div>
     </div>
@@ -177,13 +177,20 @@ import Counter from './../components/counter/counter.vue'
 import Carousel from '../components/carousel/carousel.vue'
 import CarouselItem from '../components/carousel/carousel-item.vue'
 import Pagination from './../components/pagination/pagination.vue'
+
+import { Link } from '@inertiajs/inertia-vue'
+import appLayout from '../layouts/app.vue'
+import defaultLayout from '../layouts/default.vue'
+
 export default {
+  layout: [appLayout, defaultLayout],
   components: {
     Rating,
     Counter,
     Carousel,
     CarouselItem,
     Pagination,
+    Link
   },
   data() {
     return {
@@ -267,7 +274,7 @@ export default {
     }
   },
   watch: {
-    $route: {
+    '$page.props': {
       handler() {
         this.getProduct()
       },
@@ -324,7 +331,7 @@ export default {
     getReviews() {
       this.$api.badasoReview
         .browse({
-          slug: this.$route.params.slug,
+          slug: this.$page.props.slug,
           page: this.currentPage
         })
         .then(res => {
@@ -338,7 +345,7 @@ export default {
     getProduct() {
       this.$api.badasoProduct
         .read({
-          slug: this.$route.params.slug
+          slug: this.$page.props.slug
         })
         .then(res => {
           this.product = res.data.product
@@ -353,9 +360,7 @@ export default {
         })
         .catch(err => {
           this.$helper.displayErrors(err)
-          this.$router.push({
-            name: "Page404"
-          })
+          this.$inertia.visit(this.route('badaso.commerce-theme.404'))
         })
     },
     getSimilarProduct() {
@@ -411,9 +416,7 @@ export default {
         })
         .then(res => {
           this.$store.dispatch('FETCH_CARTS')
-          this.$router.push({
-            name: "Cart"
-          })
+          this.$inertia.visit(this.route('badaso.commerce-theme.cart'))
         })
         .catch(err => {
           this.$helper.displayErrors(err)

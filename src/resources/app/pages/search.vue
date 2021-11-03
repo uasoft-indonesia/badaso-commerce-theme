@@ -212,7 +212,7 @@
           <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
           </svg>
-          Hasil pencarian untuk&nbsp;<span class="text-primary font-medium">"{{ $route.query.keyword }}"</span>
+          Hasil pencarian untuk&nbsp;<span class="text-primary font-medium">"{{ $page.props.search }}"</span>
         </div>
         <div class="flex bg-gray-200 h-12 items-center px-4 gap-4 rounded-xl w-full">
           <div class="text-gray-500 text-sm">Urutkan</div>
@@ -252,7 +252,10 @@ import CarouselItemSingle from './../components/carousel-single/carousel-item.vu
 import Pagination from './../components/pagination/pagination.vue'
 import CommerceProductAlt from '../components/commerce-product-alt.vue'
 import { mapState } from 'vuex'
+import appLayout from '../layouts/app.vue'
+import defaultLayout from '../layouts/default.vue'
 export default {
+  layout: [appLayout, defaultLayout],
   components: {
     CarouselSingle,
     CarouselItemSingle,
@@ -276,9 +279,11 @@ export default {
     })
   },
   watch: {
-    $route(to, from) {
-      document.title = `Pencarian ${this.$voca.titleCase(to.query.keyword, true)} - Badaso Commerce Theme`
-      this.fetchSearchedProducts()
+    '$page.props': {
+      handler(val) {
+        document.title = `Pencarian ${this.$voca.titleCase(this.$page.props.search, true)} - Badaso Commerce Theme`
+        this.fetchSearchedProducts()
+      }
     },
     currentPage: {
       handler(val) {
@@ -288,7 +293,7 @@ export default {
   },
   beforeRouteEnter(to, from, next) {
     next(vm => {
-      document.title = `Pencarian ${vm.$voca.titleCase(vm.$route.query.keyword, true)} - Badaso Commerce Theme`
+      document.title = `Pencarian ${vm.$voca.titleCase(vm.$page.props.search, true)} - Badaso Commerce Theme`
     })
   },
   mounted() {
@@ -298,7 +303,7 @@ export default {
     fetchSearchedProducts() {
       this.$api.badasoProduct
         .search({
-          keyword: this.$route.query.keyword,
+          keyword: this.$page.props.search,
           page: this.currentPage
         })
         .then(res => {

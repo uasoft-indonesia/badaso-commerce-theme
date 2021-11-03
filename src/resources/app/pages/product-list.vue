@@ -27,7 +27,11 @@
 import { mapState } from 'vuex'
 import CommerceProduct from '../components/commerce-product.vue'
 import Pagination from './../components/pagination/pagination.vue'
+
+import appLayout from '../layouts/app.vue'
+import defaultLayout from '../layouts/default.vue'
 export default {
+  layout: [appLayout, defaultLayout],
   components: {
     Pagination,
     CommerceProduct

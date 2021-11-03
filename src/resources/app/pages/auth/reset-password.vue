@@ -3,11 +3,11 @@
     <div class="col-span-1 w-96">
       <div class="bg-white rounded-xl p-8 flex flex-wrap gap-2 shadow-md">
         <div class="text-xl w-full text-center relative">
-          <router-link :to="{ name: 'Log In' }" class="absolute left-0 top-1/2 transform -translate-y-1/2">
+          <Link :href="route('badaso.commerce-theme.login')" class="absolute left-0 top-1/2 transform -translate-y-1/2">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
               <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
             </svg>
-          </router-link>
+          </Link>
           Reset Password
         </div>
         <password v-model="password" placeholder="Password" class="mt-4" />
@@ -24,6 +24,9 @@
 <script>
 import { mapState } from 'vuex';
 import Password from './../../components/form/password.vue'
+import appLayout from '../../layouts/app.vue'
+import authLayout from '../../layouts/auth.vue'
+import { Link } from "@inertiajs/inertia-vue"
 import {
   required,
   minLength,
@@ -32,8 +35,10 @@ import {
 } from "vuelidate/lib/validators";
 
 export default {
+  layout: [appLayout, authLayout],
   components: {
-    Password
+    Password,
+    Link
   },
   data() {
     return {
@@ -72,12 +77,6 @@ export default {
     }),
   },
   mounted() {
-    if (this.isAuthenticated) {
-      this.$router.push({
-        name: "Home"
-      }).catch(() => {})
-    }
-
     document.title = `Reset Password - ${this.appName}`
   },
   methods: {
@@ -85,14 +84,15 @@ export default {
       this.loading = true
       this.$api.badasoAuth
         .resetPassword({
-          email: this.$route.query.email,
-          token: this.$route.query.token,
+          email: this.$page.props.email,
+          token: this.$page.props.token,
           password: this.password,
           password_confirmation: this.passwordConfirmation,
         })
         .then((response) => {
+          this.$helper.alert("Redirect on 5 seconds.")
           setTimeout(() => {
-            this.$router.push({ name: "Log In" });
+            this.$inertia.visit(this.route('badaso.commerce-theme.login'))
           }, 5000);
         })
         .catch((error) => {

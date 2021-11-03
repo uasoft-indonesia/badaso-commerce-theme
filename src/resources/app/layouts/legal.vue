@@ -3,9 +3,9 @@
     <nav class="relative bg-white flex items-stretch w-full h-20 shadow-md">
       <div class="container flex items-center gap-16">
         <div class="flex flex-shrink-0 items-center">
-          <router-link :to="{ name: 'Home' }">
+          <Link :href="route('badaso.commerce-theme.home')">
             <commerce-logo dark />
-          </router-link>
+          </Link>
         </div>
         <div class="flex-grow"></div>
         <div class="flex">
@@ -28,7 +28,7 @@
         </div>
       </div>
     </nav>
-    <router-view />
+    <slot />
     <div class="bg-gray-300 h-16 border-primary w-full">
       <div class="w-full flex text-gray-500 text-sm items-center h-full px-8">
         <div class="flex gap-4">
@@ -44,11 +44,13 @@
 import { mapState } from 'vuex';
 import CommerceFooter from '../components/commerce-footer.vue'
 import CommerceLogo from '../components/commerce-logo.vue'
+import { Link } from '@inertiajs/inertia-vue'
 export default {
   name: "legal-layout",
   components: {
     CommerceFooter,
     CommerceLogo,
+    Link
   },
   computed: {
     ...mapState({

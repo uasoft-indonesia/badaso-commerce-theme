@@ -19,7 +19,7 @@ export default {
   methods: {
     searchProduct() {
       if (this.search) {
-        this.$router.push({ name: "Search", query: { keyword: this.search } })
+        this.$inertia.visit('badaso.commerce-theme.search', this.search)
       }
     }
   }

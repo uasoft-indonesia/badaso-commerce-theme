@@ -16,7 +16,7 @@
               <img :src="cart.productDetail.productImage" class="w-full h-full">
             </div>
             <div class=" flex-1 text-sm">
-              <router-link :to="{ name: 'DetailProduct', params: { slug: cart.productDetail.product.slug } }" class="line-clamp-2">{{ cart.productDetail.product.name }}</router-link>
+              <Link :to="{ name: 'DetailProduct', params: { slug: cart.productDetail.product.slug } }" class="line-clamp-2">{{ cart.productDetail.product.name }}</Link>
               <div class="text-sm mt-2">Variasi: 
                 <span class="border border-gray-300 px-1.5 py-1 cursor-pointer ml-2 rounded-md text-gray-500 text-xs">{{ $voca.titleCase(cart.productDetail.name) }}</span>
               </div>
@@ -100,13 +100,19 @@ import Counter from './../components/counter/counter.vue'
 import Carousel from '../components/carousel/carousel.vue'
 import CarouselItem from '../components/carousel/carousel-item.vue'
 import CommerceProductAlt from '../components/commerce-product-alt.vue'
+
+import appLayout from '../layouts/app.vue'
+import defaultLayout from '../layouts/default.vue'
+import { Link } from '@inertiajs/inertia-vue'
 export default {
+  layout: [appLayout, defaultLayout],
   components: {
     Checkbox,
     Counter,
     Carousel,
     CarouselItem,
-    CommerceProductAlt
+    CommerceProductAlt,
+    Link
   },
   data() {
     return {
@@ -165,7 +171,7 @@ export default {
       this.$store.dispatch('SET_CHECKOUT', carts)
 
       this.$closeLoading()
-      this.$router.push({ name: 'Checkout' })
+      this.$inertia.visit(this.route('badaso.commerce-theme.checkout'))
     },
     getCarts() {
       this.$api.badasoCart
@@ -179,9 +185,7 @@ export default {
         .catch(err => {
           if (err.status === 401) {
             localStorage.removeItem('token')
-            this.$router.push({
-              name: 'Log In'
-            })
+            this.$inertia.visit(this.route('badaso.commerce-theme.login'))
           }
           this.$helper.displayErrors(err)
         })

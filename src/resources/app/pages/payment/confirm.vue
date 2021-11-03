@@ -3,13 +3,13 @@
       <div class="h-12 flex justify-center items-center w-full border-b border-gray-300">
         <div class="lg:max-w-xl w-full flex items-center justify-center relative">
           <span class="select-none">
-            {{ $route.meta.title }}
+            {{ $page.props.title }}
           </span>
-          <a @click="() => $router.go(-1)" class="absolute left-4 cursor-pointer">
+          <Link :href="route('badaso.commerce-theme.order')" class="absolute left-4 cursor-pointer">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
             </svg>
-          </a>
+          </Link>
         </div>
       </div>
       <div class="lg:max-w-xl w-full">
@@ -227,10 +227,16 @@ import {
   alphaNum,
   integer
 } from "vuelidate/lib/validators";
+import appLayout from '../../layouts/app.vue'
+import paymentLayout from '../../layouts/payment.vue'
+import { Link } from '@inertiajs/inertia-vue'
+
 export default {
+  layout: [appLayout, paymentLayout],
   components: {
     BottomSheet,
-    List
+    List,
+    Link
   },
   data() {
     return {
@@ -332,22 +338,18 @@ export default {
         this.$openLoading()
         this.$api.badasoOrder
           .pay({
-            id: this.$route.params.id,
+            id: this.$page.props.id,
             ...this.selected,
             destinationBank: this.selected.destinationBank.name,
             sourceBank: this.selected.sourceBank.key,
           })
           .then(res => {
             this.$helper.alert(res.message)
-            this.$router.push({
-              name: "Order"
-            })
+            this.$inertia.visit(this.route('badaso.commerce-theme.order'))
           })
           .catch(err => {
             this.$helper.displayErrors(err)
-            this.$router.push({
-              name: 'Order'
-            })
+            this.$inertia.visit(this.route('badaso.commerce-theme.order'))
           })
           .finally(() => {
             this.$closeLoading()
@@ -360,22 +362,18 @@ export default {
       this.$openLoading()
       this.$api.badasoOrder
         .read({
-          id: this.$route.params.id
+          id: this.$page.props.id
         })
         .then(res => {
           this.order = res.data.order
           this.total = parseInt(res.data.order.payed)
           if (res.data.order.status != 'waitingBuyerPayment' || res.data.order.orderPayment.paymentType != 'manual-transfer') {
-            this.$router.push({
-              name: "Order"
-            })
+            this.$inertia.visit(this.route('badaso.commerce-theme.order'))
           }
         })
         .catch(err => {
           this.$helper.displayErrors(err)
-          this.$router.push({
-            name: 'Order'
-          })
+          this.$inertia.visit(this.route('badaso.commerce-theme.order'))
         })
         .finally(() => {
           this.$closeLoading()

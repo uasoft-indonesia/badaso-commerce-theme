@@ -4,11 +4,11 @@
       <template v-if="!isVerify">
         <div class="bg-white rounded-xl p-8 flex flex-wrap gap-2 shadow-md">
           <div class="text-xl w-full text-center relative">
-            <router-link :to="{ name: 'Log In' }" class="absolute left-0 top-1/2 transform -translate-y-1/2">
+            <Link :href="route('badaso.commerce-theme.login')" class="absolute left-0 top-1/2 transform -translate-y-1/2">
               <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                 <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
               </svg>
-            </router-link>
+            </Link>
             Forgot Password
           </div>
           <input type="email" class="w-full border border-gray-300 text-sm p-2 focus:outline-none focus:shadow-md focus:border-gray-700 rounded-md mt-4" placeholder="Email" v-model="email" @keypress.enter="reset">
@@ -21,11 +21,11 @@
       <template v-else>
         <div class="bg-white rounded-xl p-8 flex flex-wrap gap-2 shadow-md">
           <div class="text-xl w-full text-center relative">
-            <router-link :to="{ name: 'Log In' }" class="absolute left-0 top-1/2 transform -translate-y-1/2">
+            <Link :href="route('badaso.commerce-theme.login')" class="absolute left-0 top-1/2 transform -translate-y-1/2">
               <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                 <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
               </svg>
-            </router-link>
+            </Link>
             Verifikasi
           </div>
           <alert color="primary" closeable>
@@ -64,7 +64,11 @@ import {
   email,
 } from "vuelidate/lib/validators";
 
+import appLayout from '../../layouts/app.vue'
+import authLayout from '../../layouts/auth.vue'
+
 export default {
+  layout: [appLayout, authLayout],
   components: {
     Password,
     Pin
@@ -114,9 +118,7 @@ export default {
   },
   mounted() {
     if (this.isAuthenticated) {
-      this.$router.push({
-        name: "Home"
-      }).catch(() => {})
+      this.$inertia.visit(this.route("badaso.commerce-theme.login"))
     }
 
     document.title = `Forgot Password - ${this.appName}`
@@ -146,13 +148,10 @@ export default {
           token: this.token,
         })
         .then((response) => {
-          this.$router.push({
-            name: "Reset Password",
-            query: {
-              email: this.email,
-              token: this.token,
-            },
-          });
+          this.$inertia.visit(this.route("badaso.commerce-theme.reset-password", {
+            email: this.email,
+            token: this.token,
+          }));
         })
         .catch((error) => {
           this.$helper.displayErrors(error)
