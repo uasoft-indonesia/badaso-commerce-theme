@@ -25,7 +25,7 @@
   "require": {
     "badaso/core": "^2.0",
     "badaso/content-module": "^2.0",
-    "badaso/commerce-module": "^2.0",
+    "badaso/commerce-module": "^0.1.0",
     "inertiajs/inertia-laravel": "^0.4.5",
     "tightenco/ziggy": "^1.4"
   },
