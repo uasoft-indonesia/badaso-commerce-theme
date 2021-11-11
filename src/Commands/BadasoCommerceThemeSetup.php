@@ -43,10 +43,10 @@ class BadasoCommerceThemeSetup extends Command
     public function handle()
     {
         $this->addingBadasoEnv();
-        // $this->updateWebpackMix();
-        // $this->publishBadasoProvider();
-        // $this->updatePackageJson();
-        // $this->linkStorage();
+        $this->updateWebpackMix();
+        $this->publishBadasoProvider();
+        $this->updatePackageJson();
+        $this->linkStorage();
     }
 
     protected function updatePackageJson()
