@@ -257,7 +257,11 @@ export default {
         : this.$_.filter(this.review.data, { rating: this.reviewActive })
     },
     hasActiveDiscount() {
-      return this.product.productDetails[this.activeImageCarousel].discount.active
+      return this.$_.has(this.product.productDetails[this.activeImageCarousel], 'discount')
+        ? this.product.productDetails[this.activeImageCarousel].discount === null 
+          ? false 
+          : this.product.productDetails[this.activeImageCarousel].discount.active
+        : false
     },
     getDiscount() {
       return this.getDiscountType == 'fixed' 
