@@ -1,7 +1,7 @@
 <template>
   <div>
     <commerce-main-banner />
-    <div class="commerce-h-spacer" />
+    <div class="h-5" />
     <card>
       <card-header>
         Kategori
@@ -27,7 +27,7 @@
         </carousel>
       </card-body>
     </card>
-    <div class="commerce-h-spacer" />
+    <div class="h-5" />
     <!-- <card>
       <card-header>
         Pencarian Populer
@@ -48,7 +48,7 @@
         </carousel>
       </card-body>
     </card>
-    <div class="commerce-h-spacer" /> -->
+    <div class="h-5" /> -->
     <card>
       <card-header text-color="primary">
         Produk Terlaris
@@ -83,7 +83,7 @@
         </carousel>
       </card-body>
     </card>
-    <div class="commerce-h-spacer" />
+    <div class="h-5" />
     <card gap="2" class="relative">
       <card-header text-color="primary" class="sticky top-0 z-30">
         Rekomendasi
@@ -91,7 +91,7 @@
       <card-body color="transparent" no-gutter>
         <div class="w-full grid grid-cols-6 gap-2">
           <commerce-product :product="product" v-for="product, index in products.data" :key="index" />
-          <div class="commerce-h-spacer col-start-1 col-end-7" />
+          <div class="h-5 col-start-1 col-end-7" />
           <div class="flex col-start-3 col-end-5">
             <Link :href="route('badaso.commerce-theme.product-list')" class="bg-white flex justify-center items-center w-full text-sm py-2 border border-gray-300 hover:bg-gray-200 rounded-lg">Lihat Lainnya</Link>
           </div>
@@ -187,84 +187,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss">
-.commerce-h-spacer {
-  @apply h-5;
-}
-
-.commerce-populer-card {
-  &__container {
-    @apply flex relative;
-  }
-
-  &__item {
-    &--wrapper {
-      &:not(:last-child) {
-        @apply border-r;
-      }
-      @apply flex-1 border-gray-200;
-    }
-
-    &--container {
-      @apply border-t border-gray-200 grid grid-cols-5;
-    }
-
-    &--image {
-      @apply p-2 col-start-4 col-end-6;
-    }
-
-    &--text-container {
-      @apply col-start-1 col-end-4 p-4;
-    }
-
-    &--title {
-      @apply text-left text-sm font-semibold;
-    }
-
-    &--subtitle {
-      @apply text-left text-sm;
-    }
-  }
-}
-
-.commerce-category-card {
-  &__container {
-    @apply flex relative;
-  }
-
-  &__next-button {
-    @apply bg-white rounded-full absolute right-0 shadow-lg p-2 translate-x-1/2 transform origin-left border border-gray-200 transition-transform;
-    top: 43%;
-
-    &:hover {
-      @apply scale-150 transform origin-left;
-    }
-
-    &.hovered {
-      @apply scale-150 transform origin-left;
-    }
-  }
-
-  &__item {
-    &--wrapper {
-      &:not(:last-child) {
-        @apply border-r;
-      }
-      @apply flex-1 border-gray-200;
-    }
-
-    &--container {
-      @apply border-t border-gray-200 block hover:shadow-lg;
-    }
-
-    &--image {
-      @apply p-6 rounded-full;
-    }
-
-    &--text {
-      @apply text-center pb-6 text-sm;
-    }
-  }
-}
-</style>

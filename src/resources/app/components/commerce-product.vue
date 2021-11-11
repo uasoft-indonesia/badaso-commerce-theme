@@ -61,7 +61,7 @@ export default {
   computed: {
     hasActiveDiscount() {
       return this.$_.has(this.product.productDetails[0], 'discount')
-        ? this.product.productDetails[0].discount.active
+        ? this.product.productDetails[0].discount === null ? false : this.product.productDetails[0].discount.active
         : false
     },
     getDiscountType() {
