@@ -1,9 +1,11 @@
 <template>
   <div class="w-full flex justify-center flex-wrap">
+    <Head :title="$page.props.name" />
+
     <div class="h-12 flex justify-center items-center w-full border-b border-gray-300">
       <div class="lg:max-w-xl w-full flex items-center justify-center relative">
         <span class="select-none">
-          {{ $route.meta.title }}
+          {{ $page.props.title }}
         </span>
         <Link :href="route('badaso.commerce-theme.order')" class="absolute left-4 cursor-pointer">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -68,8 +70,8 @@
             <div class="text-sm text-gray-500">Demi kenyamanan transaksi, mohon untuk tidak membagikan bukti atau konfirmasi pembayaran pesanan kepada siapapun, selain mengunggahnya via web {{ title }}.</div>
           </div>
         </div>
-        <div class="w-full flex flex-wrap gap-2 my-2">
-          <Link class="w-full p-2 bg-primary text-white rounded text-center text-sm" :href="route('badaso.commerce-theme.payment', $page.props.id)">
+        <div class="w-full flex flex-wrap gap-2 my-2 px-3 sm:px-0">
+          <Link class="w-full p-2 bg-primary text-white rounded text-center text-sm" :href="route('badaso.commerce-theme.payment-confirm', $page.props.id)">
             Upload bukti transfer sekarang
           </Link>
           <Link 
@@ -88,7 +90,7 @@
 import { mapState } from 'vuex'
 import appLayout from '../../layouts/app.vue'
 import paymentLayout from '../../layouts/payment.vue'
-import { Link } from '@inertiajs/inertia-vue'
+import { Link, Head } from '@inertiajs/inertia-vue'
 
 export default {
   layout: [appLayout, paymentLayout],

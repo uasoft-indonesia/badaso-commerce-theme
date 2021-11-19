@@ -30,6 +30,11 @@ export default {
     return resource.put(ep, data);
   },
 
+  editCart(data) {
+    let ep = apiPrefix + "/v1/cart/public/edit-cart";
+    return resource.put(ep, data);
+  },
+
   delete(data) {
     let paramData = {
       data: data,

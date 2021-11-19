@@ -74,9 +74,9 @@ export default {
     });
     this.observer = observer;
 
-    this.interval = setInterval(() => {
-      this.next()
-    }, this.autoplayDuration);
+    if (this.autoplay) {
+      this.interval = setInterval(this.next, this.autoplayDuration);
+    }
   },
   beforeDestroy() {
     clearInterval(this.interval)

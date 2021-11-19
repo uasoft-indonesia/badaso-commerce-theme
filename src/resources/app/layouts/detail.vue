@@ -2,10 +2,8 @@
   <div>
     <commerce-top-bar class="hidden sm:flex" />
     <commerce-navbar class="hidden sm:flex" />
-    <commerce-mobile-navbar class="flex sm:hidden" />
     <slot />
     <commerce-footer class="hidden sm:block" />
-    <commerce-mobile-footer class="block sm:hidden" />
     <transition
       enter-active-class="transition-all duration-75 ease transform"
       leave-active-class="transition-all duration-75 ease transform"
@@ -26,17 +24,13 @@
 <script>
 import CommerceTopBar from '../components/commerce-top-bar.vue'
 import CommerceNavbar from '../components/commerce-navbar.vue'
-import CommerceMobileNavbar from '../components/commerce-mobile-navbar.vue'
 import CommerceFooter from '../components/commerce-footer.vue'
-import CommerceMobileFooter from '../components/commerce-mobile-footer.vue'
 export default {
   name: "default-layout",
   components: {
     CommerceTopBar,
     CommerceNavbar,
-    CommerceMobileNavbar,
     CommerceFooter,
-    CommerceMobileFooter,
   },
   data() {
     return {

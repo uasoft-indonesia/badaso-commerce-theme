@@ -189,8 +189,8 @@ export default new Vuex.Store({
             state.user = res.data.user
           })
           .catch(err => {
+            localStorage.removeItem('token')
             if (err.status === 401) {
-              localStorage.removeItem('token')
               state.isAuthenticated = false
               state.user = {
                 name: null,

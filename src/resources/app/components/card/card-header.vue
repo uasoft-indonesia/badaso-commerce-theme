@@ -13,7 +13,7 @@ export default {
       default: 'white'
     },
     radius: {
-      type: String,
+      type: String|Number,
       required: false,
       default: 'xl'
     },

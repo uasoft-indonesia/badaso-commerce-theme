@@ -23,7 +23,12 @@
 
             <div v-if="dropdownOpen" @mouseover="dropdownOpen = false" class="inset-0 fixed h-full w-full z-10" />
 
-            <transition name="fade">
+            <transition
+              enter-active-class="transition-all transform duration-300"
+              leave-active-class="transition-all transform duration-300"
+              enter-class="opacity-0 scale-50"
+              leave-to-class="opacity-0 scale-50"
+            >
               <div v-if="dropdownOpen" @mouseover="dropdownOpen = true" class="!absolute right-0 top-5 pt-2 z-20 w-96 overflow-hidden transition-all ease-in-out transform duration-300 origin-top-right">
                 <div class="border shadow-xl border-gray-300 bg-white rounded-sm navigation-arrow-top">
                   <div class="p-2">
@@ -150,12 +155,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss">
-.fade-enter-active, .fade-leave-active {
-  @apply transition-all transform duration-300;
-}
-.fade-enter, .fade-leave-to {
-  @apply opacity-0 scale-50;
-}
-</style>

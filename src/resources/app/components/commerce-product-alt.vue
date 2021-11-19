@@ -55,8 +55,8 @@ export default {
   },
   computed: {
     hasActiveDiscount() {
-      return this.product.productDetails[0].discount 
-        ? this.product.productDetails[0].discount.active
+      return this.product.productDetails[0].discount !== null
+        ? this.product.productDetails[0].discount.active === 1
         : false
     },
     getDiscountType() {
@@ -86,12 +86,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss" scoped>
-.similar-product-enter-active, .similar-product-leave-active {
-  transition: opacity .2s ease;
-}
-.similar-product-enter, .similar-product-leave-to {
-  opacity: 0;
-}
-</style>
