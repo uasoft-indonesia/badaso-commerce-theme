@@ -1,6 +1,6 @@
 <template>
-  <div @mouseenter="isHover = true" @mouseover="isHover = true" @mouseout="isHover = false" class="w-full h-full pointer-events-auto">
-    <Link :href="route('badaso.commerce-theme.detail', product.slug)" class="relative block transition-all ease duration-200 group bg-white ring-primary rounded-xl h-full hover:ring-2 hover:rounded-b-none" >
+  <div class="w-full h-full hover:shadow-md rounded-xl transition-transform duration-200 ease-in-out transform hover:-translate-y-1">
+    <Link :href="route('badaso.commerce-theme.detail', product.slug)" class="relative block group bg-white rounded-xl h-full" >
       <div class="w-full bg-cover bg-no-repeat rounded-t-xl mb-2" :style="`background-image: url('${product.productImage}'); padding-top: 100%`">
       <div class="absolute right-4 top-0 h-8 w-8" v-if="hasActiveDiscount">
         <span class="absolute right-0 top-0 text-xs z-10 w-full text-center text-white font-bold line-clamp-2">{{ getDiscount }}<br/>
@@ -11,42 +11,24 @@
         </svg>
       </div>
       </div>
-      <div class="px-4 pb-4">
+      <div class="px-3 pb-3">
         <h3 class="line-clamp-2 text-sm">{{ product.name }}</h3>
         
-        <!-- This is for voucher, not yet implemented. -->
-        <!-- <div class="bg-primary text-white text-xs inline-block border-r border-l border-dotted py-0.5 px-1 my-1">Diskon Rp5RB</div> -->
-
         <div class="flex items-start justify-between mt-1">
-          <div class="text-primary font-medium">
+          <div class="text-primary font-medium line-clamp-1">
             {{ getProductPrice }}
           </div>
           <div class="text-xs text-gray-400 mt-1 whitespace-nowrap">
             {{ getProductSold }} Terjual
           </div>
         </div>
-        <div class="flex items-start justify-between mt-1">
-          <div class="text-primary font-medium">
-            <rating stroke v-model.number="product.reviewAvgRating" :star-width="10" :star-height="10" star-active-color="rgba(6, 187, 211, 1)" star-empty-color="transparent" />
-          </div>
-        </div>
       </div>
-      <transition 
-        enter-active-class="transition-all duration-200 ease"
-        leave-active-class="transition-all duration-200 ease"
-        enter-class="opacity-0"
-        leave-to-class="opacity-0"
-      >
-        <div v-if="isHover" class="w-full p-2 font-medium text-sm bg-primary text-white text-center group-hover:ring-2 ring-primary z-20 opacity-0 group-hover:opacity-100 absolute bottom-0 transform translate-y-full rounded-b-xl group-hover:shadow-md">
-          Produk Serupa
-        </div>
-      </transition>
     </Link>
   </div>
 </template>
 
 <script>
-import Rating from './../components/rating/rating.vue'
+import Rating from './rating/rating.vue'
 import { Link } from '@inertiajs/inertia-vue'
 export default {
   components: {
@@ -86,15 +68,13 @@ export default {
         : `${this.$currency(min.price)} - ${this.$currency(max.price)}`
       }
 
-      return this.$_.has(this.$_.minBy(this.product.productDetails, 'price'), 'price')
-        ? this.$currency(this.$_.minBy(this.product.productDetails, 'price').price)
-        : this.$currency(0)
+      return this.$currency(this.$_.minBy(this.product.productDetails, 'price').price)
     },
     getProductSold() {
       return this.product.productDetails.reduce((prev, curr) => {
         return prev + parseInt(curr.sold || 0)
       }, 0) || 0;
     }
-  },
+  }
 }
 </script>

@@ -4,15 +4,12 @@
   </div>
 </template>
 
-<style lang="scss">
-.w-full-all {
-  & > * {
-    @apply w-full;
-  }
+<script>
+export default {
+  created () {
+    this.$children.forEach(child => {
+      child.classList.add('w-full')
+    })
+  },
 }
-.h-auto-all {
-  & > * {
-    @apply w-full;
-  }
-}
-</style>
+</script>

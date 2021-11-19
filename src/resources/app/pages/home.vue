@@ -1,8 +1,13 @@
 <template>
   <div>
-    <commerce-main-banner />
-    <div class="h-5" />
-    <card>
+    <Head :title="$page.props.name" />
+
+    <commerce-main-banner class="hidden sm:block" />
+    <commerce-mobile-main-banner class="block sm:hidden" />
+    <div class="h-5 hidden sm:block" />
+
+    <!-- Category -->
+    <card class="hidden sm:block">
       <card-header>
         Kategori
       </card-header>
@@ -27,29 +32,28 @@
         </carousel>
       </card-body>
     </card>
-    <div class="h-5" />
-    <!-- <card>
-      <card-header>
-        Pencarian Populer
-      </card-header>
-      <card-body color="transparent" no-gutter>
-        <carousel show="5" class="container" hide-navigation>
-          <carousel-item v-for="index in 5" :key="index">
-            <a href="#" class="bg-white rounded-xl flex w-full">
-              <div class="flex-1 p-4">
-                <div class="text-left text-sm font-semibold">Masker Sensi</div>
-                <div class="text-left text-sm">10RB+ Produk</div>
-              </div>
-              <div class="flex-1 relative p-2 flex items-center">
-                <div alt="" class="w-full bg-contain bg-no-repeat rounded-xl" style="background-image: url('https://picsum.photos/320/320'); padding-top: 100%" />
-              </div>
-            </a>
-          </carousel-item>
-        </carousel>
+    <card class="sm:hidden block" :gap="0">
+      <div class="text-gray-400 bg-white pl-2 pt-2">KATEGORI</div>
+      <card-body color="white" no-gutter :radius="0" class="overflow-x-scroll hide-scrollbar pb-4">
+        <div class="inline-flex items-start justify-start h-full flex-row gap-x-2 mx-2">
+          <div v-for="category, index in splitCategory" :key="index" class="w-24 flex-1">
+            <Link v-if="category[0]" :href="route('badaso.commerce-theme.category', category[0].slug)" class="h-full w-24 rounded-xl flex flex-wrap">
+              <img :src="category[0].image" alt="" class="rounded-full object-contain object-center w-24 h-24">
+              <div class="text-center text-sm h-10 w-full line-clamp-2">{{ category[0].name }}</div>
+            </Link>
+            <Link v-if="category[1]" :href="route('badaso.commerce-theme.category', category[1].slug)" class="h-full w-24 rounded-xl flex flex-wrap mt-2">
+              <img :src="category[1].image" alt="" class="rounded-full object-contain object-center w-24 h-24">
+              <div class="text-center text-sm h-10 w-full line-clamp-2">{{ category[1].name }}</div>
+            </Link>
+          </div>
+        </div>
       </card-body>
     </card>
-    <div class="h-5" /> -->
-    <card>
+
+    <div class="h-4 sm:h-5" />
+
+    <!-- Product Terlaris -->
+    <card class="hidden sm:block">
       <card-header text-color="primary">
         Produk Terlaris
         <card-action>
@@ -83,12 +87,35 @@
         </carousel>
       </card-body>
     </card>
-    <div class="h-5" />
-    <card gap="2" class="relative">
+    <card class="sm:hidden block" :gap="0">
+      <div class="text-gray-400 bg-white pl-2 pt-2">PRODUCT TERLARIS</div>
+      <card-body color="white" no-gutter :radius="0" class="overflow-x-scroll overflow-y-hidden hide-scrollbar">
+        <div class="inline-flex items-start justify-start h-full flex-row-reverse my-2">
+          <div v-for="product, index in bestSelling" :key="index" class="w-32 flex-1 ml-2 first:mr-2">
+            <Link :href="route('badaso.commerce-theme.detail', product.slug)" class="rounded-xl border border-gray-300 flex w-32 flex-wrap">
+              <div class="w-full relative mb-2 flex items-center">
+                <div class="p-1 bg-primary absolute top-0 left-0 rounded-tl-xl">
+                  <span class="text-sm text-white font-semibold">TOP</span>
+                </div>
+                <div class="w-full bg-contain bg-no-repeat rounded-t-xl" :style="`background-image: url('${product.productImage}'); padding-top: 100%`" />
+              </div>
+              <div class="flex-1 px-4 pb-4">
+                <div class="text-left text-sm line-clamp-2">{{ product.name }}</div>
+                <div class="text-xs mt-2">{{ getProductSoldTotal(product) }}+ terjual</div>
+              </div>
+            </Link>
+          </div>
+        </div>
+      </card-body>
+    </card>
+
+    <div class="h-4 sm:h-5" />
+
+    <card gap="2" class="relative hidden sm:block">
       <card-header text-color="primary" class="sticky top-0 z-30">
         Rekomendasi
       </card-header>
-      <card-body color="transparent" no-gutter>
+      <card-body color="transparent" no-gutter class="mt-1">
         <div class="w-full grid grid-cols-6 gap-2">
           <commerce-product :product="product" v-for="product, index in products.data" :key="index" />
           <div class="h-5 col-start-1 col-end-7" />
@@ -98,33 +125,52 @@
         </div>
       </card-body>
     </card>
+    <card class="sm:hidden block" :gap="0">
+      <div class="text-gray-400 bg-white pl-2 pt-2">REKOMENDASI</div>
+      <card-body color="white" no-gutter :radius="0">
+        <div class="w-full grid grid-cols-2 px-2 mt-2 gap-2 bg-gradient-to-t from-gray-100 via-gray-100 to-white">
+          <commerce-mobile-product :product="product" v-for="product, index in products.data" :key="index" />
+          <div class="h-3 col-span-full" />
+          <div class="flex col-span-full">
+            <Link :href="route('badaso.commerce-theme.product-list')" class="bg-white flex justify-center items-center w-full text-sm py-2 border border-primary text-primary hover:bg-gray-200 rounded-lg">Lihat Lainnya</Link>
+          </div>
+        </div>
+      </card-body>
+    </card>
+
+    <div class="h-4 sm:h-5" />
   </div>
 </template>
 
 <script>
 import CommerceMainBanner from './../components/commerce-main-banner.vue'
+import CommerceMobileMainBanner from './../components/commerce-mobile-main-banner.vue'
 import Card from '../components/card/card.vue'
 import CardHeader from '../components/card/card-header.vue'
 import CardAction from '../components/card/card-action.vue'
 import CardBody from '../components/card/card-body.vue'
 import CommerceProduct from '../components/commerce-product.vue'
+import CommerceMobileProduct from '../components/commerce-mobile-product.vue'
 import Carousel from '../components/carousel/carousel.vue'
 import CarouselItem from '../components/carousel/carousel-item.vue'
 
 import appLayout from '../layouts/app.vue'
 import defaultLayout from '../layouts/default.vue'
-import { Link } from "@inertiajs/inertia-vue"
+import { Link, Head } from "@inertiajs/inertia-vue"
 export default {
   components: {
     CommerceMainBanner,
+    CommerceMobileMainBanner,
+    CommerceMobileProduct,
+    CommerceProduct,
     Card,
     CardHeader,
     CardAction,
     CardBody,
     Carousel,
     CarouselItem,
-    CommerceProduct,
-    Link
+    Link,
+    Head,
   },
   layout: [appLayout, defaultLayout],
   computed: {

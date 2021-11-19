@@ -29,7 +29,7 @@
       </div>
     </nav>
     <slot />
-    <div class="bg-gray-300 h-16 border-primary w-full">
+    <div class="bg-gray-300 h-16 border-primary w-full sm:block hidden">
       <div class="w-full flex text-gray-500 text-sm items-center h-full px-8">
         <div class="flex gap-4">
           <div class="text-lg text-white">Help</div>

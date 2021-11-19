@@ -1,7 +1,8 @@
 <template>
-  <div id="app">
+  <div id="app" class="h-full">
     <slot />
-    <toast-list />
+    <toast-list class="hidden sm:flex" />
+    <toast-list-mobile class="flex sm:hidden" />
     <loading />
   </div>
 </template>
@@ -9,12 +10,20 @@
 <script>
 import { mapActions, mapState } from 'vuex'
 import ToastList from '../components/toast/toast-list.vue'
+import ToastListMobile from '../components/toast/toast-list-mobile.vue'
 import Loading from '../components/loading/loading.vue'
 
 export default {
   name: "App",
+  provide: {
+    goBack: () => {
+      // this.$inertia.visit(this.$page.props.previous)
+      window.history.back()
+    }
+  },
   components: {
     ToastList,
+    ToastListMobile,
     Loading
   },
   data() {

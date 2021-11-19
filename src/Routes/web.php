@@ -20,7 +20,6 @@ Route::prefix($commerce_route_prefix)
         Route::get('/detail/{slug}', 'InertiaController@detail')->name('detail');
         Route::get('/list', 'InertiaController@productList')->name('product-list');
         Route::get('/search/{search}', 'InertiaController@search')->name('search');
-        Route::get('/top', 'InertiaController@topSelling')->name('top-selling');
 
         /**
          * Auth route
@@ -49,4 +48,12 @@ Route::prefix($commerce_route_prefix)
         Route::get('/legal/tos', 'InertiaController@legalTos')->name('tos');
         Route::get('/legal/privacy', 'InertiaController@legalPrivacy')->name('privacy');
 
+        /**
+         * Payment route
+         */
+        Route::get('/payment/{id}/info', 'InertiaController@paymentInfo')->name('payment-info');
+        Route::get('/payment/{id}/confirm', 'InertiaController@paymentConfirm')->name('payment-confirm');
+        Route::get('/review/{id}', 'InertiaController@review')->name('review');
+
+        Route::fallback('InertiaController@HTTP404');
     });

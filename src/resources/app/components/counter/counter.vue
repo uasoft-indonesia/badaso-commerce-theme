@@ -36,7 +36,7 @@ export default {
       type:[Number,String]
     },
     textDisabled: [Boolean],
-    disabled: [Boolean]
+    disabled: [Boolean],
   },
   computed: {
     listeners(){
@@ -58,6 +58,7 @@ export default {
   },
   methods: {
     add() {
+      this.$emit('add', this.value)
       let newValue
       if(this.value === ''){
         newValue = 0
@@ -70,6 +71,7 @@ export default {
       }
     },
     subtract() {
+      this.$emit('subtract', this.value)
       let newValue
       if(this.value === ''){
         newValue = 0

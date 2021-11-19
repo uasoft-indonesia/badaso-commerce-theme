@@ -3,7 +3,7 @@
     <div v-for="(star, index) in stars" :key="index" class="flex" @click="emit(index)">
       <svg
         :style="[
-          { fill: `url(#gradient${star.raw})` },
+          { fill: `url(#${id}${star.raw})` },
           { width: starWidth ? starWidth : length },
           { height: starHeight ? starHeight : length },
         ]"
@@ -12,7 +12,7 @@
       >
         <polygon :points="getStarPoints" style="fill-rule: nonzero" />
         <defs>
-          <linearGradient :id="`gradient${star.raw}`">
+          <linearGradient :id="`${id}${star.raw}`">
             <stop
               id="stop1"
               :offset="star.percent"
@@ -82,7 +82,8 @@ export default {
       emptyStar: 0,
       fullStar: 1,
       totalStars: 5,
-      length: 24
+      length: 24,
+      id: null
     };
   },
   watch: {
@@ -174,6 +175,7 @@ export default {
     }
   },
   created() {
+    this.id = Math.random().toString(36).substr(2, 9);
     this.initStars();
     this.setStars();
   },
