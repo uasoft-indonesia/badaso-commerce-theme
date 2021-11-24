@@ -7,7 +7,7 @@
         <div class="px-4 py-2 rounded-lg bg-primary text-white text-lg font-medium z-10">Semua</div>
         <div class="absolute border-t border-dotted border-black w-full z-0" />
       </div>
-      <div class="commerce-h-spacer" />
+      <div class="h-4 sm:h-5" />
       <div class="grid grid-cols-6 gap-4 w-full h-full">
         <!-- Sorting -->
         <div class="col-start-1 col-end-7 flex flex-wrap items-start h-max">
@@ -16,7 +16,7 @@
             <commerce-product :product="product" v-for="product, index in products.data" :key="index" />
           </div>
         </div>
-        <div class="commerce-h-spacer" />
+        <div class="h-4 sm:h-5" />
         
         <div class="col-span-full">
           <!-- Pagination -->
@@ -28,6 +28,11 @@
     <div class="sm:hidden">
       <div class="w-full p-3 grid grid-cols-2 h-full gap-2">
         <commerce-mobile-product :product="product" v-for="product, index in products.data" :key="index" />
+
+        <div class="col-span-full">
+          <!-- Pagination -->
+          <pagination :total="products.total" :per-page="productLimit" v-model="currentPage" />
+        </div>
       </div>
     </div>
   </div>

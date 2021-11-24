@@ -238,7 +238,7 @@
             <commerce-product-alt :product="product" v-for="product, index in products.data" :key="index" />
           </div>
         </div>
-        <div class="commerce-h-spacer" />
+        <div class="h-4 sm:h-5" />
         
         <div class="col-start-2 col-end-7">
       
