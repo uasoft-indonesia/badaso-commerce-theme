@@ -33,23 +33,11 @@
 <script>
 import { mapState } from "vuex";
 import { Link } from "@inertiajs/inertia-vue";
-import CommerceLogo from "./commerce-logo.vue";
-import CommerceSearchInput from "./commerce-search-input.vue";
 export default {
   components: {
-    CommerceLogo,
-    CommerceSearchInput,
     Link,
   },
-  inject: ["goBack"],
-  data() {
-    return {
-      dropdownOpen: false,
-      search: '',
-    };
-  },
   mounted() {
-    this.search = this.$page.props.search;
   },
   computed: {
     ...mapState({
@@ -61,12 +49,5 @@ export default {
       },
     }),
   },
-  methods: {
-    searchProduct() {
-      if (this.search) {
-        this.$inertia.visit(this.route('badaso.commerce-theme.search', this.search))
-      }
-    }
-  }
 };
 </script>
