@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://badaso-docs.uatech.co.id/">
-    <img src="https://i.ibb.co/Vq5hH9k/badaso-commerce-theme-logo.png" width="200px" alt="Badaso logo" />
+    <img src="https://i.ibb.co/Vq5hH9k/badaso-commerce-theme-logo.png" width="150px" alt="Badaso logo" />
   </a>
 </p>
 <h3 align="center">badaso/commerce-theme</h3>
