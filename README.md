@@ -1,5 +1,11 @@
 # badaso/commerce-theme
-e-commerce theme for badaso commerce module.
+E-commerce theme for badaso [commerce module](https://github.com/uasoft-indonesia/badaso-commerce-module).
+
+<p align="center">
+  <a href="https://badaso-docs.uatech.co.id/">
+    <img src="https://i.ibb.co/mTdhq0T/Screen-Shot-2021-12-08-at-22-47-51.png" alt="screencapture-badaso-dashboard-uatech-co-id-dashboard-crud-2021-03-17-09-57-08-1" />
+  </a>
+</p>
 
 ## Installation
 - Install badaso first with commerce module installed. After that, you can install the module with the following command.
