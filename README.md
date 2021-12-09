@@ -1,5 +1,18 @@
-# badaso/commerce-theme
-E-commerce theme for badaso [commerce module](https://github.com/uasoft-indonesia/badaso-commerce-module).
+<p align="center">
+  <a href="https://badaso-docs.uatech.co.id/">
+    <img src="https://i.ibb.co/Vq5hH9k/badaso-commerce-theme-logo.png" width="200px" alt="Badaso logo" />
+  </a>
+</p>
+<h3 align="center">badaso/commerce-theme</h3>
+<p align="center">Official e-commerce theme for badaso <a href="https://github.com/uasoft-indonesia/badaso-commerce-module">commerce module</a></p>
+<p align="center"><a href="https://badaso-demo.uatech.co.id/commerce" target="_blank">Try live demo</a></p>
+<br />
+
+<p align="center">
+<a href="https://github.styleci.io/repos/347838630"><img src="https://github.styleci.io/repos/347838630/shield" alt="Badaso StyleCI"></a>
+<a href="https://packagist.org/packages/uasoft-indonesia/badaso"><img src="https://img.shields.io/packagist/dt/badaso/core" alt="Total Downloads"></a>
+<a href="https://packagist.org/packages/uasoft-indonesia/badaso"><img src="https://img.shields.io/packagist/v/badaso/core" alt="Latest Stable Version"></a>
+</p>
 
 <p align="center">
   <a href="https://badaso-docs.uatech.co.id/">
