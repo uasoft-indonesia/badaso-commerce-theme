@@ -17,11 +17,17 @@ class InertiaController extends Controller
         ], 'commerce-theme:app');
     }
 
-    public function category($slug)
+    public function category()
     {
         return Inertia::render('category', [
-            'slug' => $slug,
+            'slug' => request('slug'),
             'name' => 'Category',
+            'sort' => request('sort'),
+            'search' => request('search'),
+            'rating' => request('rating'),
+            'minPrice' => request('minPrice'),
+            'maxPrice' => request('maxPrice'),
+            'type' => request('type'),
         ], 'commerce-theme:app');
     }
 
@@ -54,11 +60,11 @@ class InertiaController extends Controller
         ], 'commerce-theme:app');
     }
 
-    public function search($search)
+    public function search()
     {
         return Inertia::render('search', [
-            'search' => $search,
-            'name' => 'Search'
+            'keyword' => request('keyword'),
+            'name' => 'Search',
         ], 'commerce-theme:app');
     }
 

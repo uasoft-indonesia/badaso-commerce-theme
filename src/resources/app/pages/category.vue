@@ -21,7 +21,9 @@
             </svg>
             <span class="font-semibold">Semua Kategori</span>
           </div>
+
           <div class="w-full h-px bg-gray-300" />
+
           <div class="flex flex-wrap gap-3">
             <Link v-if="activeCategory" :href="route('badaso.commerce-theme.category', $page.props.slug)" class="text-primary w-full font-bold text-sm flex items-center px-2 relative">
               <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 absolute -left-2" viewBox="0 0 20 20" fill="currentColor">
@@ -49,9 +51,6 @@
               <div class="h-px w-16 bg-gray-300" />
               <input type="text" placeholder="RP MAX" v-model="maxPrice" class="ring-1 w-full ring-gray-300 text-xs rounded-sm focus:outline-none p-2">
             </div>
-            <button class="w-full bg-primary text-white p-1 text-sm uppercase rounded-sm" @click="filterProductsPrice">
-              Terapkan
-            </button>
           </div>
           <div class="w-full h-px bg-gray-300" />
           <div class="flex w-full flex-wrap gap-3 select-none cursor-default">
@@ -60,7 +59,7 @@
             </div>
             <div class="flex gap-2 flex-wrap">
 
-              <div class="w-auto flex gap-1 items-center cursor-pointer" @click="() => filterProductsPriceByRating(5)">
+              <div class="w-full flex gap-1 items-center cursor-pointer p-1 px-1.5" :class="[rating === 5 ? 'bg-gray-200 rounded-full font-bold' : '']" @click="setRatingOption(5)">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-yellow-500" viewBox="0 0 20 20" fill="currentColor">
                   <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                 </svg>
@@ -78,7 +77,7 @@
                 </svg>
               </div>
 
-              <div class="w-auto flex gap-1 items-center cursor-pointer" @click="() => filterProductsPriceByRating(4)">
+              <div class="w-full flex gap-1 items-center cursor-pointer p-1 px-1.5" :class="[rating === 4 ? 'bg-gray-200 rounded-full font-bold' : '']" @click="setRatingOption(4)">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-yellow-500" viewBox="0 0 20 20" fill="currentColor">
                   <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                 </svg>
@@ -97,7 +96,7 @@
                 <span class="text-sm">ke atas</span>
               </div>
 
-              <div class="w-auto flex gap-1 items-center cursor-pointer" @click="() => filterProductsPriceByRating(3)">
+              <div class="w-full flex gap-1 items-center cursor-pointer p-1 px-1.5" :class="[rating === 3 ? 'bg-gray-200 rounded-full font-bold' : '']" @click="setRatingOption(3)">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-yellow-500" viewBox="0 0 20 20" fill="currentColor">
                   <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                 </svg>
@@ -116,7 +115,7 @@
                 <span class="text-sm">ke atas</span>
               </div>
 
-              <div class="w-auto flex gap-1 items-center cursor-pointer" @click="() => filterProductsPriceByRating(2)">
+              <div class="w-full flex gap-1 items-center cursor-pointer p-1 px-1.5" :class="[rating === 2 ? 'bg-gray-200 rounded-full font-bold' : '']" @click="setRatingOption(2)">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-yellow-500" viewBox="0 0 20 20" fill="currentColor">
                   <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                 </svg>
@@ -135,7 +134,7 @@
                 <span class="text-sm">ke atas</span>
               </div>
 
-              <div class="w-auto flex gap-1 items-center cursor-pointer" @click="() => filterProductsPriceByRating(1)">
+              <div class="w-full flex gap-1 items-center cursor-pointer p-1 px-1.5" :class="[rating === 1 ? 'bg-gray-200 rounded-full font-bold' : '']" @click="setRatingOption(1)">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-yellow-500" viewBox="0 0 20 20" fill="currentColor">
                   <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                 </svg>
@@ -156,24 +155,52 @@
             </div>
           </div>
           <div class="w-full h-px bg-gray-300" />
-          <button class="w-full bg-primary text-white uppercase text-sm p-1 rounded-sm" @click="resetProducts">
-            Hapus Semua
-          </button>
+          <div class="flex flex-col gap-3 w-full">
+            <button class="w-full bg-primary text-white p-1 text-sm uppercase rounded-sm" @click="applyFilterQueryString">
+              Terapkan
+            </button>
+            <button class="w-full bg-transparent text-primary border border-primary uppercase text-sm p-1 rounded-sm" @click="resetProducts">
+              Hapus Semua
+            </button>
+          </div>
         </div>
         <!-- Sorting -->
         <div class="col-start-2 col-end-7 flex flex-wrap items-start h-max">
           <div class="flex bg-gray-200 h-12 items-center px-4 gap-4 rounded-xl w-full">
             <div class="text-gray-500 text-sm">Urutkan</div>
-            <button class="w-24 h-8 bg-primary text-white rounded-md text-sm">Terbaru</button>
-            <button class="w-24 h-8 bg-white hover:bg-gray-100 text-gray-600 rounded-md text-sm">
-              Terlaris
-            </button>
-            <button class="w-48 h-8 bg-white text-gray-600 rounded-md text-sm flex items-center justify-between px-3">
-              <span>Harga</span>
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-              </svg>
-            </button>
+            <button :class="[sort === 'latest' ? 'bg-primary text-white' : 'bg-white hover:bg-gray-100 text-gray-600']" class="h-8 px-6 rounded-md text-sm" @click="applyFilterSort('latest')">Terbaru</button>
+            <button :class="[sort === 'most-selling' ? 'bg-primary text-white' : 'bg-white hover:bg-gray-100 text-gray-600']"  class="h-8 px-6 rounded-md text-sm" @click="applyFilterSort('most-selling')">Terlaris</button>
+
+            <div class="relative">
+              <button class="w-52 h-8 bg-white text-gray-600 rounded-md text-sm flex items-center justify-between px-3" @click="priceFilter = !priceFilter" :class="[sort === 'price' ? 'text-primary' : '']">
+                <span>Harga</span>
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                </svg>
+              </button>
+
+              <transition>
+                <div v-if="priceFilter" class="w-full absolute left-0 right-0 -bottom-18 shadow rounded-md z-70 bg-white">
+                  <div :class="[sort === 'price' && type === 'asc' ? 'text-primary' : '']" class="p-2 flex items-center justify-between text-sm hover:bg-black hover:bg-opacity-5 rounded-t-md cursor-pointer" @click="applyFilterSortPrice('asc')">
+                    Harga: Rendah ke Tinggi
+                    <template v-if="sort === 'price' && type === 'asc'">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                    </template>
+                  </div>
+                  <div :class="[sort === 'price' && type === 'desc' ? 'text-primary' : '']" class="p-2 flex items-center justify-between text-sm hover:bg-black hover:bg-opacity-5 rounded-b-md cursor-pointer" @click="applyFilterSortPrice('desc')">
+                    Harga: Tinggi ke Rendah
+                    <template v-if="sort === 'price' && type === 'desc'">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                    </template>
+                  </div>
+                </div>
+              </transition>
+            </div>
+
             <div class="flex-grow" />
             <div class="text-sm">
               <span class="text-primary">{{ products.currentPage }}</span>/{{ products.lastPage }}
@@ -195,7 +222,7 @@
           <!-- Items -->
           <div class="w-full py-2 grid grid-cols-5 h-full gap-2">
             <template v-if="products.data.length > 0">
-              <commerce-product-alt :product="product" v-for="product, index in products.data" :key="index" />
+              <commerce-product-alt :product="product" v-for="product, index in sortedProducts" :key="index" />
             </template>
           </div>
         </div>
@@ -314,15 +341,39 @@
         </card-body>
       </card>
 
+      <div class="w-full flex justify-between mt-3 text-sm bg-white text-gray-400">
+        <div @click="applyFilterSort('latest')" class="py-3 text-center w-1/4" :class="[sort === 'latest' ? 'text-primary border-b-2 border-primary' : '']">Terbaru</div>
+        <div @click="applyFilterSort('most-selling')" class="py-3 text-center w-1/4" :class="[sort === 'most-selling' ? 'text-primary border-b-2 border-primary' : '']">Terlaris</div>
+        <div @click="applyFilterSortPrice(type === 'desc' ? 'asc' : 'desc')" class="py-3 text-center w-1/4 flex items-center justify-center gap-2" :class="[sort === 'price' ? 'text-primary border-b-2 border-primary' : '']">
+          Harga
+          <template v-if="sort !== 'price'">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4" />
+            </svg>
+          </template>
+          <template v-else>
+            <svg xmlns="http://www.w3.org/2000/svg" v-if="type === 'asc'" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 11l5-5m0 0l5 5m-5-5v12" />
+            </svg>
+
+            <svg xmlns="http://www.w3.org/2000/svg" v-else class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 13l-5 5m0 0l-5-5m5 5V6" />
+            </svg>
+          </template>
+        </div>
+      </div>
+
       <card class="sm:hidden block mt-3" :gap="0">
         <card-body color="transparent" no-gutter :radius="0">
           <div class="w-full grid grid-cols-2 px-2 gap-2">
             <commerce-mobile-product :product="product" v-for="product, index in products.data" :key="index" />
+
+            <div class="col-span-full">
+              <pagination :total="products.total" :per-page="productLimit" v-model="currentPage" />
+            </div>
           </div>
         </card-body>
       </card>
-
-      <!-- <pagination :total="products.total" :per-page="productLimit" v-model="currentPage" /> -->
     </div>
   </div>
 </template>
@@ -375,14 +426,65 @@ export default {
         data: []
       },
       productCategories: [],
-      minPrice: 0,
-      maxPrice: 0,
-      search: '',
+      minPrice: null,
+      maxPrice: null,
+      search: null,
       filter: false,
-      rating: 0,
+      rating: null,
+      sort: 'latest',
+      type: 'desc',
+      priceFilter: false
     }
   },
   computed: {
+    sortedProducts() {
+      return this.products.data.sort((a, b) => {
+        if (this.sort === 'latest') {
+          if (this.type === 'desc') {
+            return this.$moment(a.createdAt).isBefore(b.createdAt) ? 1 : -1
+          } else {
+            return this.$moment(a.createdAt).isAfter(b.createdAt) ? 1 : -1
+          }
+        }
+
+        if (this.sort === 'most-selling') {
+          let aSold = a.productDetails.reduce((total, item) => {
+            if (item.sold !== null) {
+              return total + parseInt(item.sold)
+            }
+            return total;
+          }, 0)
+
+          let bSold = b.productDetails.reduce((total, item) => {
+            if (item.sold !== null) {
+              return total + parseInt(item.sold)
+            }
+            return total;
+          }, 0)
+
+          if (this.type === 'desc') {
+            return bSold - aSold
+          } else {
+            return aSold - bSold
+          }
+        }
+
+        if (this.sort === 'price') {
+          
+          if (this.type === 'desc') {
+            // get a price from product details using Math.max
+            let aPrice = Math.max(...a.productDetails.map(item => item.price))
+            let bPrice = Math.max(...b.productDetails.map(item => item.price))
+            return bPrice > aPrice ? 1 : -1
+          } else {
+            // get a price from product details using Math.min
+            let aPrice = Math.min(...a.productDetails.map(item => item.price))
+            let bPrice = Math.min(...b.productDetails.map(item => item.price))
+            return bPrice < aPrice ? 1 : -1
+          }
+        }
+      })
+    },
     splitCategory() {
       return this.$_.chunk(this.productCategories, 2)
     },
@@ -416,8 +518,19 @@ export default {
     this.search = this.$page.props.search;
     this.getProducts()
     this.getCategories()
+    this.setQueryParams()
   },
   methods: {
+    setQueryParams() {
+      this.search = this.$page.props.search
+      this.rating = this.$page.props.rating ? parseInt(this.$page.props.rating) : null
+      this.minPrice = parseInt(this.$page.props.minPrice)
+      this.maxPrice = parseInt(this.$page.props.maxPrice)
+      this.sort = this.$page.props.sort || 'latest'
+      this.type = this.$page.props.type || 'desc'
+      this.page = this.$page.props.page
+      this.slug = this.$page.props.slug
+    },
     openFilter() {
       this.filter = true;
     },
@@ -461,55 +574,22 @@ export default {
           console.error(err);
         })
     },
-    filterProductsPrice() {
-      this.products = {
-        data: []
-      }
-      this.$api.badasoProduct
-        .browseByCategorySlug({
-          slug: this.$page.props.slug,
-          page: this.currentPage,
-          min: this.minPrice,
-          max: this.maxPrice,
-        })
-        .then(res => {
-          this.products = res.data.products
-        })
-        .catch(err => {
-          console.error(err);
-        })
-    },
-    filterProductsPriceByRating(rating) {
-      this.products = {
-        data: []
-      }
-      this.$api.badasoProduct
-        .browseByCategorySlug({
-          slug: this.$page.props.slug,
-          page: this.currentPage,
-          min: this.minPrice,
-          max: this.maxPrice,
-          rating
-        })
-        .then(res => {
-          this.products = res.data.products
-        })
-        .catch(err => {
-          console.error(err);
-        })
-    },
     resetProducts() {
       this.products = {
         data: []
       }
       this.getProducts()
     },
+    setRatingOption(rating) {
+      if (this.rating === rating) {
+        this.rating = 0
+      } else {
+        this.rating = rating
+      }
+    },
     getProducts() {
       this.$api.badasoProduct
-        .browseByCategorySlug({
-          slug: this.$page.props.slug,
-          page: this.currentPage,
-        })
+        .browseByCategorySlug(this.queryParams())
         .then(res => {
           this.products = res.data.products
           this.setMaxPrice();
@@ -518,6 +598,46 @@ export default {
         .catch(err => {
           console.error(err);
         })
+    },
+    queryParams() {
+      let params = {
+        sort: this.$page.props.sort || this.props || 'latest',
+        rating: this.rating || this.$page.props.rating || "0",
+        search: this.search || "",
+        page: this.currentPage || 1,
+        slug: this.$page.props.slug,
+        type: this.type || "desc"
+      }
+
+      if (this.minPrice) {
+        params.minPrice = this.minPrice
+      }
+
+      if (this.maxPrice) {
+        params.maxPrice = this.maxPrice
+      }
+
+      return params
+    },
+    applyFilterSort(sort) {
+      this.sort = sort;
+      this.type = 'desc'
+      this.$inertia.visit(this.route('badaso.commerce-theme.category', {
+        ...this.queryParams(),
+        sort
+      }))
+    },
+    applyFilterSortPrice(type) {
+      this.sort = 'price';
+      this.type = 'type'
+      this.$inertia.visit(this.route('badaso.commerce-theme.category', {
+        ...this.queryParams(),
+        sort: this.sort,
+        type
+      }))
+    },
+    applyFilterQueryString() {
+      this.$inertia.visit(this.route('badaso.commerce-theme.category', this.queryParams()))
     },
     applyFilter() {
       this.products = {

@@ -17,6 +17,7 @@ module.exports = {
         '22': '88px',
         max: 'max-content',
         min: 'min-content',
+        'auth': 'calc(100vh - 48px)',
       },
       gridTemplateColumns: {
         'profile': '200px 1fr',
@@ -28,9 +29,18 @@ module.exports = {
         'arrow-right': 'calc(89% - 10px) !important',
         'arrow-center': 'calc(50% - 10px) !important',
         'arrow-left': 'calc(11% - 10px) !important',
+        '18': '68px'
       },
       spacing: {
         '15': '60px'
+      },
+      zIndex: {
+        '-1': '-1',
+        '60': '60',
+        '70': '70',
+        '80': '80',
+        '90': '90',
+        '100': '100',
       }
     },
     container: {

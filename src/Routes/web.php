@@ -19,7 +19,7 @@ Route::prefix($commerce_route_prefix)
         Route::get('/checkout', 'InertiaController@checkout')->name('checkout');
         Route::get('/detail/{slug}', 'InertiaController@detail')->name('detail');
         Route::get('/list', 'InertiaController@productList')->name('product-list');
-        Route::get('/search/{search}', 'InertiaController@search')->name('search');
+        Route::get('/search', 'InertiaController@search')->name('search');
 
         /**
          * Auth route
