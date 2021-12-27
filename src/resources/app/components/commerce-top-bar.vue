@@ -9,8 +9,8 @@
           Commerce Module
         </a>
       </div>
-      <div class="lg:flex lg:items-stretch lg:flex-shrink-0 lg:flex-grow">
-        <div class="lg:flex lg:justify-end ml-auto items-center">
+      <div class="md:flex md:items-stretch md:flex-shrink-0 md:flex-grow">
+        <div class="md:flex md:justify-end ml-auto items-center">
           <div class="flex-grow-0 flex-shrink-0 relative px-4">
             <div class="block w-full h-full pointer-events-auto relative z-20" @mouseover="dropdownOpen = true">
               <Link :href="route('badaso.commerce-theme.notification')" class="flex leading-normal text-white no-underline items-center hover:text-gray-300 text-sm">

@@ -1,14 +1,14 @@
 <template>
   <div class="flex flex-wrap">
     <nav class="relative bg-white flex items-stretch w-full h-20 shadow-md">
-      <div class="container flex items-center gap-16">
+      <div class="container flex items-center gap-16 justify-between">
         <div class="flex flex-shrink-0 items-center">
           <Link :href="route('badaso.commerce-theme.home')">
             <commerce-logo dark />
           </Link>
         </div>
-        <div class="flex-grow"></div>
-        <div class="flex">
+
+        <div class="hidden md:flex">
           <div class="flex items-stretch justify-end mx-auto">
             <div class="text-sm flex gap-4">
               <a href="#">

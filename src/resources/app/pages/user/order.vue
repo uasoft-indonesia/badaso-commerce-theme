@@ -42,7 +42,7 @@
         </div>
         <div class="px-6">
           <div class="grid grid-cols-6 bg-white rounded-xl mb-3">
-            <div @click="isActive = index" :class="['py-4 cursor-pointer text-center hover:text-primary transition-colors border-b-2 first:rounded-l-xl last:rounded-r-xl', isActive === index ? 'border-primary text-primary' : 'border-gray-200 text-gray-700']" v-for="(tab, index) in tabs" :key="index">{{ tab }}</div>
+            <div @click="isActive = index" :class="['py-4 cursor-pointer text-center hover:text-primary transition-colors border-b-2 first:rounded-l-xl last:rounded-r-xl text-sm lg:text-base', isActive === index ? 'border-primary text-primary' : 'border-gray-200 text-gray-700']" v-for="(tab, index) in tabs" :key="index">{{ tab }}</div>
           </div>
           <div class="flex items-center mb-3">
             <div class="relative w-full">
@@ -92,7 +92,7 @@
                   <div class="flex space-x-4 w-full py-4 first:border-t border-b last:border-b-0 last:pb-0 items-start" v-for="orderDetail, index in order.orderDetails" :key="index">
                     <img :src="orderDetail.productDetail.productImage" class="border" width="80">
                     <div class="flex flex-col">
-                      <div class="text-gray-700">{{ orderDetail.productDetail.product.name }}</div>
+                      <div class="text-gray-700 line-clamp-2">{{ orderDetail.productDetail.product.name }}</div>
                       <div class="flex">
                         <div class="px-2 my-2 py-1 text-sm border rounded-md cursor-pointer text-gray-500 border-gray-300">{{ orderDetail.productDetail.name }}</div>
                       </div>
