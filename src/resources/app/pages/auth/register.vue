@@ -15,7 +15,7 @@
             {{ subtitle }}
           </div>
         </div>
-        <div class="col-span-1 px-20">
+        <div class="col-span-1 md:px-0 lg:px-20">
           <div class="bg-white rounded-xl p-8 flex flex-wrap gap-2 shadow-md">
             <div class="text-xl w-full">Daftar</div>
             <input

@@ -116,10 +116,10 @@
         Rekomendasi
       </card-header>
       <card-body color="transparent" no-gutter class="mt-1">
-        <div class="w-full grid grid-cols-6 gap-2">
+        <div class="w-full grid md:grid-cols-4 lg:grid-cols-6 gap-2">
           <commerce-product :product="product" v-for="product, index in products.data" :key="index" />
-          <div class="h-5 col-start-1 col-end-7" />
-          <div class="flex col-start-3 col-end-5">
+          <div class="h-5 col-span-full" />
+          <div class="flex lg:col-start-3 lg:col-end-5 md:col-start-2 md:col-end-4">
             <Link :href="route('badaso.commerce-theme.product-list')" class="bg-white flex justify-center items-center w-full text-sm py-2 border border-gray-300 hover:bg-gray-200 rounded-lg">Lihat Lainnya</Link>
           </div>
         </div>

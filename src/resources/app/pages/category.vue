@@ -2,17 +2,17 @@
   <div>
     <Head :title="$page.props.name" />
 
-    <div class="container pt-8 hidden sm:block">
+    <div class="container pt-8 hidden md:block">
       <carousel-single autoplay class="h-80 rounded-sm">
         <carousel-item-single>
-          <img src="https://cf.shopee.co.id/file/c8674787746f009d717b946abe9c431e" alt="">
+          <img src="https://cf.shopee.co.id/file/c8674787746f009d717b946abe9c431e" alt="" class="w-full h-full object-cover">
         </carousel-item-single>
         <carousel-item-single>
-          <img src="https://cf.shopee.co.id/file/dbecfb8fd8e0576fb483dc8dee70f760" alt="">
+          <img src="https://cf.shopee.co.id/file/dbecfb8fd8e0576fb483dc8dee70f760" alt="" class="w-full h-full object-cover">
         </carousel-item-single>
       </carousel-single>
       <div class="h-4 sm:h-5" />
-      <div class="grid grid-cols-6 gap-4 w-full h-full">
+      <div class="grid lg:grid-cols-6 lg:gap-4 md:grid-cols-4 md:gap-2 w-full h-full">
         <!-- Filter -->
         <div class="col-start-1 row-span-full flex flex-wrap gap-6 mb-auto">
           <div class="flex gap-2 items-center pt-4">
@@ -25,13 +25,13 @@
           <div class="w-full h-px bg-gray-300" />
 
           <div class="flex flex-wrap gap-3">
-            <Link v-if="activeCategory" :href="route('badaso.commerce-theme.category', $page.props.slug)" class="text-primary w-full font-bold text-sm flex items-center px-2 relative">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 absolute -left-2" viewBox="0 0 20 20" fill="currentColor">
+            <Link v-if="activeCategory" :href="route('badaso.commerce-theme.category', $page.props.slug)" class="text-primary w-full font-bold text-sm flex items-center px-2 relative pl-4">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 absolute left-0" viewBox="0 0 20 20" fill="currentColor">
                 <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
               </svg>
               {{ activeCategory.name }}
             </Link>
-            <Link :href="route('badaso.commerce-theme.category', category.slug)" v-for="category, index in filteredCategories" :key="index" class="text-gray-500 w-full font-medium text-sm flex items-center px-2 relative">
+            <Link :href="route('badaso.commerce-theme.category', category.slug)" v-for="category, index in filteredCategories" :key="index" class="text-gray-500 w-full font-medium text-sm flex items-center px-2 pl-4 relative">
               {{ category.name }}
             </Link>
           </div>
@@ -171,8 +171,8 @@
             <button :class="[sort === 'latest' ? 'bg-primary text-white' : 'bg-white hover:bg-gray-100 text-gray-600']" class="h-8 px-6 rounded-md text-sm" @click="applyFilterSort('latest')">Terbaru</button>
             <button :class="[sort === 'most-selling' ? 'bg-primary text-white' : 'bg-white hover:bg-gray-100 text-gray-600']"  class="h-8 px-6 rounded-md text-sm" @click="applyFilterSort('most-selling')">Terlaris</button>
 
-            <div class="relative">
-              <button class="w-52 h-8 bg-white text-gray-600 rounded-md text-sm flex items-center justify-between px-3" @click="priceFilter = !priceFilter" :class="[sort === 'price' ? 'text-primary' : '']">
+            <div class="relative md:max-w-52 max-w-32 w-full">
+              <button class="w-full  h-8 bg-white text-gray-600 rounded-md text-sm flex items-center justify-between px-3" @click="priceFilter = !priceFilter" :class="[sort === 'price' ? 'text-primary' : '']">
                 <span>Harga</span>
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                   <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
@@ -220,7 +220,7 @@
             </div>
           </div>
           <!-- Items -->
-          <div class="w-full py-2 grid grid-cols-5 h-full gap-2">
+          <div class="w-full py-2 grid md:grid-cols-3 lg:grid-cols-5 h-full gap-2">
             <template v-if="products.data.length > 0">
               <commerce-product-alt :product="product" v-for="product, index in sortedProducts" :key="index" />
             </template>
@@ -235,7 +235,7 @@
       </div>
     </div>
 
-    <div class="sm:hidden relative">
+    <div class="md:hidden relative">
       <transition
         enter-active-class="transition-all duration-75 ease transform"
         leave-active-class="transition-all duration-75 ease transform"
@@ -289,7 +289,7 @@
       </transition>
     </div>
 
-    <div class="flex flex-col w-full sm:hidden">
+    <div class="flex flex-col w-full md:hidden">
 
       <nav class="block px-4 top-2 select-none bg-white w-full py-3">
         <div class="h-10 w-full relative flex items-center gap-3">
@@ -298,7 +298,7 @@
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
             </svg>
           </div>
-          <div class="relative flex items-center h-10">
+          <div class="relative flex items-center h-10 flex-grow">
             <div class="absolute left-2 text-primary">
               <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />

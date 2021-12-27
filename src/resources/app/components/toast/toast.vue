@@ -48,7 +48,10 @@ export default {
         "flex flex-nowrap transform transform transition-all",
         "rounded-md shadow-md p-3 items-center justify-between",
         "duration-300 ease-in-out w-full",
-        `bg-${this.bgColor} text-${this.textColor}`,
+        this.bgColor === "bg-gray-800" ? 
+        `bg-gray-800` : `bg-${this.bgColor}`,
+        this.textColor === "text-white" ? 
+        `text-white` : `text-${this.textColor}`
       ];
     },
   },

@@ -1,5 +1,5 @@
 <template>
-  <div class="col-span-7">
+  <div>
     <component
       v-model="v"
       :is="`commerce-${payment.slug}`"

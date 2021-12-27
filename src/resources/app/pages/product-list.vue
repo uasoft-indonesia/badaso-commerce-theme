@@ -12,7 +12,7 @@
         <!-- Sorting -->
         <div class="col-start-1 col-end-7 flex flex-wrap items-start h-max">
           <!-- Items -->
-          <div class="w-full py-2 grid grid-cols-6 h-full gap-2">
+          <div class="w-full py-2 grid h-full gap-2 md:grid-cols-4 lg:grid-cols-6">
             <commerce-product :product="product" v-for="product, index in products.data" :key="index" />
           </div>
         </div>

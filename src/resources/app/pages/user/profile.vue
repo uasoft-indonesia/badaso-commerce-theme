@@ -55,13 +55,13 @@
             <span class="text-sm text-gray-500">Kelola informasi profil Anda untuk mengontrol, melindungi dan mengamankan akun</span>
           </div>
           <div class="grid grid-cols-3 p-6 mb-4 items-start">
-            <div class="col-span-2 grid grid-cols-profile-content gap-x-6 pr-4 content-center items-center">
+            <div class="col-span-2 grid md:grid-cols-3 lg:grid-cols-profile-content gap-x-6 pr-4 content-center items-center">
               <div class="text-sm text-right text-gray-500 mb-4">Nama</div>
-              <div class="flex-1 mb-4">
+              <div class="flex-1 mb-4 col-span-1 md:col-span-2 lg:col-span-1">
                 <input v-model="name" type="text" class="w-full border p-2 text-sm focus:outline-none hover:shadow-inner transition-shadow form-input border-gray-200 rounded-md focus:ring-0 focus:border-primary">
               </div>
               <div class="text-sm text-right text-gray-500 mb-4">Email</div>
-              <div class="flex-1 mb-4">
+              <div class="flex-1 mb-4 col-span-1 md:col-span-2 lg:col-span-1">
                 <input v-model="email" disabled type="text" class="w-full border p-2 text-sm focus:outline-none hover:shadow-inner transition-shadow form-input border-gray-200 rounded-md focus:ring-0 focus:border-primary disabled:bg-gray-100 disabled:text-gray-300 disabled:shadow-none disabled:cursor-not-allowed">
               </div>
               <div class="col-start-2 col-end-3 mt-2">

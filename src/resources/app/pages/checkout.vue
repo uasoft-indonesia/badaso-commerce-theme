@@ -93,8 +93,8 @@
       </div>
       <div class="bg-white rounded-xl shadow-md mt-4">
         <div class="grid grid-cols-8">
-          <div class="pl-6 pt-6 text-lg leading-tight font-medium text-gray-700">Metode Pembayaran</div>
-          <div class="ml-4 pt-6 col-span-7 flex gap-4 flex-wrap">
+          <div class="pl-6 pt-6 text-lg leading-tight md:col-span-2 lg:col-span-1 font-medium text-gray-700">Metode Pembayaran</div>
+          <div class="ml-4 pt-6 md:col-span-6 lg:col-span-7 flex gap-4 flex-wrap">
             <button v-for="p, index in payments" :key="index" tabindex="-1" class="border border-primary px-4 py-2 text-sm font-medium rounded-md text-primary relative" @click="setPaymentTab(p)">
               {{ p.name }}
               <span v-if="p.slug === payment" class="absolute bottom-0 right-0 text-white">
@@ -108,19 +108,19 @@
             </button>
           </div>
           <div class="col-span-full my-8 h-px w-full bg-gray-300" />
-          <div class="pl-6 text-lg leading-tight font-medium text-gray-700">Pilih Bank</div>
+          <div class="pl-6 text-lg leading-tight md:col-span-2 lg:col-span-1 font-medium text-gray-700">Pilih Bank</div>
     
-          <commerce-payment v-model="option" :active="payment" :payments="payments" @checkout="checkoutData = $event" />
+          <commerce-payment class="md:col-span-6 lg:col-span-7" v-model="option" :active="payment" :payments="payments" @checkout="checkoutData = $event" />
           <div class="col-span-full p-6 mt-8 flex flex-wrap flex-col items-end gap-4 bg-primary bg-opacity-5 border-t border-gray-300">
-            <div class="w-1/3 flex justify-between items-center flex-1">
+            <div class="md:w-1/2 lg:w-1/3 flex justify-between items-center flex-1">
               <div class="text-sm text-gray-500 text-left">Subtotal untuk Produk:</div>
               <div class="text-sm text-gray-500">{{ $currency(getTotalCost) }}</div>
             </div>
-            <div class="w-1/3 flex justify-between items-center flex-1">
+            <div class="md:w-1/2 lg:w-1/3 flex justify-between items-center flex-1">
               <div class="text-sm text-gray-500 text-left">Total Ongkos Kirim:</div>
               <div class="text-sm text-gray-500">{{ $currency(shippingCost) }}</div>
             </div>
-            <div class="w-1/3 flex justify-between items-center flex-1">
+            <div class="md:w-1/2 lg:w-1/3 flex justify-between items-center flex-1">
               <div class="text-sm text-gray-500 text-left">Total Pembayaran:</div>
               <div class="text-3xl text-primary">{{ $currency(getTotalCost + parseInt(shippingCost)) }}</div>
             </div>

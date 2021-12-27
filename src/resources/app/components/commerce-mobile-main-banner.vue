@@ -4,7 +4,7 @@
       <div class="rounded-sm">
         <carousel-single autoplay :autoplayDuration="7000" class="rounded-sm h-full">
           <carousel-item-single class="rounded-sm" v-for="d, index in bannerSrc" :key="index">
-            <img class="rounded-sm h-40 object-cover object-center" :src="d" alt="">
+            <img class="rounded-sm h-40 object-cover object-center w-full" :src="d" alt="">
           </carousel-item-single>
         </carousel-single>
       </div>

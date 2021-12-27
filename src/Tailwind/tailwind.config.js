@@ -1,8 +1,9 @@
 module.exports = {
   purge: [
-      './packages/badaso/commerce-theme/src/resources/js/**/*.vue}',
-      './packages/badaso/commerce-theme/src/resources/views/**/*.php}',
-      './storage/framework/views/*.php',
+    './vendor/badaso/commerce-theme/src/resources/**/*.vue',
+    './vendor/badaso/commerce-theme/src/resources/**/*.js',
+    './vendor/badaso/commerce-theme/src/resources/views/**/*.php',
+    './storage/framework/views/*.php',
   ],
   darkMode: false, // or 'media' or 'class'
   theme: {
@@ -11,7 +12,10 @@ module.exports = {
         '3': '3px'
       },
       colors: {
-        primary: '#06bbd3'
+        primary: '#06bbd3',
+        gray: {
+          800: '#1f2937'
+        }
       },
       height: {
         '22': '88px',
@@ -41,6 +45,10 @@ module.exports = {
         '80': '80',
         '90': '90',
         '100': '100',
+      },
+      maxWidth: {
+        32: '8rem',
+        52: '13rem',
       }
     },
     container: {
