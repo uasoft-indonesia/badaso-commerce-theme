@@ -10,4 +10,17 @@ return [
     |
     */
     'theme_prefix' => env('MIX_COMMERCE_WEB_ROUTE_PREFIX', 'commerce'),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Override Controller
+    |--------------------------------------------------------------------------
+    |
+    | Register a controller to override the default controller.
+    |
+    */
+    'controllers' => [
+        'api' => [],
+        'web' => [],
+    ]
 ];
