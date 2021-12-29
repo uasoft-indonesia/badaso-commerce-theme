@@ -36,6 +36,7 @@ class CommerceThemeProvider extends ServiceProvider
             __DIR__.'/../Config/badaso-commerce-theme.php' => config_path('badaso-commerce-theme.php'),
             __DIR__.'/../Tailwind/' => base_path(),
             __DIR__.'/../Images/' => storage_path('app/public/files/shares'),
+            __DIR__.'/../resources/customization/' => resource_path('js/badaso/theme/commerce-theme/'),
         ], 'BadasoCommerceTheme');
     }
 

@@ -2,7 +2,7 @@
   <!-- Carousel Container -->
   <div class="w-full overflow-hidden relative group">
     <!-- Carousel Track -->
-    <div class="h-full flex m-0 p-0 relative transition-all duration-500 ease-in-out" :style="{ transform: `translateX(-${currentPosition}%)`}" ref="carouselSingle">
+    <div class="h-full flex m-0 p-0 relative transition-all duration-500 ease-in-out" :style="{ transform: `translateX(-${(currentActiveIndex - 1) * 100}%)`}" ref="carouselSingle">
       <slot />
     </div>
 
@@ -47,85 +47,44 @@ export default {
   },
   data() {
     return {
-      totalPage: 0,
       currentActiveIndex: 1,
-      currentPosition: 0,
       interval: undefined,
-      observer: undefined
     }
   },
   computed: {
     getTotalPage() {
-      return this.totalPage
-    }
-  },
-  watch: {
-    '$slots.default': {
-      handler(val) {
-        this.totalPage = val.length
+      let total = 0;
+
+      if (this.$slots.default) {
+        total = this.$slots.default.filter(item => item.tag).length;
       }
+
+      return total
     }
   },
   mounted() {
-    const observer = new MutationObserver(this.setTotalPage);
-    observer.observe(this.$el, {
-      childList: true,
-      subtree: true 
-    });
-    this.observer = observer;
-
     if (this.autoplay) {
       this.interval = setInterval(this.next, this.autoplayDuration);
     }
   },
   beforeDestroy() {
-    clearInterval(this.interval)
-    this.observer.disconnect()
+    if (this.autoplay) {
+      clearInterval(this.interval)
+    }
   },
   methods: {
-    setTotalPage() {
-      this.totalPage = this.$slots.default.length
-    },
     next() {
-      if (this.currentActiveIndex + 1 === this.totalPage) {
-        this.currentActiveIndex = this.totalPage
-        this.currentPosition = (this.totalPage - 1) * 100
-        return
-      }
-
-      if (this.currentActiveIndex + 1 < this.totalPage) {
-        this.currentActiveIndex += 1
-        this.currentPosition += 100
-        return
-      }
-
-      if (this.autoplay) {
-        if (this.currentActiveIndex === this.totalPage) {
-          this.currentActiveIndex = 1
-          this.currentPosition = 0
-          return
-        }
+      if (this.currentActiveIndex < this.getTotalPage) {
+        this.currentActiveIndex++
+      } else {
+        this.currentActiveIndex = 1
       }
     },
     prev() {
-      if (this.currentActiveIndex - 1 === 1) {
-        this.currentActiveIndex = 1
-        this.currentPosition = 0
-        return
-      }
-
-      if (this.currentActiveIndex - 1 > 1) {
-        this.currentActiveIndex -= 1
-        this.currentPosition -= 100
-        return
-      }
-
-      if (this.autoplay) {
-        if (this.currentActiveIndex === 1) {
-          this.currentActiveIndex = this.totalPage
-          this.currentPosition = (this.totalPage - 1) * 100
-          return
-        }
+      if (this.currentActiveIndex > 1) {
+        this.currentActiveIndex--
+      } else {
+        this.currentActiveIndex = this.getTotalPage
       }
     }
   }

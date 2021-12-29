@@ -68,8 +68,8 @@
             </div>
           </template>
           <template v-else>
-            <div v-for="address, index in sortedAddresses" :key="index" class="grid grid-cols-my-address w-full gap-2 first:pb-6 first:pt-0 last:pb-0 last:pt-6 pb-6 pt-6">
-              <div class="grid grid-cols-profile-content gap-x-4 gap-y-1 items-center">
+            <div v-for="address, index in sortedAddresses" :key="index" class="grid md:grid-cols-4 lg:grid-cols-my-address w-full gap-2 first:pb-6 first:pt-0 last:pb-0 last:pt-6 pb-6 pt-6">
+              <div class="grid col-span-1 md:col-span-3 lg:col-span-1 grid-cols-profile-content gap-x-4 gap-y-1 items-center">
                 <div class="text-right text-sm text-gray-500">Nama Lengkap</div>
                 <div class="font-medium">{{ address.recipientName }} <span v-if="address.isMain == 1" class="hidden first:inline ml-4 text-xs font-medium py-0.5 px-1 bg-gray-500 text-white rounded-md">Utama</span></div>
                 <template v-if="address.phoneNumber">

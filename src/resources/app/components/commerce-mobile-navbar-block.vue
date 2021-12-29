@@ -6,7 +6,7 @@
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
         </svg>
       </div>
-      <div class="relative flex items-center h-10">
+      <div class="relative flex items-center h-10 flex-grow">
         <div class="absolute left-2 text-primary">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -33,23 +33,11 @@
 <script>
 import { mapState } from "vuex";
 import { Link } from "@inertiajs/inertia-vue";
-import CommerceLogo from "./commerce-logo.vue";
-import CommerceSearchInput from "./commerce-search-input.vue";
 export default {
   components: {
-    CommerceLogo,
-    CommerceSearchInput,
     Link,
   },
-  inject: ["goBack"],
-  data() {
-    return {
-      dropdownOpen: false,
-      search: '',
-    };
-  },
   mounted() {
-    this.search = this.$page.props.search;
   },
   computed: {
     ...mapState({
@@ -61,12 +49,5 @@ export default {
       },
     }),
   },
-  methods: {
-    searchProduct() {
-      if (this.search) {
-        this.$inertia.visit(this.route('badaso.commerce-theme.search', this.search))
-      }
-    }
-  }
 };
 </script>

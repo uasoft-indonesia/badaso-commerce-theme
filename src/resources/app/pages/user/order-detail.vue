@@ -53,14 +53,14 @@
               <div class="pl-4 text-primary uppercase">{{ formatStatus(order.status) }}</div>
             </div>
           </div>
-          <div class="flex items-start bg-white border-t border-dotted w-full p-12 rounded-lg text-primary" >
+          <div class="flex items-start bg-white border-t border-dotted w-full py-12 md:px-2 lg:px-12 rounded-lg text-primary" >
             <div class="flex flex-col items-center justify-center">
               <div class="flex flex-col rounded-full w-16 items-center justify-center h-16" :class="[order.status === 'waitingBuyerPayment' ? 'bg-primary text-white' : 'ring-4 ring-primary ring-inset' ]">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path d="m19,21l0,-16a2,2 0 0 0 -2,-2l-10,0a2,2 0 0 0 -2,2l0,16l3.5,-2l3.5,2l3.5,-2l3.5,2z" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
                 </svg>
               </div>
-              <div class="text-sm text-gray-700 w-32 text-center mt-6 mb-1">Pesanan Dibuat</div>
+              <div class="px-4 lg:px-0 text-sm text-gray-700 w-32 text-center mt-6 mb-1">Pesanan Dibuat</div>
             </div>
             <template v-if="order.status !== 'cancel'">
               <div class="flex-auto h-16 flex items-center -mx-8"><div class="bg-primary h-1 w-full" /></div>
@@ -70,7 +70,7 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" />
                   </svg>
                 </div>
-                <div class="text-sm text-gray-700 w-32 text-center mt-6 mb-1">Pesanan Dikonfirmasi</div>
+                <div class="px-4 lg:px-0 text-sm text-gray-700 w-32 text-center mt-6 mb-1">Pesanan Dikonfirmasi</div>
               </div>
             </template>
             <template v-if="order.status !== 'cancel'">
@@ -82,7 +82,7 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                   </svg>
                 </div>
-                <div class="text-sm text-gray-700 w-32 text-center mt-6 mb-1">Pesanan Diproses</div>
+                <div class="px-4 lg:px-0 text-sm text-gray-700 w-32 text-center mt-6 mb-1">Pesanan Diproses</div>
               </div>
             </template>
             <template v-if="order.status !== 'cancel'">
@@ -94,7 +94,7 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0" />
                   </svg>
                 </div>
-                <div class="text-sm text-gray-700 w-32 text-center mt-6 mb-1">Pesanan Dikirim</div>
+                <div class="px-4 lg:px-0 text-sm text-gray-700 w-32 text-center mt-6 mb-1">Pesanan Dikirim</div>
               </div>
             </template>
             <template v-if="order.status !== 'cancel'">
@@ -105,7 +105,7 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
                   </svg>
                 </div>
-                <div class="text-sm text-gray-700 w-32 text-center mt-6 mb-1">Pesanan Selesai</div>
+                <div class="px-4 lg:px-0 text-sm text-gray-700 w-32 text-center mt-6 mb-1">Pesanan Selesai</div>
               </div>
             </template>
             <template v-if="order.status === 'cancel'">
@@ -116,7 +116,7 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                   </svg>
                 </div>
-                <div class="text-sm text-gray-700 w-32 text-center mt-6 mb-1">Pesanan Dibatalkan</div>
+                <div class="px-4 lg:px-0 text-sm text-gray-700 w-32 text-center mt-6 mb-1">Pesanan Dibatalkan</div>
               </div>
             </template>
           </div>

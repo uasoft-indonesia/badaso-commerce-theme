@@ -88,7 +88,12 @@
         <div class="text-gray-400 font-medium w-full">
           KAMU MUNGKIN JUGA SUKA
         </div>
-        <carousel class="container" show="6">
+        <carousel class="container hidden lg:flex" show="6">
+          <carousel-item v-for="product, index in similarProducts.data" :key="index">
+            <commerce-product-alt :product="product" />
+          </carousel-item>
+        </carousel>
+        <carousel class="container hidden md:flex lg:hidden" show="4">
           <carousel-item v-for="product, index in similarProducts.data" :key="index">
             <commerce-product-alt :product="product" />
           </carousel-item>
