@@ -8,6 +8,23 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <script defer src="{{ mix('js/commerce-theme.js') }}"></script>
     <link rel="stylesheet" href="{{ mix('css/commerce-theme.css') }}"></link>
+
+    @php
+        $measurement_id = env('MIX_ANALYTICS_TRACKING_ID', null);
+    @endphp
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="{{ "https://www.googletagmanager.com/gtag/js?id={$measurement_id}" }}"></script>
+    <script>
+        window.measurement_id = '{{ $measurement_id }}'
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+    </script>
+    <!-- End Google Analytics -->
+
     <!-- Favicon -->
     @php
         use Uasoft\Badaso\Helpers\Config;
