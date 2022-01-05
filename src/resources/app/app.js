@@ -89,13 +89,12 @@ Vue.mixin({ methods: { route } });
 Inertia.on("navigate", (event) => {
   const page_title = document.title;
   const { href: page_location, pathname: page_path } = window.location;
+
   const configuration = {
     page_title,
     page_location,
     page_path,
   };
-
-  console.log(configuration)
 
   gtag("js", new Date());
   gtag("config", window.measurement_id, configuration);
