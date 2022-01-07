@@ -154,21 +154,26 @@
               </div>
             </div>
           </div>
+
           <div class="w-full h-px bg-gray-300" />
+
           <div class="flex flex-col gap-3 w-full">
             <button class="w-full bg-primary text-white p-1 text-sm uppercase rounded-sm" @click="applyFilterQueryString">
               Terapkan
             </button>
+
             <button class="w-full bg-transparent text-primary border border-primary uppercase text-sm p-1 rounded-sm" @click="resetProducts">
               Hapus Semua
             </button>
           </div>
         </div>
+
         <!-- Sorting -->
         <div class="col-start-2 col-end-7 flex flex-wrap items-start h-max">
           <div class="flex bg-gray-200 h-12 items-center px-4 gap-4 rounded-xl w-full">
             <div class="text-gray-500 text-sm">Urutkan</div>
             <button :class="[sort === 'latest' ? 'bg-primary text-white' : 'bg-white hover:bg-gray-100 text-gray-600']" class="h-8 px-6 rounded-md text-sm" @click="applyFilterSort('latest')">Terbaru</button>
+
             <button :class="[sort === 'most-selling' ? 'bg-primary text-white' : 'bg-white hover:bg-gray-100 text-gray-600']"  class="h-8 px-6 rounded-md text-sm" @click="applyFilterSort('most-selling')">Terlaris</button>
 
             <div class="relative md:max-w-52 max-w-32 w-full">
@@ -206,13 +211,13 @@
               <span class="text-primary">{{ products.currentPage }}</span>/{{ products.lastPage }}
             </div>
             <div class="flex">
-              <button disabled class="px-2 h-8 bg-white disabled:opacity-30 disabled:cursor-default text-gray-600 rounded-l-md text-sm">
+              <button :disabled="currentPage <= 1" class="px-2 h-8 bg-white disabled:opacity-30 disabled:cursor-default text-gray-600 rounded-l-md text-sm" @click="currentPage -= 1">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                   <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
                 </svg>
               </button>
               <div class="h-full w-px bg-gray-500"></div>
-              <button class="px-2 h-8 bg-white hover:bg-gray-100 text-gray-600 rounded-r-md text-sm">
+              <button :disabled="currentPage >= products.lastPage" class="px-2 h-8 bg-white disabled:opacity-30 disabled:cursor-default text-gray-600 rounded-r-md text-sm" @click="currentPage += 1">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                   <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
                 </svg>
@@ -578,7 +583,11 @@ export default {
       this.products = {
         data: []
       }
-      this.getProducts()
+      this.minPrice = 0;
+      this.maxPrice = 0;
+      this.rating = 0;
+      this.currentPage = 1;
+      this.applyFilterQueryString()
     },
     setRatingOption(rating) {
       if (this.rating === rating) {
@@ -602,7 +611,7 @@ export default {
     queryParams() {
       let params = {
         sort: this.$page.props.sort || this.props || 'latest',
-        rating: this.rating || this.$page.props.rating || "0",
+        rating: [0, 1, 2, 3, 4, 5].includes(this.rating) ? this.rating : (this.$page.props.rating || "0"),
         search: this.search || "",
         page: this.currentPage || 1,
         slug: this.$page.props.slug,
