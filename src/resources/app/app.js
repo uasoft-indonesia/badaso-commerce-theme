@@ -96,8 +96,10 @@ Inertia.on("navigate", (event) => {
     page_path,
   };
 
-  gtag("js", new Date());
-  gtag("config", window.measurement_id, configuration);
+  if (gtag) {
+    gtag("js", new Date());
+    gtag("config", window.measurement_id, configuration);
+  }
 });
 
 const appName =
