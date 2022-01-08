@@ -65,6 +65,12 @@ class InertiaController extends Controller
         return Inertia::render('search', [
             'keyword' => request('keyword'),
             'name' => 'Search',
+            'sort' => request('sort'),
+            'search' => request('search'),
+            'rating' => request('rating'),
+            'minPrice' => request('minPrice'),
+            'maxPrice' => request('maxPrice'),
+            'type' => request('type'),
         ], 'commerce-theme:app');
     }
 
