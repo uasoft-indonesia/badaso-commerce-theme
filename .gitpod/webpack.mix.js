@@ -20,3 +20,12 @@ mix.js('resources/js/app.js', 'public/js')
 mix.js("packages/badaso/core/src/resources/js/app.js", "public/js/badaso.js")
     .sass("packages/badaso/core/src/resources/js/assets/scss/style.scss", "public/css/badaso.css")
     .vue()
+
+// BadasoCommerce
+const path = require('path');
+mix.js("vendor/badaso/commerce-theme/src/resources/app/app.js", "public/js/commerce-theme.js")
+    .sass('vendor/badaso/commerce-theme/src/resources/app/assets/scss/index.scss', 'public/css/commerce-theme.css')
+    .alias({
+        '@': path.join(__dirname, 'vendor/badaso')
+    })
+    .vue()
