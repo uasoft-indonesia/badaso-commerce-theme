@@ -1,0 +1,94 @@
+{
+    "name": "laravel/laravel",
+    "type": "project",
+    "description": "The Laravel Framework.",
+    "keywords": ["framework", "laravel"],
+    "license": "MIT",
+    "require": {
+        "php": "^7.3|^8.0",
+        "fruitcake/laravel-cors": "^2.0",
+        "guzzlehttp/guzzle": "^7.0.1",
+        "laravel/framework": "^8.75",
+        "laravel/sanctum": "^2.11",
+        "laravel/tinker": "^2.5"
+    },
+    "require-dev": {
+        "facade/ignition": "^2.5",
+        "fakerphp/faker": "^1.9.1",
+        "laravel/sail": "^1.0.1",
+        "mockery/mockery": "^1.4.4",
+        "nunomaduro/collision": "^5.10",
+        "phpunit/phpunit": "^9.5.10",
+        "laravel/sanctum": "^2.11",
+        "webpatser/laravel-uuid": "^4.0",
+        "doctrine/dbal": "^2.12",
+        "tymon/jwt-auth": "dev-develop",
+        "larapack/doctrine-support": "^0.1.9",
+        "arcanedev/log-viewer": "^8.1",
+        "spatie/laravel-activitylog": "^3.17",
+        "spatie/laravel-backup": "^6.16",
+        "spatie/flysystem-dropbox": "^1.2.2",
+        "nao-pon/flysystem-google-drive": "^1.1.13",
+        "league/flysystem-aws-s3-v3": "^1.0.28",
+        "guzzlehttp/guzzle": "^7.0.1",
+        "unisharp/laravel-filemanager": "^2.2",
+        "darkaonline/l5-swagger": "^8.0",
+        "zircote/swagger-php": "^3.2",
+        "symfony/var-exporter": "^5.2.0",
+        "google/apiclient": "^2.9",
+        "predis/predis": "^1.1",
+        "laravel/ui": "^3.3",
+        "laravel/octane": "^1.0",      
+        "mll-lab/laravel-graphql-playground": "^2.5",
+        "webonyx/graphql-php": "^14.8",
+        "mbezhanov/faker-provider-collection": "^2.0.1",
+        "badaso/core": "^2.0",
+        "badaso/content-module": "^2.0",
+        "badaso/commerce-module": "^0.3.0",
+        "inertiajs/inertia-laravel": "^0.4.5",
+        "tightenco/ziggy": "^1.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/",
+            "Uasoft\\Badaso\\Module\\Commerce\\": "packages/badaso/commerce-module/src/",
+            "Uasoft\\Badaso\\Theme\\CommerceTheme\\": "packages/badaso/commerce-theme/src/",
+            "Uasoft\\Badaso\\": "packages/badaso/core/src/",
+            "Database\\Factories\\": "database/factories/",
+            "Database\\Seeders\\": "database/seeders/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            
+            "Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "post-autoload-dump": [
+            "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
+            "@php artisan package:discover --ansi"
+        ],
+        "post-update-cmd": [
+            "@php artisan vendor:publish --tag=laravel-assets --ansi --force"
+        ],
+        "post-root-package-install": [
+            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+        ],
+        "post-create-project-cmd": [
+            "@php artisan key:generate --ansi"
+        ]
+    },
+    "extra": {
+        "laravel": {
+            "dont-discover": []
+        }
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

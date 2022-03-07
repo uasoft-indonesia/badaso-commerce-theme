@@ -1,0 +1,52 @@
+image:
+  file: .gitpod.Dockerfile
+
+tasks:
+  - name: Starting Projects
+    init: composer create-project laravel/laravel:^8.0 laravel &&
+      mkdir -p laravel/packages/badaso/commerce-theme && 
+      mv {,.}* laravel/packages/badaso/commerce-theme 2>/dev/null; true &&
+      cd laravel/packages/badaso &&
+      git clone --branch main --single-branch https://github.com/uasoft-indonesia/badaso-commerce-module.git commerce-module &&
+      git clone --branch 2.x --single-branch https://github.com/uasoft-indonesia/badaso.git core &&
+      cd ../../ &&
+      cp packages/badaso/commerce-theme/.gitpod/AppServiceProvider.php app/Providers/AppServiceProvider.php &&
+      cp packages/badaso/commerce-theme/.gitpod/app.php config/app.php &&
+      cp packages/badaso/commerce-theme/.gitpod/composer.json composer.json &&
+      cp packages/badaso/commerce-theme/.gitpod/webpack.mix.js webpack.mix.js &&
+      cp .env.example .env &&
+      composer update &&
+      php artisan key:generate &&
+      mysql -u root -e "create database laravel"
+    command: php artisan badaso:setup --force &&
+      php artisan badaso-commerce:setup &&
+      php artisan badaso-commerce-theme:setup &&
+      sed -i 's/http:\/\/localhost//g' .env &&
+      sed -i 's/FILESYSTEM_DRIVER=local/FILESYSTEM_DRIVER=public/g' .env &&
+      sed -i "s|APP_URL=|APP_URL=${GITPOD_WORKSPACE_URL}|g" .env &&
+      sed -i "s|APP_URL=https://|APP_URL=https://8000-|g" .env &&
+      sed -i 's/MIX_DEFAULT_MENU=general/MIX_DEFAULT_MENU=general,commerce-module,commerce-theme/g' .env &&
+      sed -i 's/MIX_BADASO_MENU=${MIX_DEFAULT_MENU}/MIX_BADASO_MENU=${MIX_DEFAULT_MENU},commerce-module,commerce-theme/g' .env &&
+      echo -e "\nMIX_BADASO_MODULES=commerce-module,commerce-theme" >> .env &&
+      php artisan migrate &&
+      php artisan db:seed --class="Database\Seeders\Badaso\BadasoSeeder" &&
+      php artisan db:seed --class="Database\Seeders\Badaso\Commerce\BadasoCommerceModuleSeeder" &&
+      php artisan db:seed --class="Database\Seeders\Badaso\BadasoSeeder" &&
+      php artisan db:seed --class="Database\Seeders\Badaso\Commerce\Theme\BadasoCommerceThemeSeeder" &&
+      php artisan storage:link &&
+      php artisan migrate &&
+      npm install &&
+      php artisan badaso:admin admin@admin.com --name=admin --username=admin --password=admin --confirm_password=admin --create && 
+      npm run dev &&
+      php artisan serve --host=0.0.0.0
+ports:
+  - port: 8000
+    onOpen: open-browser
+  - port: 3306
+    onOpen: ignore
+vscode:
+  extensions:
+    - bmewburn.vscode-intelephense-client
+    - MehediDracula.php-namespace-resolver
+    - junstyle.php-cs-fixer
+    - PKief.material-icon-theme
