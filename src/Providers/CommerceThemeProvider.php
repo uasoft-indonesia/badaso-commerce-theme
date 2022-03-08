@@ -32,11 +32,11 @@ class CommerceThemeProvider extends ServiceProvider
         $this->loadRoutesFrom(__DIR__.'/../Routes/web.php');
 
         $this->publishes([
-            __DIR__.'/../Seeder' => database_path('seeders/Badaso/Commerce/Theme'),
+            __DIR__.'/../Seeder'                           => database_path('seeders/Badaso/Commerce/Theme'),
             __DIR__.'/../Config/badaso-commerce-theme.php' => config_path('badaso-commerce-theme.php'),
-            __DIR__.'/../Tailwind/' => base_path(),
-            __DIR__.'/../Images/' => storage_path('app/public/files/shares'),
-            __DIR__.'/../resources/customization/' => resource_path('js/badaso/theme/commerce-theme/'),
+            __DIR__.'/../Tailwind/'                        => base_path(),
+            __DIR__.'/../Images/'                          => storage_path('app/public/files/shares'),
+            __DIR__.'/../resources/customization/'         => resource_path('js/badaso/theme/commerce-theme/'),
         ], 'BadasoCommerceTheme');
     }
 

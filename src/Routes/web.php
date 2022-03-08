@@ -1,8 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Uasoft\Badaso\Theme\CommerceTheme\Middlewares\HandleInertiaRequests;
 use Uasoft\Badaso\Theme\CommerceTheme\Helpers\Route as HelpersRoute;
+use Uasoft\Badaso\Theme\CommerceTheme\Middlewares\HandleInertiaRequests;
 
 $commerce_route_prefix = config('badaso-commerce-theme.theme_prefix');
 Route::prefix($commerce_route_prefix)
@@ -11,7 +11,7 @@ Route::prefix($commerce_route_prefix)
     ->group(function () {
 
         /**
-         * General route
+         * General route.
          */
         Route::get('/', HelpersRoute::getController('InertiaController@home'))->name('home');
         Route::get('/category/{slug}', HelpersRoute::getController('InertiaController@category'))->name('category');
@@ -22,7 +22,7 @@ Route::prefix($commerce_route_prefix)
         Route::get('/search', HelpersRoute::getController('InertiaController@search'))->name('search');
 
         /**
-         * Auth route
+         * Auth route.
          */
         Route::get('/auth/login', HelpersRoute::getController('InertiaController@authLogin'))->name('login');
         Route::get('/auth/register', HelpersRoute::getController('InertiaController@authRegister'))->name('register');
@@ -31,7 +31,7 @@ Route::prefix($commerce_route_prefix)
         Route::get('/auth/verify/{email}', HelpersRoute::getController('InertiaController@authVerify'))->name('verification');
 
         /**
-         * My profile route
+         * My profile route.
          */
         Route::get('/profile', HelpersRoute::getController('InertiaController@userProfile'))->name('profile');
         Route::get('/profile/notification', HelpersRoute::getController('InertiaController@userNotification'))->name('notification');
@@ -43,13 +43,13 @@ Route::prefix($commerce_route_prefix)
         Route::get('/profile/address/edit/{id}', HelpersRoute::getController('InertiaController@userAddressEdit'))->name('address-edit');
 
         /**
-         * Legal route
+         * Legal route.
          */
         Route::get('/legal/tos', HelpersRoute::getController('InertiaController@legalTos'))->name('tos');
         Route::get('/legal/privacy', HelpersRoute::getController('InertiaController@legalPrivacy'))->name('privacy');
 
         /**
-         * Payment route
+         * Payment route.
          */
         Route::get('/payment/{id}/info', HelpersRoute::getController('InertiaController@paymentInfo'))->name('payment-info');
         Route::get('/payment/{id}/confirm', HelpersRoute::getController('InertiaController@paymentConfirm'))->name('payment-confirm');
