@@ -23,6 +23,7 @@ tasks:
       php artisan badaso-commerce:setup &&
       php artisan badaso-commerce-theme:setup &&
       sed -i 's/http:\/\/localhost//g' .env &&
+      sed -i "s/'payments' => [],/'payments' => ['Uasoft\Badaso\Module\Commerce\BadasoCommerceModule']" config/badaso-commerce.php &&
       sed -i 's/FILESYSTEM_DRIVER=local/FILESYSTEM_DRIVER=public/g' .env &&
       sed -i "s|APP_URL=|APP_URL=${GITPOD_WORKSPACE_URL}|g" .env &&
       sed -i "s|APP_URL=https://|APP_URL=https://8000-|g" .env &&
@@ -30,6 +31,8 @@ tasks:
       sed -i 's/MIX_COMMERCE_WEB_ROUTE_PREFIX=/MIX_COMMERCE_WEB_ROUTE_PREFIX=commerce/g' .env &&
       sed -i 's/MIX_BADASO_MENU=${MIX_DEFAULT_MENU}/MIX_BADASO_MENU=${MIX_DEFAULT_MENU},commerce-module,commerce-theme/g' .env &&
       echo -e "\nMIX_BADASO_MODULES=commerce-module,commerce-theme" >> .env &&
+      echo -e "\nCOMMERCE_PRODUCTS_LIMIT_QUERY=10" >> .env &&
+      echo -e "\nMIX_PAYMENT_MODULE=commerce-module" >> .env &&
       php artisan migrate &&
       php artisan db:seed --class="Database\Seeders\Badaso\BadasoSeeder" &&
       php artisan db:seed --class="Database\Seeders\Badaso\Commerce\BadasoCommerceModuleSeeder" &&
