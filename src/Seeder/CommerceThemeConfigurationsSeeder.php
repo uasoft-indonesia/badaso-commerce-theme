@@ -25,7 +25,7 @@ class CommerceThemeConfigurationsSeeder extends Seeder
                 0 => [
                     'key' => 'logoTextLightTheme',
                     'display_name' => 'Logo Text Light Theme',
-                    'value' => '',
+                    'value' => 'photos/shares/logo.webp',
                     'details' => '',
                     'type' => 'upload_image',
                     'order' => 1,
@@ -55,7 +55,7 @@ class CommerceThemeConfigurationsSeeder extends Seeder
                 3 => [
                     'key' => 'logoTheme',
                     'display_name' => 'Logo Theme',
-                    'value' => '',
+                    'value' => 'photos/shares/favicon.png',
                     'details' => '',
                     'type' => 'upload_image',
                     'order' => 4,
@@ -105,7 +105,7 @@ class CommerceThemeConfigurationsSeeder extends Seeder
                 8 => [
                     'key' => 'commerceThemeFavicon',
                     'display_name' => 'Commerce Theme Favicon',
-                    'value' => '',
+                    'value' => 'photos/shares/logo-144px.png',
                     'details' => '',
                     'type' => 'upload_image',
                     'order' => 9,
@@ -115,7 +115,7 @@ class CommerceThemeConfigurationsSeeder extends Seeder
                 9 => [
                     'key' => 'logoTextDarkTheme',
                     'display_name' => 'Logo Text Dark Theme',
-                    'value' => '',
+                    'value' => 'photos/shares/logo.webp',
                     'details' => '',
                     'type' => 'upload_image',
                     'order' => 10,
