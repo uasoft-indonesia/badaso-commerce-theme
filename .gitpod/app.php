@@ -165,6 +165,7 @@ return [
         /*
          * Package Service Providers...
          */
+        "Uasoft\\Badaso\\Providers\\BadasoServiceProvider",
         "Uasoft\\Badaso\\Module\\Commerce\\Providers\\BadasoCommerceModuleServiceProvider",
         "Uasoft\\Badaso\\Theme\\CommerceTheme\\Providers\\CommerceThemeProvider",
         /*
