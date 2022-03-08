@@ -14,6 +14,7 @@ tasks:
       cp packages/badaso/commerce-theme/.gitpod/app.php config/app.php &&
       cp packages/badaso/commerce-theme/.gitpod/composer.json composer.json &&
       cp packages/badaso/commerce-theme/.gitpod/webpack.mix.js webpack.mix.js &&
+      cp packages/badaso/commerce-theme/.gitpod/tailwind.config.js tailwind.config.js &&
       cp .env.example .env &&
       composer update &&
       php artisan key:generate &&
@@ -26,6 +27,7 @@ tasks:
       sed -i "s|APP_URL=|APP_URL=${GITPOD_WORKSPACE_URL}|g" .env &&
       sed -i "s|APP_URL=https://|APP_URL=https://8000-|g" .env &&
       sed -i 's/MIX_DEFAULT_MENU=general/MIX_DEFAULT_MENU=general,commerce-module,commerce-theme/g' .env &&
+      sed -i 's/MIX_COMMERCE_WEB_ROUTE_PREFIX=/MIX_COMMERCE_WEB_ROUTE_PREFIX=commerce/g' .env &&
       sed -i 's/MIX_BADASO_MENU=${MIX_DEFAULT_MENU}/MIX_BADASO_MENU=${MIX_DEFAULT_MENU},commerce-module,commerce-theme/g' .env &&
       echo -e "\nMIX_BADASO_MODULES=commerce-module,commerce-theme" >> .env &&
       php artisan migrate &&
