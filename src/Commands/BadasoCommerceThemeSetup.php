@@ -4,7 +4,6 @@ namespace Uasoft\Badaso\Theme\CommerceTheme\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Artisan;
-use Symfony\Component\VarExporter\VarExporter;
 use Illuminate\Support\Str;
 
 class BadasoCommerceThemeSetup extends Command
@@ -124,13 +123,13 @@ class BadasoCommerceThemeSetup extends Command
             $this->error('Failed adding badaso env '.$e->getMessage());
         }
     }
-    
+
     protected function envListUpload()
     {
         return [
             'MIX_COMMERCE_WEB_ROUTE_PREFIX' => '',
-            'NOTIFICATION_EMAIL' => '',
-            'CRON_EXPIRED_ORDER' => '"*/5 * * * *"',
+            'NOTIFICATION_EMAIL'            => '',
+            'CRON_EXPIRED_ORDER'            => '"*/5 * * * *"',
         ];
     }
 
@@ -161,6 +160,6 @@ class BadasoCommerceThemeSetup extends Command
 
     protected function checkExist($file, $search)
     {
-        return $this->file->exists($file) && ! Str::contains($this->file->get($file), $search);
+        return $this->file->exists($file) && !Str::contains($this->file->get($file), $search);
     }
 }

@@ -26,16 +26,16 @@ class CommerceThemeFixedMenuItemSeeder extends Seeder
 
             $menu_items = [
                 0 => [
-                    'menu_id' => $menu_id,
-                    'title' => 'Commerce Theme Configuration',
-                    'url' => '/commerce-theme-config',
-                    'target' => '_self',
-                    'icon_class' => 'desktop_mac',
-                    'color' => '',
-                    'parent_id' => null,
-                    'order' => 1,
+                    'menu_id'     => $menu_id,
+                    'title'       => 'Commerce Theme Configuration',
+                    'url'         => '/commerce-theme-config',
+                    'target'      => '_self',
+                    'icon_class'  => 'desktop_mac',
+                    'color'       => '',
+                    'parent_id'   => null,
+                    'order'       => 1,
                     'permissions' => 'browse_theme_commerce_configurations',
-                ]
+                ],
             ];
 
             $new_menu_items = [];
