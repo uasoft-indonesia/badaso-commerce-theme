@@ -8,7 +8,7 @@ use Inertia\Inertia;
 class InertiaController extends Controller
 {
     /**
-     * General route
+     * General route.
      */
     public function home()
     {
@@ -20,28 +20,28 @@ class InertiaController extends Controller
     public function category()
     {
         return Inertia::render('category', [
-            'slug' => request('slug'),
-            'name' => 'Category',
-            'sort' => request('sort'),
-            'search' => request('search'),
-            'rating' => request('rating'),
+            'slug'     => request('slug'),
+            'name'     => 'Category',
+            'sort'     => request('sort'),
+            'search'   => request('search'),
+            'rating'   => request('rating'),
             'minPrice' => request('minPrice'),
             'maxPrice' => request('maxPrice'),
-            'type' => request('type'),
+            'type'     => request('type'),
         ], 'commerce-theme:app');
     }
 
     public function cart()
     {
         return Inertia::render('cart', [
-            'name' => 'Cart'
+            'name' => 'Cart',
         ], 'commerce-theme:app');
     }
 
     public function checkout()
     {
         return Inertia::render('checkout', [
-            'name' => 'Checkout'
+            'name' => 'Checkout',
         ], 'commerce-theme:app');
     }
 
@@ -49,52 +49,52 @@ class InertiaController extends Controller
     {
         return Inertia::render('detail', [
             'slug' => $slug,
-            'name' => 'Detail'
+            'name' => 'Detail',
         ], 'commerce-theme:app');
     }
 
     public function productList()
     {
         return Inertia::render('product-list', [
-            'name' => 'Product List'
+            'name' => 'Product List',
         ], 'commerce-theme:app');
     }
 
     public function search()
     {
         return Inertia::render('search', [
-            'keyword' => request('keyword'),
-            'name' => 'Search',
-            'sort' => request('sort'),
-            'search' => request('search'),
-            'rating' => request('rating'),
+            'keyword'  => request('keyword'),
+            'name'     => 'Search',
+            'sort'     => request('sort'),
+            'search'   => request('search'),
+            'rating'   => request('rating'),
             'minPrice' => request('minPrice'),
             'maxPrice' => request('maxPrice'),
-            'type' => request('type'),
+            'type'     => request('type'),
         ], 'commerce-theme:app');
     }
 
     /**
-     * Auth route
+     * Auth route.
      */
     public function authForgotPassword()
     {
         return Inertia::render('auth/forgot-password', [
-            'name' => 'Forgot Password'
+            'name' => 'Forgot Password',
         ], 'commerce-theme:app');
     }
 
     public function authLogin()
     {
         return Inertia::render('auth/login', [
-            'name' => 'Login'
+            'name' => 'Login',
         ], 'commerce-theme:app');
     }
 
     public function authRegister()
     {
         return Inertia::render('auth/register', [
-            'name' => 'Register'
+            'name' => 'Register',
         ], 'commerce-theme:app');
     }
 
@@ -103,7 +103,7 @@ class InertiaController extends Controller
         return Inertia::render('auth/reset-password', [
             'email' => $email,
             'token' => $token,
-            'name' => 'Reset Password'
+            'name'  => 'Reset Password',
         ], 'commerce-theme:app');
     }
 
@@ -111,96 +111,96 @@ class InertiaController extends Controller
     {
         return Inertia::render('auth/verify', [
             'email' => $email,
-            'name' => 'Verify'
+            'name'  => 'Verify',
         ], 'commerce-theme:app');
     }
 
     /**
-     * Profile route
+     * Profile route.
      */
     public function userProfile()
     {
         return Inertia::render('user/profile', [
-            'name' => 'Profile'
+            'name' => 'Profile',
         ], 'commerce-theme:app');
     }
 
     public function userAddress()
     {
         return Inertia::render('user/address', [
-            'name' => 'Address'
+            'name' => 'Address',
         ], 'commerce-theme:app');
     }
 
     public function userAddressAdd()
     {
         return Inertia::render('user/address-add', [
-            'name' => 'Add Address'
+            'name' => 'Add Address',
         ], 'commerce-theme:app');
     }
 
     public function userAddressEdit($id)
     {
         return Inertia::render('user/address-edit', [
-            'id' => $id,
-            'name' => 'Edit Address'
+            'id'   => $id,
+            'name' => 'Edit Address',
         ], 'commerce-theme:app');
     }
 
     public function userNotification()
     {
         return Inertia::render('user/notification', [
-            'name' => 'Notification'
+            'name' => 'Notification',
         ], 'commerce-theme:app');
     }
 
     public function userOrderDetail($id)
     {
         return Inertia::render('user/order-detail', [
-            'id' => $id,
-            'name' => 'Order Detail'
+            'id'   => $id,
+            'name' => 'Order Detail',
         ], 'commerce-theme:app');
     }
 
     public function userChangePassword()
     {
         return Inertia::render('user/change-password', [
-            'name' => 'Change Password'
+            'name' => 'Change Password',
         ], 'commerce-theme:app');
     }
 
     public function userOrder()
     {
         return Inertia::render('user/order', [
-            'name' => 'Order'
+            'name' => 'Order',
         ], 'commerce-theme:app');
     }
 
     /**
-     * Legal route
+     * Legal route.
      */
     public function legalPrivacy()
     {
         return Inertia::render('legal/privacy', [
-            'name' => 'Privacy'
+            'name' => 'Privacy',
         ], 'commerce-theme:app');
     }
 
     public function legalTos()
     {
         return Inertia::render('legal/tos', [
-            'name' => 'Term of Service'
+            'name' => 'Term of Service',
         ], 'commerce-theme:app');
     }
 
     /**
-     * Payment route
+     * Payment route.
      */
     public function paymentInfo($id)
     {
         return Inertia::render('payment/info', [
             'name' => 'Payment Info',
-            'id' => $id,
+            'id'   => $id,
         ], 'commerce-theme:app');
     }
 
@@ -208,7 +208,7 @@ class InertiaController extends Controller
     {
         return Inertia::render('payment/confirm', [
             'name' => 'Payment Confirmation',
-            'id' => $id,
+            'id'   => $id,
         ], 'commerce-theme:app');
     }
 
@@ -216,14 +216,14 @@ class InertiaController extends Controller
     {
         return Inertia::render('user/review', [
             'name' => 'Review',
-            'id' => $id
+            'id'   => $id,
         ], 'commerce-theme:app');
     }
 
     public function HTTP404()
     {
         return Inertia::render('404', [
-            'name' => '404'
+            'name' => '404',
         ], 'commerce-theme:app');
     }
 }
