@@ -27,7 +27,7 @@ class CommerceThemeProductCategories extends Seeder
             DB::table('badaso_product_categories')->insert(array(
                 0 =>
                 array(
-                    'id' => 1,
+
                     'parent_id' => NULL,
                     'name' => 'Electronic',
                     'slug' => 'electronic',
@@ -40,7 +40,7 @@ class CommerceThemeProductCategories extends Seeder
                 ),
                 1 =>
                 array(
-                    'id' => 2,
+
                     'parent_id' => NULL,
                     'name' => 'Food & Drink',
                     'slug' => 'food-drink',
@@ -53,7 +53,7 @@ class CommerceThemeProductCategories extends Seeder
                 ),
                 2 =>
                 array(
-                    'id' => 3,
+
                     'parent_id' => NULL,
                     'name' => 'Computer & Accessories',
                     'slug' => 'computer-accessories',
@@ -66,7 +66,7 @@ class CommerceThemeProductCategories extends Seeder
                 ),
                 3 =>
                 array(
-                    'id' => 4,
+
                     'parent_id' => NULL,
                     'name' => 'Treatment & Beauty',
                     'slug' => 'treatment-beauty',
@@ -79,7 +79,7 @@ class CommerceThemeProductCategories extends Seeder
                 ),
                 4 =>
                 array(
-                    'id' => 5,
+
                     'parent_id' => NULL,
                     'name' => 'Phone & Accessories',
                     'slug' => 'phone-accessories',
@@ -92,7 +92,7 @@ class CommerceThemeProductCategories extends Seeder
                 ),
                 5 =>
                 array(
-                    'id' => 6,
+
                     'parent_id' => NULL,
                     'name' => 'Home Appliances',
                     'slug' => 'home-appliances',
@@ -105,7 +105,7 @@ class CommerceThemeProductCategories extends Seeder
                 ),
                 6 =>
                 array(
-                    'id' => 7,
+
                     'parent_id' => NULL,
                     'name' => 'Menswear',
                     'slug' => 'menswear',
@@ -118,7 +118,7 @@ class CommerceThemeProductCategories extends Seeder
                 ),
                 7 =>
                 array(
-                    'id' => 8,
+
                     'parent_id' => NULL,
                     'name' => 'Ladieswear',
                     'slug' => 'ladieswear',
@@ -131,7 +131,7 @@ class CommerceThemeProductCategories extends Seeder
                 ),
                 8 =>
                 array(
-                    'id' => 9,
+
                     'parent_id' => NULL,
                     'name' => "Men's Shoes",
                     'slug' => 'mens-shoes',
@@ -144,7 +144,7 @@ class CommerceThemeProductCategories extends Seeder
                 ),
                 9 =>
                 array(
-                    'id' => 10,
+
                     'parent_id' => NULL,
                     'name' => 'Muslim Fashion',
                     'slug' => 'muslim-fashion',
@@ -157,7 +157,7 @@ class CommerceThemeProductCategories extends Seeder
                 ),
                 10 =>
                 array(
-                    'id' => 11,
+
                     'parent_id' => NULL,
                     'name' => "Men's Bag",
                     'slug' => 'mens-bag',
@@ -170,7 +170,7 @@ class CommerceThemeProductCategories extends Seeder
                 ),
                 11 =>
                 array(
-                    'id' => 12,
+
                     'parent_id' => NULL,
                     'name' => 'Baby & Kids Fashion',
                     'slug' => 'baby-kids-fashion',
@@ -183,7 +183,7 @@ class CommerceThemeProductCategories extends Seeder
                 ),
                 12 =>
                 array(
-                    'id' => 13,
+
                     'parent_id' => NULL,
                     'name' => 'Fashion Accessories',
                     'slug' => 'fashion-accessories',
@@ -196,7 +196,7 @@ class CommerceThemeProductCategories extends Seeder
                 ),
                 13 =>
                 array(
-                    'id' => 14,
+
                     'parent_id' => NULL,
                     'name' => 'Mother & Baby',
                     'slug' => 'mother-baby',
@@ -209,7 +209,7 @@ class CommerceThemeProductCategories extends Seeder
                 ),
                 14 =>
                 array(
-                    'id' => 15,
+
                     'parent_id' => NULL,
                     'name' => 'Wristwatch',
                     'slug' => 'wristwatch',
@@ -222,7 +222,7 @@ class CommerceThemeProductCategories extends Seeder
                 ),
                 15 =>
                 array(
-                    'id' => 16,
+
                     'parent_id' => NULL,
                     'name' => "Women's Shoes",
                     'slug' => 'womens-shoes',
@@ -235,7 +235,7 @@ class CommerceThemeProductCategories extends Seeder
                 ),
                 16 =>
                 array(
-                    'id' => 17,
+
                     'parent_id' => NULL,
                     'name' => 'Health',
                     'slug' => 'health',
@@ -248,7 +248,7 @@ class CommerceThemeProductCategories extends Seeder
                 ),
                 17 =>
                 array(
-                    'id' => 18,
+
                     'parent_id' => NULL,
                     'name' => "Women's Bag",
                     'slug' => 'womens-bag',
@@ -261,7 +261,7 @@ class CommerceThemeProductCategories extends Seeder
                 ),
                 18 =>
                 array(
-                    'id' => 19,
+
                     'parent_id' => NULL,
                     'name' => 'Hobbies & Collections',
                     'slug' => 'hobbies-collections',
@@ -274,7 +274,7 @@ class CommerceThemeProductCategories extends Seeder
                 ),
                 19 =>
                 array(
-                    'id' => 20,
+
                     'parent_id' => NULL,
                     'name' => 'Automotive',
                     'slug' => 'automotive',
@@ -287,7 +287,7 @@ class CommerceThemeProductCategories extends Seeder
                 ),
                 20 =>
                 array(
-                    'id' => 21,
+
                     'parent_id' => NULL,
                     'name' => 'Sports & Outdoor',
                     'slug' => 'sports-outdoor',
@@ -300,7 +300,7 @@ class CommerceThemeProductCategories extends Seeder
                 ),
                 21 =>
                 array(
-                    'id' => 22,
+
                     'parent_id' => NULL,
                     'name' => 'Souvenirs & Parties',
                     'slug' => 'souvenirs-parties',
@@ -313,7 +313,7 @@ class CommerceThemeProductCategories extends Seeder
                 ),
                 22 =>
                 array(
-                    'id' => 23,
+
                     'parent_id' => NULL,
                     'name' => 'Books & Stationery',
                     'slug' => 'books-stationery',
@@ -326,7 +326,7 @@ class CommerceThemeProductCategories extends Seeder
                 ),
                 23 =>
                 array(
-                    'id' => 24,
+
                     'parent_id' => NULL,
                     'name' => 'Photograph',
                     'slug' => 'photograph',
@@ -339,7 +339,7 @@ class CommerceThemeProductCategories extends Seeder
                 ),
                 24 =>
                 array(
-                    'id' => 25,
+
                     'parent_id' => NULL,
                     'name' => 'Voucher',
                     'slug' => 'voucher',
@@ -351,7 +351,6 @@ class CommerceThemeProductCategories extends Seeder
                     'deleted_at' => NULL,
                 ),
             ));
-
         } catch (Exception $e) {
             throw new Exception('Exception occur ' . $e);
             DB::rollBack();

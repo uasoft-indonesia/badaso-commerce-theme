@@ -211,7 +211,7 @@
           </div>
         </div>
         <div class="h-4 sm:h-5" />
-        
+
         <div class="col-start-2 col-end-7">
           <!-- Pagination -->
           <pagination :total="products.total" :per-page="productLimit" v-model="currentPage" />
@@ -313,7 +313,7 @@ export default {
         }
 
         if (this.sort === 'price') {
-          
+
           if (this.type === 'desc') {
             // get a price from product details using Math.max
             let aPrice = Math.max(...a.productDetails.map(item => item.price))
@@ -463,7 +463,7 @@ export default {
       this.products = {
         data: []
       }
-    
+
     let params = {
         slug: this.$page.props.slug,
         page: this.currentPage,
@@ -474,7 +474,7 @@ export default {
       if (this.rating > 0) {
         params = { ...params, rating: this.rating }
       }
-          
+
       this.$api.badasoProduct
         .search(params)
         .then(res => {
