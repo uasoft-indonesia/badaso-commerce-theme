@@ -20,7 +20,7 @@
               </div>
               <div class=" flex-1 text-sm">
                 <Link :to="{ name: 'DetailProduct', params: { slug: cart.productDetail.product.slug } }" class="line-clamp-2">{{ cart.productDetail.product.name }}</Link>
-                <div class="text-sm mt-2">Variasi: 
+                <div class="text-sm mt-2">Variasi:
                   <span class="border border-gray-300 px-1.5 py-1 cursor-pointer ml-2 rounded-md text-gray-500 text-xs">{{ $voca.titleCase(cart.productDetail.name) }}</span>
                 </div>
               </div>
@@ -120,7 +120,7 @@
           </div>
         </div>
       </transition>
-      
+
       <transition
         enter-active-class="transition-all ease-out duration-100"
         leave-active-class="transition-all ease-in duration-100"
@@ -339,7 +339,7 @@ export default {
       let price = 0
       this.checkboxModel.forEach(val => {
         let cart = this.$_.find(this.carts, { id: val })
-        let p = cart.productDetail.discount !== null && cart.productDetail.discount.active == 1 
+        let p = cart.productDetail.discount !== null && cart.productDetail.discount.active == 1
           ? this.getDiscount(cart.productDetail.price, cart.productDetail.discount)
           : cart.productDetail.price
         price += p * cart.quantity
@@ -351,7 +351,7 @@ export default {
       let price = 0
       this.checkboxModel.forEach(val => {
         let cart = this.$_.find(this.carts, { id: val })
-        let p = cart.productDetail.discount !== null && cart.productDetail.discount.active == 1 
+        let p = cart.productDetail.discount !== null && cart.productDetail.discount.active == 1
           ? this.getDiscount(cart.productDetail.price, cart.productDetail.discount)
           : cart.productDetail.price
         price += cart.productDetail.price - p
