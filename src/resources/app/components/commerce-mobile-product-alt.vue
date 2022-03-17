@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full h-full hover:shadow-md rounded-xl transition-transform duration-200 ease-in-out transform hover:-translate-y-1" v-if="product.productDetails.length > 0">
+  <div class="w-full h-72 hover:shadow-md rounded-xl transition-transform duration-200 ease-in-out transform hover:-translate-y-1" v-if="product.productDetails.length > 0">
     <Link :href="route('badaso.commerce-theme.detail', product.slug)" class="relative block group bg-white rounded-xl h-full" >
       <div class="w-full bg-cover bg-no-repeat rounded-t-xl mb-2" :style="`background-image: url('${product.productImage}'); padding-top: 100%`">
       <div class="absolute right-4 top-0 h-8 w-8" v-if="hasActiveDiscount">
@@ -13,7 +13,7 @@
       </div>
       <div class="px-3 pb-3">
         <h3 class="line-clamp-2 text-sm">{{ product.name }}</h3>
-        
+
         <div class="flex items-start justify-between mt-1">
           <div class="text-primary font-medium line-clamp-1">
             {{ getProductPrice }}
@@ -55,7 +55,7 @@ export default {
       return this.product.productDetails.length > 0 && this.product.productDetails[0].discount.discountType
     },
     getDiscount() {
-      return this.getDiscountType == 'fixed' 
+      return this.getDiscountType == 'fixed'
       ? `${Math.round(this.product.productDetails[0].discount.discountFixed/1000)}K`
       : `${this.product.productDetails[0].discount.discountPercent}%`
     },
@@ -63,8 +63,8 @@ export default {
       if (this.product.productDetails.length > 0) {
         let min = this.$_.minBy(this.product.productDetails, 'price')
         let max = this.$_.maxBy(this.product.productDetails, 'price')
-        return min == max 
-        ? this.$currency(min.price) 
+        return min == max
+        ? this.$currency(min.price)
         : `${this.$currency(min.price)} - ${this.$currency(max.price)}`
       }
 
