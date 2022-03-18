@@ -5,8 +5,6 @@ namespace Database\Seeders\Badaso\Commerce\Theme;
 use Exception;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use Uasoft\Badaso\Models\Menu;
-use Uasoft\Badaso\Models\MenuItem;
 
 class CommerceThemeProductCategories extends Seeder
 {
@@ -352,7 +350,7 @@ class CommerceThemeProductCategories extends Seeder
                 ),
             ));
         } catch (Exception $e) {
-            throw new Exception('Exception occur ' . $e);
+            throw new Exception('Exception occur '.$e);
             DB::rollBack();
         }
 

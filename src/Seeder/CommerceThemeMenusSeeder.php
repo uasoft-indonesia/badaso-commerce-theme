@@ -23,7 +23,7 @@ class CommerceThemeMenusSeeder extends Seeder
         try {
             $menus = [
                 0 => [
-                    'key' => 'commerce-theme',
+                    'key'          => 'commerce-theme',
                     'display_name' => 'Commerce Theme Menu',
                 ],
             ];

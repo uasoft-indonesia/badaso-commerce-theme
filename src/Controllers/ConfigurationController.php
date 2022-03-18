@@ -48,26 +48,26 @@ class ConfigurationController extends Controller
 
         try {
             $request->validate([
-                'id' => 'required|exists:Uasoft\Badaso\Models\Configuration',
-                'key' => 'required',
+                'id'           => 'required|exists:Uasoft\Badaso\Models\Configuration',
+                'key'          => 'required',
                 'display_name' => 'required',
-                'value' => 'required',
-                'details' => 'required',
-                'type' => 'required',
-                'order' => 'required',
-                'group' => 'required',
+                'value'        => 'required',
+                'details'      => 'required',
+                'type'         => 'required',
+                'order'        => 'required',
+                'group'        => 'required',
             ]);
 
             $configuration = Configuration::where('group', 'commerceThemePanel')->where('id', $request->id)->first();
 
-            if (! is_null($configuration)) {
+            if (!is_null($configuration)) {
                 $configuration->key = $request->key;
                 $configuration->display_name = $request->display_name;
                 $configuration->value = $request->value;
                 $configuration->details = $request->details;
                 $configuration->type = $request->type;
                 $configuration->order = $request->order;
-                $configuration->group = "commerceThemePanel";
+                $configuration->group = 'commerceThemePanel';
                 $configuration->save();
             }
 
@@ -94,14 +94,14 @@ class ConfigurationController extends Controller
                     'id' => ['required'],
                 ])->validate();
                 $updated_configuration = Configuration::where('group', 'commerceThemePanel')->where('id', $configuration['id'])->first();
-                if (! is_null($configuration)) {
+                if (!is_null($configuration)) {
                     $updated_configuration->key = $configuration['key'];
                     $updated_configuration->display_name = $configuration['display_name'];
                     $updated_configuration->value = $configuration['value'];
                     $updated_configuration->details = json_encode($configuration['details']);
                     $updated_configuration->type = $configuration['type'];
                     $updated_configuration->order = $configuration['order'];
-                    $updated_configuration->group = "commerceThemePanel";
+                    $updated_configuration->group = 'commerceThemePanel';
                     $updated_configuration->save();
                 }
             }
@@ -122,23 +122,23 @@ class ConfigurationController extends Controller
 
         try {
             $request->validate([
-                'key' => 'required|unique:Uasoft\Badaso\Models\Configuration',
+                'key'          => 'required|unique:Uasoft\Badaso\Models\Configuration',
                 'display_name' => 'required',
-                'group' => 'required',
-                'type' => 'required',
-                'details' => [
+                'group'        => 'required',
+                'type'         => 'required',
+                'details'      => [
                     function ($attribute, $value, $fail) use ($request) {
                         if (in_array($request->type, ['checkbox', 'radio', 'select', 'select_multiple'])) {
                             json_decode($value);
                             $is_json = (json_last_error() == JSON_ERROR_NONE);
-                            if (! $is_json) {
+                            if (!$is_json) {
                                 $fail('The details must be a valid JSON string.');
                             }
                         }
                     },
                     function ($attribute, $value, $fail) use ($request) {
                         if (in_array($request->type, ['checkbox', 'radio', 'select', 'select_multiple'])) {
-                            if (! isset($value) || is_null($value)) {
+                            if (!isset($value) || is_null($value)) {
                                 $fail('Options is required for  Checkbox, Radio, Select, Select-multiple');
                             }
                         }
