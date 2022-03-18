@@ -439,7 +439,7 @@
       <div class="bg-white mt-3 flex flex-col border-b">
         <div class="flex gap-2 flex-row flex-nowrap p-3 border-b">
           <div class="flex-grow flex flex-col uppercase text-sm">
-            Produk Lainnya tes
+            Produk Lainnya
           </div>
         </div>
 
@@ -454,7 +454,6 @@
                   <div class="text-left text-sm line-clamp-2 overflow-hidden overflow-clip">{{ similarProduct.name }}</div>
                   <div class="w-full flex mt-2 items-center">
                     <div class="font-medium flex-shrink line-clamp-1 text-primary">{{ getProductPrice(similarProduct) }}</div>
-                    <!-- <div class="text-xs flex-grow whitespace-nowrap">{{ getProductSoldTotal(similarProduct) }}+ terjual</div> -->
                   </div>
                   <div class="w-full flex items-center">
                        <div class="text-xs flex-grow whitespace-nowrap">{{ getProductSoldTotal(similarProduct) }}+ terjual</div>
