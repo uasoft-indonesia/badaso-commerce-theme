@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full h-72 hover:shadow-md rounded-xl transition-transform duration-200 ease-in-out transform hover:-translate-y-1" v-if="product.productDetails.length > 0">
+  <div class="w-full h-full hover:shadow-md rounded-xl transition-transform duration-200 ease-in-out transform hover:-translate-y-1" v-if="product.productDetails.length > 0">
     <Link :href="route('badaso.commerce-theme.detail', product.slug)" class="relative block group bg-white rounded-xl h-full" >
       <div class="w-full bg-cover bg-no-repeat rounded-t-xl mb-2" :style="`background-image: url('${product.productImage}'); padding-top: 100%`">
       <div class="absolute right-4 top-0 h-8 w-8" v-if="hasActiveDiscount">

@@ -7,17 +7,17 @@
             <img :src="activeImageSource" alt="" class="w-full h-full object-center object-cover cursor-pointer rounded-xl">
           </div>
           <carousel :show="4" class="mt-2" :hide-navigation="product.productDetails.length <= 4" v-if="product.productDetails.length > 0">
-            <carousel-item 
-              v-for="productDetail, index in product.productDetails" 
-              :key="index" 
-              no-gutter 
-              :class="['cursor-pointer', activeImageCarousel === index ? 'ring-2 ring-primary ring-inset' : '', 'rounded-xl']" 
+            <carousel-item
+              v-for="productDetail, index in product.productDetails"
+              :key="index"
+              no-gutter
+              :class="['cursor-pointer', activeImageCarousel === index ? 'ring-2 ring-primary ring-inset' : '', 'rounded-xl']"
               :padding="2"
             >
-              <img 
-                :src="productDetail.productImage" 
-                alt="" 
-                @mouseenter="activeImageSource = productDetail.productImage; activeImageCarousel = index" 
+              <img
+                :src="productDetail.productImage"
+                alt=""
+                @mouseenter="activeImageSource = productDetail.productImage; activeImageCarousel = index"
                 @mouseleave="activeImageSource = product.productDetails[active].productImage; activeImageCarousel = active"
                 class="rounded-xl"
               >
@@ -61,7 +61,7 @@
             <div class="grid grid-cols-6 gap-y-4 items-center w-full">
               <div class="col-span-1">Variasi</div>
               <div class="col-span-5 flex gap-2">
-                <div class="px-2.5 py-1.5 text-sm border rounded-md hover:border-primary hover:text-primary cursor-pointer" 
+                <div class="px-2.5 py-1.5 text-sm border rounded-md hover:border-primary hover:text-primary cursor-pointer"
                   :class="productDetail.id == selectedProduct.id ? 'text-primary border-primary' : 'text-gray-500 border-gray-300'"
                   v-for="productDetail, index in product.productDetails" :key="index"
                   @click="clickProductDetail(productDetail, index)"
@@ -439,7 +439,7 @@
       <div class="bg-white mt-3 flex flex-col border-b">
         <div class="flex gap-2 flex-row flex-nowrap p-3 border-b">
           <div class="flex-grow flex flex-col uppercase text-sm">
-            Produk Lainnya
+            Produk Lainnya tes
           </div>
         </div>
 
@@ -454,7 +454,10 @@
                   <div class="text-left text-sm line-clamp-2 overflow-hidden overflow-clip">{{ similarProduct.name }}</div>
                   <div class="w-full flex mt-2 items-center">
                     <div class="font-medium flex-shrink line-clamp-1 text-primary">{{ getProductPrice(similarProduct) }}</div>
-                    <div class="text-xs flex-grow whitespace-nowrap">{{ getProductSoldTotal(similarProduct) }}+ terjual</div>
+                    <!-- <div class="text-xs flex-grow whitespace-nowrap">{{ getProductSoldTotal(similarProduct) }}+ terjual</div> -->
+                  </div>
+                  <div class="w-full flex items-center">
+                       <div class="text-xs flex-grow whitespace-nowrap">{{ getProductSoldTotal(similarProduct) }}+ terjual</div>
                   </div>
                 </div>
               </Link>
@@ -527,8 +530,8 @@ export default {
         reviewAvgRating: 0,
         reviewCount: 0,
         productCategory: {
-          name: null, 
-          slug: null, 
+          name: null,
+          slug: null,
         },
         productDetails: [
           {
@@ -579,15 +582,15 @@ export default {
     },
     getDiscount() {
       if (this.product.productDetails[0].discount !== null) {
-        return this.getDiscountType == 'fixed' 
+        return this.getDiscountType == 'fixed'
           ? `${Math.round(this.product.productDetails[0].discount.discountFixed/1000)}K`
           : `${this.product.productDetails[0].discount.discountPercent}%`
       }
-      
+
       return null
     },
     getDiscountType() {
-      return this.product.productDetails[0].discount !== null 
+      return this.product.productDetails[0].discount !== null
         ? this.product.productDetails[0].discount.discountType
         : null
     },
@@ -686,7 +689,7 @@ export default {
       return true;
     },
     getReviewButtonClasses(index) {
-      return this.reviewActive === index 
+      return this.reviewActive === index
         ? 'text-primary bg-white border-primary'
         : 'text-black bg-white border-gray-300'
     },
@@ -798,22 +801,22 @@ export default {
         })
     },
     clickProductDetail(productDetail, index) {
-      this.selectedProduct = productDetail; 
-      this.quantity = 1; 
+      this.selectedProduct = productDetail;
+      this.quantity = 1;
       this.active = index;
       this.activePrice = productDetail.price
       this.activeStock = productDetail.quantity
       this.activeDiscount = productDetail.discount
     },
     hoverProductDetail(index) {
-      this.activeImageCarousel = index; 
+      this.activeImageCarousel = index;
       this.activeImageSource = this.product.productDetails[index].productImage
       this.activePrice = this.product.productDetails[index].price
       this.activeStock = this.product.productDetails[index].quantity
       this.activeDiscount = this.product.productDetails[index].discount
     },
     leaveProductDetail(active) {
-      this.activeImageCarousel = active; 
+      this.activeImageCarousel = active;
       this.activeImageSource = this.product.productDetails[active].productImage
       this.activePrice = this.product.productDetails[active].price
       this.activeStock = this.product.productDetails[active].quantity
@@ -823,8 +826,8 @@ export default {
       if (product.productDetails.length > 0) {
         let min = this.$_.minBy(product.productDetails, 'price')
         let max = this.$_.maxBy(product.productDetails, 'price')
-        return min == max 
-        ? this.$currency(min.price) 
+        return min == max
+        ? this.$currency(min.price)
         : `${this.$currency(min.price)} - ${this.$currency(max.price)}`
       }
 
