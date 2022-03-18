@@ -24,7 +24,7 @@ class CommerceThemeProductCategories extends Seeder
 
             DB::table('badaso_product_categories')->insert([
                 0 => [
-                    'id'         => 1,
+
                     'parent_id'  => null,
                     'name'       => 'Electronic',
                     'slug'       => 'electronic',
@@ -36,7 +36,7 @@ class CommerceThemeProductCategories extends Seeder
                     'deleted_at' => null,
                 ],
                 1 => [
-                    'id'         => 2,
+
                     'parent_id'  => null,
                     'name'       => 'Food & Drink',
                     'slug'       => 'food-drink',
@@ -48,7 +48,7 @@ class CommerceThemeProductCategories extends Seeder
                     'deleted_at' => null,
                 ],
                 2 => [
-                    'id'         => 3,
+
                     'parent_id'  => null,
                     'name'       => 'Computer & Accessories',
                     'slug'       => 'computer-accessories',
@@ -60,7 +60,7 @@ class CommerceThemeProductCategories extends Seeder
                     'deleted_at' => null,
                 ],
                 3 => [
-                    'id'         => 4,
+
                     'parent_id'  => null,
                     'name'       => 'Treatment & Beauty',
                     'slug'       => 'treatment-beauty',
@@ -72,7 +72,7 @@ class CommerceThemeProductCategories extends Seeder
                     'deleted_at' => null,
                 ],
                 4 => [
-                    'id'         => 5,
+
                     'parent_id'  => null,
                     'name'       => 'Phone & Accessories',
                     'slug'       => 'phone-accessories',
@@ -84,7 +84,7 @@ class CommerceThemeProductCategories extends Seeder
                     'deleted_at' => null,
                 ],
                 5 => [
-                    'id'         => 6,
+
                     'parent_id'  => null,
                     'name'       => 'Home Appliances',
                     'slug'       => 'home-appliances',
@@ -96,7 +96,7 @@ class CommerceThemeProductCategories extends Seeder
                     'deleted_at' => null,
                 ],
                 6 => [
-                    'id'         => 7,
+
                     'parent_id'  => null,
                     'name'       => 'Menswear',
                     'slug'       => 'menswear',
@@ -108,7 +108,7 @@ class CommerceThemeProductCategories extends Seeder
                     'deleted_at' => null,
                 ],
                 7 => [
-                    'id'         => 8,
+
                     'parent_id'  => null,
                     'name'       => 'Ladieswear',
                     'slug'       => 'ladieswear',
@@ -120,7 +120,7 @@ class CommerceThemeProductCategories extends Seeder
                     'deleted_at' => null,
                 ],
                 8 => [
-                    'id'         => 9,
+
                     'parent_id'  => null,
                     'name'       => "Men's Shoes",
                     'slug'       => 'mens-shoes',
@@ -132,7 +132,7 @@ class CommerceThemeProductCategories extends Seeder
                     'deleted_at' => null,
                 ],
                 9 => [
-                    'id'         => 10,
+
                     'parent_id'  => null,
                     'name'       => 'Muslim Fashion',
                     'slug'       => 'muslim-fashion',
@@ -144,7 +144,7 @@ class CommerceThemeProductCategories extends Seeder
                     'deleted_at' => null,
                 ],
                 10 => [
-                    'id'         => 11,
+
                     'parent_id'  => null,
                     'name'       => "Men's Bag",
                     'slug'       => 'mens-bag',
@@ -156,7 +156,7 @@ class CommerceThemeProductCategories extends Seeder
                     'deleted_at' => null,
                 ],
                 11 => [
-                    'id'         => 12,
+
                     'parent_id'  => null,
                     'name'       => 'Baby & Kids Fashion',
                     'slug'       => 'baby-kids-fashion',
@@ -168,7 +168,7 @@ class CommerceThemeProductCategories extends Seeder
                     'deleted_at' => null,
                 ],
                 12 => [
-                    'id'         => 13,
+
                     'parent_id'  => null,
                     'name'       => 'Fashion Accessories',
                     'slug'       => 'fashion-accessories',
@@ -180,7 +180,7 @@ class CommerceThemeProductCategories extends Seeder
                     'deleted_at' => null,
                 ],
                 13 => [
-                    'id'         => 14,
+
                     'parent_id'  => null,
                     'name'       => 'Mother & Baby',
                     'slug'       => 'mother-baby',
@@ -192,7 +192,7 @@ class CommerceThemeProductCategories extends Seeder
                     'deleted_at' => null,
                 ],
                 14 => [
-                    'id'         => 15,
+
                     'parent_id'  => null,
                     'name'       => 'Wristwatch',
                     'slug'       => 'wristwatch',
@@ -204,7 +204,7 @@ class CommerceThemeProductCategories extends Seeder
                     'deleted_at' => null,
                 ],
                 15 => [
-                    'id'         => 16,
+
                     'parent_id'  => null,
                     'name'       => "Women's Shoes",
                     'slug'       => 'womens-shoes',
@@ -216,7 +216,7 @@ class CommerceThemeProductCategories extends Seeder
                     'deleted_at' => null,
                 ],
                 16 => [
-                    'id'         => 17,
+
                     'parent_id'  => null,
                     'name'       => 'Health',
                     'slug'       => 'health',
@@ -228,7 +228,7 @@ class CommerceThemeProductCategories extends Seeder
                     'deleted_at' => null,
                 ],
                 17 => [
-                    'id'         => 18,
+
                     'parent_id'  => null,
                     'name'       => "Women's Bag",
                     'slug'       => 'womens-bag',
@@ -240,7 +240,7 @@ class CommerceThemeProductCategories extends Seeder
                     'deleted_at' => null,
                 ],
                 18 => [
-                    'id'         => 19,
+
                     'parent_id'  => null,
                     'name'       => 'Hobbies & Collections',
                     'slug'       => 'hobbies-collections',
@@ -252,7 +252,7 @@ class CommerceThemeProductCategories extends Seeder
                     'deleted_at' => null,
                 ],
                 19 => [
-                    'id'         => 20,
+
                     'parent_id'  => null,
                     'name'       => 'Automotive',
                     'slug'       => 'automotive',
@@ -264,7 +264,7 @@ class CommerceThemeProductCategories extends Seeder
                     'deleted_at' => null,
                 ],
                 20 => [
-                    'id'         => 21,
+
                     'parent_id'  => null,
                     'name'       => 'Sports & Outdoor',
                     'slug'       => 'sports-outdoor',
@@ -276,7 +276,7 @@ class CommerceThemeProductCategories extends Seeder
                     'deleted_at' => null,
                 ],
                 21 => [
-                    'id'         => 22,
+
                     'parent_id'  => null,
                     'name'       => 'Souvenirs & Parties',
                     'slug'       => 'souvenirs-parties',
@@ -288,7 +288,7 @@ class CommerceThemeProductCategories extends Seeder
                     'deleted_at' => null,
                 ],
                 22 => [
-                    'id'         => 23,
+
                     'parent_id'  => null,
                     'name'       => 'Books & Stationery',
                     'slug'       => 'books-stationery',
@@ -300,7 +300,7 @@ class CommerceThemeProductCategories extends Seeder
                     'deleted_at' => null,
                 ],
                 23 => [
-                    'id'         => 24,
+
                     'parent_id'  => null,
                     'name'       => 'Photograph',
                     'slug'       => 'photograph',
@@ -312,7 +312,7 @@ class CommerceThemeProductCategories extends Seeder
                     'deleted_at' => null,
                 ],
                 24 => [
-                    'id'         => 25,
+
                     'parent_id'  => null,
                     'name'       => 'Voucher',
                     'slug'       => 'voucher',

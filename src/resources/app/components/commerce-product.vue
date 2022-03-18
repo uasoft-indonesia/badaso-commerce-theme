@@ -1,5 +1,5 @@
 <template>
-  <div @mouseenter="isHover = true" @mouseover="isHover = true" @mouseout="isHover = false" class="w-full h-full pointer-events-auto">
+  <div @mouseenter="isHover = true" @mouseover="isHover = true" @mouseout="isHover = false" class="w-full h-72 pointer-events-auto">
     <Link :href="route('badaso.commerce-theme.detail', product.slug)" class="relative block transition-all ease duration-200 group bg-white ring-primary rounded-xl h-full hover:ring-2 hover:rounded-b-none" >
       <div class="w-full bg-cover bg-no-repeat rounded-t-xl mb-2" :style="`background-image: url('${product.productImage}'); padding-top: 100%`">
       <div class="absolute right-4 top-0 h-8 w-8" v-if="hasActiveDiscount">
@@ -13,7 +13,7 @@
       </div>
       <div class="px-4 pb-4">
         <h3 class="line-clamp-2 text-sm">{{ product.name }}</h3>
-        
+
         <!-- This is for voucher, not yet implemented. -->
         <!-- <div class="bg-primary text-white text-xs inline-block border-r border-l border-dotted py-0.5 px-1 my-1">Diskon Rp5RB</div> -->
 
@@ -31,7 +31,7 @@
           </div>
         </div>
       </div>
-      <transition 
+      <transition
         enter-active-class="transition-all duration-200 ease"
         leave-active-class="transition-all duration-200 ease"
         enter-class="opacity-0"
@@ -73,7 +73,7 @@ export default {
       return this.product.productDetails[0].discount.discountType
     },
     getDiscount() {
-      return this.getDiscountType == 'fixed' 
+      return this.getDiscountType == 'fixed'
       ? `${Math.round(this.product.productDetails[0].discount.discountFixed/1000)}K`
       : `${this.product.productDetails[0].discount.discountPercent}%`
     },
@@ -81,8 +81,8 @@ export default {
       if (this.product.productDetails.length > 0) {
         let min = this.$_.minBy(this.product.productDetails, 'price')
         let max = this.$_.maxBy(this.product.productDetails, 'price')
-        return min == max 
-        ? this.$currency(min.price) 
+        return min == max
+        ? this.$currency(min.price)
         : `${this.$currency(min.price)} - ${this.$currency(max.price)}`
       }
 

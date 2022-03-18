@@ -232,7 +232,7 @@
           </div>
         </div>
         <div class="h-4 sm:h-5" />
-    
+
         <div class="col-start-2 col-end-7">
           <!-- Pagination -->
           <pagination :total="products.total" :per-page="productLimit" v-model="currentPage" />
@@ -266,7 +266,7 @@
             <div class="p-3 bg-gray-100 w-full">Filter</div>
 
             <div class="p-2 flex justify-end gap-3 absolute bottom-0 w-full border-t">
-              <div class="p-2 text-sm rounded-md text-primary bg-transparent border border-primary">Atur Ulang</div>
+              <div class="p-2 text-sm rounded-md text-primary bg-transparent border border-primary" @click="resetProducts">Atur Ulang</div>
               <div class="p-2 text-sm rounded-md bg-primary text-white" @click="applyFilter">Terapkan</div>
             </div>
 
@@ -475,7 +475,7 @@ export default {
         }
 
         if (this.sort === 'price') {
-          
+
           if (this.type === 'desc') {
             // get a price from product details using Math.max
             let aPrice = Math.max(...a.productDetails.map(item => item.price))
