@@ -1,7 +1,7 @@
 parameters:
     excludePaths:
     - src/Controllers/ConfigurationController.php
-    - src/Controllers\Web\InertiaController.php
+    - src/Controllers/Web/InertiaController.php
 
     ignoreErrors:
     - '#Call to an undefined static method Uasoft\\Badaso\\Module\\Content\\Models\\Content::[a-zA-Z0-9-()\_]+.#'
