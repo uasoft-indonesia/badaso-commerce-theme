@@ -47,5 +47,8 @@
         "Uasoft\\Badaso\\Theme\\CommerceTheme\\Providers\\CommerceThemeProvider"
       ]
     }
+  },
+  "require-dev": {
+    "phpstan/phpstan": "^1.4"
   }
 }
