@@ -2,9 +2,9 @@
 
 namespace Uasoft\Badaso\Theme\CommerceTheme\Controllers;
 
-use App\Http\Controllers\Controller;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;

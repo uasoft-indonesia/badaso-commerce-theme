@@ -9,7 +9,7 @@
         </div>
         <input
           type="text"
-          v-model="search"
+          v-model="keyword"
           @keypress.enter="searchProduct"
           class="block w-full h-full focus:outline-none pr-3 pl-9 py-4 rounded-sm"
           placeholder="Search anything here"
@@ -46,6 +46,7 @@ export default {
     return {
       dropdownOpen: false,
       search: '',
+      keyword: null,
     };
   },
   computed: {
@@ -58,10 +59,28 @@ export default {
       },
     }),
   },
+    beforeRouteEnter(to, from, next) {
+            next((vm) => {
+                document.title = `Pencarian ${vm.$voca.titleCase(vm.$page.props.keyword, true)} - Badaso Commerce Theme`;
+            });
+        },
+         mounted(){
+            this.keyword = this.$page.props.keyword;
+
+         },
   methods: {
+      setQueryParams(){
+        this.keyword = this.$page.props.keyword;
+
+      },
     searchProduct() {
       if (this.search) {
         this.$inertia.visit(this.route('badaso.commerce-theme.search', this.search))
+      }
+      if (this.keyword.length > 0) {
+        this.$inertia.visit(this.route('badaso.commerce-theme.search', {
+          keyword: this.keyword
+        }))
       }
     }
   }
