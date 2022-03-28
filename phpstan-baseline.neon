@@ -1,6 +1,5 @@
 parameters:
     excludePaths:
-    - src/Controllers/ConfigurationController.php
     - src/Controllers/Web/InertiaController.php
 
     ignoreErrors:
